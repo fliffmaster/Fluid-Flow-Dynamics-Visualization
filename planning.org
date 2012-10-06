@@ -1,0 +1,42 @@
+#+begin_src plantuml :file uml.png
+  Class Reactor
+  Class ReactorLog
+  Class WaterSliceLog
+  Class ReactorGraphic
+  Class WaterSliceGraphic
+  
+  Reactor *-- ReactorLog
+  ReactorLog *-- WaterSliceLog
+  Reactor *-- ReactorGraphic
+  ReactorGraphic *-- WaterSliceGraphic
+#+end_src
+
+#+RESULTS:
+[[file:uml.png]]
+
+#+begin_src plantuml :file uml2.png
+  class InitiateTest {
+        Co Flow
+        T PFR
+  }
+  
+  class PFR {
+        WaterSlice[]
+        Timer timer
+  }
+  class WaterSlice {
+        void createDots()
+        void deleteDots()
+  }
+  class Dot {
+        long x
+        long y
+  }
+  InitiateTest ..> PFR
+  PFR ..> WaterSlice
+  WaterSlice ..> Dot
+#+end_src
+
+#+RESULTS:
+[[file:uml2.png]]
+
