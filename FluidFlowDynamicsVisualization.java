@@ -8,6 +8,8 @@ import javax.swing.JTextArea;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class FluidFlowDynamicsVisualization {
 
@@ -62,14 +64,25 @@ public class FluidFlowDynamicsVisualization {
 		txtInitialConcentration.setText("1000");
 		txtInitialConcentration.setBounds(208, 63, 114, 19);
 		MainFrame.getContentPane().add(txtInitialConcentration);
-		txtInitialConcentration.setColumns(10);
-
+		
+		txtInitialConcentration.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				resetReactor();
+			}
+		});
 		JLabel lblNewLabel = new JLabel("Rate Constant per Minute");
 		lblNewLabel.setBounds(12, 94, 192, 15);
 		MainFrame.getContentPane().add(lblNewLabel);
 
 		txtRateConstant = new JTextField();
-		txtRateConstant.setText("2");
+		txtRateConstant.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				resetReactor();
+			}
+		});
+		txtRateConstant.setText(".1");
 		txtRateConstant.setBounds(208, 90, 114, 19);
 		MainFrame.getContentPane().add(txtRateConstant);
 		txtRateConstant.setColumns(10);
@@ -93,6 +106,8 @@ public class FluidFlowDynamicsVisualization {
 		txtConcentrationLog.setLineWrap(true);
 		txtConcentrationLog.setBounds(346, 67, 506, 432);
 		MainFrame.getContentPane().add(txtConcentrationLog);
+		resetReactor();
+		
 	}
 
 	private void resetReactor() {
