@@ -1,11 +1,15 @@
-import java.util.Random;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.Color;
 import java.util.ArrayList;
-import java.awt.Graphics;
+import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class FluidFlowReactorPanel extends JPanel{
 	
@@ -15,12 +19,26 @@ public class FluidFlowReactorPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<FFDot> dots;
 	private int lastDot;
+	private Timer timer = new Timer(500,new TimerListener());
 	
 	public FluidFlowReactorPanel(int numDots)
 	{
-		System.out.println(this.getBounds().getHeight());
+		//System.out.println(this.getBounds().getHeight());
 		lastDot = numDots;
 		dots = new ArrayList<FFDot>();
+		timer.setRepeats(true);
+	}
+	
+	public void start(){
+		timer.start();
+	}
+	
+	public void stop(){
+		timer.stop();
+	}
+	
+	public void setTimer(int delay){
+		timer.setDelay(delay);
 	}
 	
 	public void makeDots()
@@ -39,12 +57,16 @@ public class FluidFlowReactorPanel extends JPanel{
 		lastDot = index;
 	}
 	
+	public int getLastDot(){
+		return lastDot;
+	}
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.BLUE);
-		
+		makeDots();
 		for(int i = 0; i < lastDot; i++)
 		{
 			Ellipse2D.Double dot = dots.get(i).getEllipse();
@@ -52,6 +74,15 @@ public class FluidFlowReactorPanel extends JPanel{
 		}
 	}
 	
+	class TimerListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent evt) {
+			clearDots();
+			makeDots();
+			repaint();
+	
+		}
+	}
 	
 }
 
@@ -60,17 +91,17 @@ class FFDot
 	private int x;
 	private int y;
 	private int diameter;
-	private Random rando;
+	private Random rando = new Random();
 	
 	public FFDot(Rectangle boundary)
 	{
-		rando = new Random();
+		
 		diameter = 4;
 		int height = (int) boundary.getHeight();
-		System.out.println(height);
+		//System.out.println(height);
 		int width = (int) boundary.getWidth();
-		y = rando.nextInt((int)(height - diameter + 1));
-		x = rando.nextInt((int)(width - diameter + 1));	
+		y = rando.nextInt((int)(height - diameter - 10)) + 5;
+		x = rando.nextInt((int)(width - diameter - 10)) + 5 ;	
 	}
 	
 	public FFDot(int x, int y, Rectangle boundary)
@@ -89,4 +120,6 @@ class FFDot
 		g2.fill(dot);
 		g2.setColor(Color.BLACK);
 	}*/
+	
 }
+
