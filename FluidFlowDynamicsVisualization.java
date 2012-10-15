@@ -152,7 +152,6 @@ public class FluidFlowDynamicsVisualization {
 	class ButtonResetListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent evt) {
-			resetReactor();
 		}
 
 	}
