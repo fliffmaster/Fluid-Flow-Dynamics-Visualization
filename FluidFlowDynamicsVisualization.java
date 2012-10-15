@@ -153,7 +153,6 @@ public class FluidFlowDynamicsVisualization {
 
 		public void actionPerformed(ActionEvent evt) {
 			resetReactor();
-			resetReactor();
 		}
 
 	}
