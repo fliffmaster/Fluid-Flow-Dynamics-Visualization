@@ -1,6 +1,6 @@
 import java.lang.Math;
 
-public class FFBatchReactor extends Thread
+public class FFBatchReactor //extends Thread
 {
 	private double tFinal;
 	private double cInit;

@@ -10,15 +10,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class FluidFlowDynamicsVisualization {
 
 	private JFrame MainFrame;
 	private JTextField txtInitialConcentration;
 	private JTextField txtRateConstant;
-	private Timer timer = new Timer( 500, new TimerListener());
+	private Timer timer = new Timer( 100, new TimerListener());
 	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
+	private FluidFlowReactorPanel panel;
 
 	/**
 	 * Launch the application.
@@ -62,7 +66,7 @@ public class FluidFlowDynamicsVisualization {
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
 		txtInitialConcentration.setText("1000");
-		txtInitialConcentration.setBounds(208, 63, 114, 19);
+		txtInitialConcentration.setBounds(183, 63, 114, 19);
 		MainFrame.getContentPane().add(txtInitialConcentration);
 		
 		txtInitialConcentration.addFocusListener(new FocusAdapter() {
@@ -83,29 +87,36 @@ public class FluidFlowDynamicsVisualization {
 			}
 		});
 		txtRateConstant.setText(".1");
-		txtRateConstant.setBounds(208, 90, 114, 19);
+		txtRateConstant.setBounds(183, 90, 114, 19);
 		MainFrame.getContentPane().add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ButtonGoListener());
-		btnGo.setBounds(208, 122, 117, 25);
+		btnGo.setBounds(183, 124, 117, 25);
 		MainFrame.getContentPane().add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ButtonStopListener());
-		btnStop.setBounds(208, 159, 117, 25);
+		btnStop.setBounds(183, 161, 117, 25);
 		MainFrame.getContentPane().add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ButtonResetListener());
-		btnReset.setBounds(208, 196, 117, 25);
+		btnReset.setBounds(183, 198, 117, 25);
 		MainFrame.getContentPane().add(btnReset);
 
 		txtConcentrationLog = new JTextArea();
 		txtConcentrationLog.setLineWrap(true);
-		txtConcentrationLog.setBounds(346, 67, 506, 432);
+		txtConcentrationLog.setBounds(336, 39, 224, 432);
 		MainFrame.getContentPane().add(txtConcentrationLog);
+		
+		//JPanel panel = new JPanel();
+		panel = new FluidFlowReactorPanel(2000);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
+		panel.setBounds(583, 78, 242, 338);
+		panel.makeDots();
+		MainFrame.getContentPane().add(panel);
 		resetReactor();
 		
 	}
@@ -153,6 +164,10 @@ public class FluidFlowDynamicsVisualization {
 			txtConcentrationLog.setText("Concentration at time "
 					+ reactor.getCurrentTime() + " is "
 					+ reactor.getCurrentConcentration() + "\n" + txtConcentrationLog.getText());
+			panel.clearDots();
+			panel.makeDots();
+			panel.setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* 2000));
+			panel.repaint();
 	
 		}
 	}
