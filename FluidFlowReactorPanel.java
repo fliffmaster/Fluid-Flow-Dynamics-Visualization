@@ -65,7 +65,7 @@ public class FluidFlowReactorPanel extends JPanel{
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.BLUE);
+		g2.setColor(Color.RED);
 		makeDots();
 		for(int i = 0; i < lastDot; i++)
 		{
@@ -96,7 +96,7 @@ class FFDot
 	public FFDot(Rectangle boundary)
 	{
 		
-		diameter = 4;
+		diameter = 3;
 		int height = (int) boundary.getHeight();
 		//System.out.println(height);
 		int width = (int) boundary.getWidth();
