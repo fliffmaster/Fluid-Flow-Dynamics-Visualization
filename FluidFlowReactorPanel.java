@@ -5,10 +5,12 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 public class FluidFlowReactorPanel extends JPanel{
@@ -18,32 +20,68 @@ public class FluidFlowReactorPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<FFDot> dots;
-	private int lastDot;
-	private Timer timer = new Timer(500,new TimerListener());
+	private int totalNumberOfDots;
+	private int currentNumberOfDots;
+	private double initialConcentration;
+	private Timer animationTimer = new Timer(500,new AnimationTimerListener());
+	private Timer reactionTimer = new Timer( 100, new ReactionTimerListener());
+	private FFBatchReactor reactor = new FFBatchReactor();
+	private JTextArea txtConcentrationLog;
 	
 	public FluidFlowReactorPanel(int numDots)
 	{
 		//System.out.println(this.getBounds().getHeight());
-		lastDot = numDots;
+		totalNumberOfDots = numDots;
+		currentNumberOfDots = numDots;
 		dots = new ArrayList<FFDot>();
-		timer.setRepeats(true);
+		animationTimer.setRepeats(true);
+		reactionTimer.setRepeats(true);
 	}
 	
-	public void start(){
-		timer.start();
+	public void setLogTextArea(JTextArea log){
+		txtConcentrationLog = log;
 	}
 	
-	public void stop(){
-		timer.stop();
+	public void setInitialConcentration(double concentration){
+		initialConcentration = concentration;
+		reactor.setInitialConcentration(concentration);
 	}
 	
-	public void setTimer(int delay){
-		timer.setDelay(delay);
+	public void setRateConstant(double rate){
+		reactor.setRateConstant(rate);
 	}
 	
+	public void setCurrentTime(double time){
+		reactor.setCurrentTime(time);
+	}
+	
+	public void startReaction(){
+		reactionTimer.start();
+	}
+	
+	public void stopReaction(){
+		reactionTimer.stop();
+	}
+
+	public void startAnimation(){
+		animationTimer.start();
+	}
+	
+	public void stopAnimation(){
+		animationTimer.stop();
+	}
+	
+	public void setAnimationTimer(int delay){
+		animationTimer.setDelay(delay);
+	}
+
+	public void setReactionTimer(int delay){
+		reactionTimer.setDelay(delay);
+	}
+
 	public void makeDots()
 	{
-		for(int i = 0; i < lastDot; i++)
+		for(int i = 0; i < currentNumberOfDots; i++)
 			dots.add(new FFDot(this.getBounds()));
 	}
 	
@@ -52,13 +90,14 @@ public class FluidFlowReactorPanel extends JPanel{
 		dots = new ArrayList<FFDot>();
 	}
 	
-	public void setLastDot(int index)
+	public void setTotalNumberOfDots(int index)
 	{
-		lastDot = index;
+		totalNumberOfDots = index;
+		currentNumberOfDots = index;
 	}
 	
 	public int getLastDot(){
-		return lastDot;
+		return totalNumberOfDots;
 	}
 	
 	public void paintComponent(Graphics g)
@@ -67,17 +106,33 @@ public class FluidFlowReactorPanel extends JPanel{
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.BLUE);
 		makeDots();
-		for(int i = 0; i < lastDot; i++)
+		for(int i = 0; i < currentNumberOfDots; i++)
 		{
 			Ellipse2D.Double dot = dots.get(i).getEllipse();
 			g2.fill(dot);
 		}
 	}
 	
-	class TimerListener implements ActionListener {
+	class AnimationTimerListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent evt) {
 			clearDots();
+			makeDots();
+			repaint();
+	
+		}
+	}
+	
+	class ReactionTimerListener implements ActionListener {
+		DecimalFormat df =  new DecimalFormat("#.##");
+		public void actionPerformed(ActionEvent evt) {
+			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
+			txtConcentrationLog.setText ("Concentration at time "
+					+ (int) reactor.getCurrentTime() + " is "
+					+ df.format(reactor.getCurrentConcentration()/ initialConcentration * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+			clearDots();
+			currentNumberOfDots = (int) (reactor.getCurrentConcentration()/initialConcentration * totalNumberOfDots);
+			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
 			makeDots();
 			repaint();
 	

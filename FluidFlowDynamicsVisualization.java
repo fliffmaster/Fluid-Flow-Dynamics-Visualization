@@ -4,14 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.text.DecimalFormat;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
 public class FluidFlowDynamicsVisualization {
@@ -19,8 +18,7 @@ public class FluidFlowDynamicsVisualization {
 	private JFrame MainFrame;
 	private JTextField txtInitialConcentration;
 	private JTextField txtRateConstant;
-	private Timer timer = new Timer( 100, new TimerListener());
-	private FFBatchReactor reactor = new FFBatchReactor();
+	
 	private JTextArea txtConcentrationLog;
 	private FluidFlowReactorPanel panel;
 	private JTextField txtParticleNumber;
@@ -54,7 +52,7 @@ public class FluidFlowDynamicsVisualization {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		timer.setRepeats(true);
+		
 		
 		MainFrame = new JFrame();
 		MainFrame.setTitle("Fluid Flow Dynamics Visualization");
@@ -118,6 +116,7 @@ public class FluidFlowDynamicsVisualization {
 		panel = new FluidFlowReactorPanel(2000);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(583, 78, 242, 338);
+		panel.setLogTextArea(txtConcentrationLog);
 		
 		MainFrame.getContentPane().add(panel);
 		
@@ -175,16 +174,16 @@ public class FluidFlowDynamicsVisualization {
 	}
 
 	private void resetReactor() {
-		reactor.setInitialConcentration(Double
+		panel.setInitialConcentration(Double
 				.parseDouble(txtInitialConcentration.getText()));
-		reactor.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
-		reactor.setCurrentTime(0);
+		panel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+		panel.setCurrentTime(0);
 		txtConcentrationLog.setText("");
 		
-		timer.setDelay(Integer.parseInt(txtTimeRate.getText()));
-		panel.setTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+		panel.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
+		panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 		panel.clearDots();
-		panel.setLastDot(Integer.parseInt(txtParticleNumber.getText()));
+		panel.setTotalNumberOfDots(Integer.parseInt(txtParticleNumber.getText()));
 		panel.makeDots();
 		panel.repaint();
 		
@@ -194,10 +193,10 @@ public class FluidFlowDynamicsVisualization {
 
 		public void actionPerformed(ActionEvent evt) {
 			
-			timer.setDelay(Integer.parseInt(txtTimeRate.getText()));
-			panel.setTimer(Integer.parseInt(txtParticleMoveRate.getText()));
-			panel.start();
-			timer.start();
+			panel.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
+			panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+			panel.startAnimation();
+			panel.startReaction();
 		}
 
 	}
@@ -206,8 +205,8 @@ public class FluidFlowDynamicsVisualization {
 
 		public void actionPerformed(ActionEvent evt) {
 			
-			timer.stop();
-			panel.stop();
+			panel.stopReaction();
+			panel.stopAnimation();
 		}
 
 	}
@@ -220,18 +219,5 @@ public class FluidFlowDynamicsVisualization {
 
 	}
 
-	class TimerListener implements ActionListener {
-		DecimalFormat df =  new DecimalFormat("#.##");
-		public void actionPerformed(ActionEvent evt) {
-			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			txtConcentrationLog.setText("Concentration at time "
-					+ (int) reactor.getCurrentTime() + " is "
-					+ df.format(reactor.getCurrentConcentration()/ Double.parseDouble(txtInitialConcentration.getText()) * 100 ) + "%\n" + txtConcentrationLog.getText());
-			panel.clearDots();
-			panel.setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
-			panel.makeDots();
-			panel.repaint();
-	
-		}
-	}
+
 }

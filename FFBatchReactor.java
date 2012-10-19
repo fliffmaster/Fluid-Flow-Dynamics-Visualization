@@ -7,6 +7,7 @@ public class FFBatchReactor //extends Thread
 	private double kInit;
 	private double tCurr;
 	private double cCurr;
+	
 	//private double kCurr;
 
 	public double getInitialConcentration() {
