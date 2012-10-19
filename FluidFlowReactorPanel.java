@@ -44,15 +44,15 @@ public class FluidFlowReactorPanel extends JPanel{
 	
 	public void setInitialConcentration(double concentration){
 		initialConcentration = concentration;
-		reactor.setInitialConcentration(concentration);
+		getReactor().setInitialConcentration(concentration);
 	}
 	
 	public void setRateConstant(double rate){
-		reactor.setRateConstant(rate);
+		getReactor().setRateConstant(rate);
 	}
 	
 	public void setCurrentTime(double time){
-		reactor.setCurrentTime(time);
+		getReactor().setCurrentTime(time);
 	}
 	
 	public void startReaction(){
@@ -81,6 +81,7 @@ public class FluidFlowReactorPanel extends JPanel{
 
 	public void makeDots()
 	{
+
 		for(int i = 0; i < currentNumberOfDots; i++)
 			dots.add(new FFDot(this.getBounds()));
 	}
@@ -113,10 +114,20 @@ public class FluidFlowReactorPanel extends JPanel{
 		}
 	}
 	
+	public FFBatchReactor getReactor() {
+		return reactor;
+	}
+
+	public void setReactor(FFBatchReactor newReactor) {
+		reactor = null;
+		reactor = newReactor;
+	}
+
 	class AnimationTimerListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent evt) {
 			clearDots();
+			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			makeDots();
 			repaint();
 	
@@ -129,9 +140,9 @@ public class FluidFlowReactorPanel extends JPanel{
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
 			txtConcentrationLog.setText ("Concentration at time "
 					+ (int) reactor.getCurrentTime() + " is "
-					+ df.format(reactor.getCurrentConcentration()/ initialConcentration * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
 			clearDots();
-			currentNumberOfDots = (int) (reactor.getCurrentConcentration()/initialConcentration * totalNumberOfDots);
+			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
 			makeDots();
 			repaint();
@@ -155,8 +166,8 @@ class FFDot
 		int height = (int) boundary.getHeight();
 		//System.out.println(height);
 		int width = (int) boundary.getWidth();
-		y = rando.nextInt((int)(height - diameter - 10)) + 5;
-		x = rando.nextInt((int)(width - diameter - 10)) + 5 ;	
+		y = rando.nextInt((int)(height - diameter )) + 5;
+		x = rando.nextInt((int)(width - diameter )) + 5 ;	
 	}
 	
 	public FFDot(int x, int y, Rectangle boundary)

@@ -24,6 +24,7 @@ public class FluidFlowDynamicsVisualization {
 	private JTextField txtParticleNumber;
 	private JTextField txtTimeRate;
 	private JTextField txtParticleMoveRate;
+	private PFR  pfrPanel = new PFR();
 
 	/**
 	 * Launch the application.
@@ -56,7 +57,7 @@ public class FluidFlowDynamicsVisualization {
 		
 		MainFrame = new JFrame();
 		MainFrame.setTitle("Fluid Flow Dynamics Visualization");
-		MainFrame.setBounds(100, 100, 868, 560);
+		MainFrame.setBounds(100, 100, 868, 813);
 		MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainFrame.getContentPane().setLayout(null);
 
@@ -167,6 +168,15 @@ public class FluidFlowDynamicsVisualization {
 		JLabel lblRateOfRepaint = new JLabel("Rate of repaint of particles");
 		lblRateOfRepaint.setBounds(12, 185, 192, 15);
 		MainFrame.getContentPane().add(lblRateOfRepaint);
+
+		
+		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		//Timer
+		pfrPanel.setBounds(28, 550, 626, 209);
+		MainFrame.getContentPane().add(pfrPanel);
+		pfrPanel.setLayout(null);
+		pfrPanel.setReactor(panel.getReactor() );
+		
 		
 		resetReactor();
 		
@@ -179,6 +189,7 @@ public class FluidFlowDynamicsVisualization {
 		panel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 		panel.setCurrentTime(0);
 		txtConcentrationLog.setText("");
+		pfrPanel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 		
 		panel.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
 		panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
@@ -197,6 +208,8 @@ public class FluidFlowDynamicsVisualization {
 			panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 			panel.startAnimation();
 			panel.startReaction();
+			pfrPanel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+			pfrPanel.startReactor();
 		}
 
 	}
@@ -207,6 +220,7 @@ public class FluidFlowDynamicsVisualization {
 			
 			panel.stopReaction();
 			panel.stopAnimation();
+			pfrPanel.stopReactor();
 		}
 
 	}

@@ -1,14 +1,16 @@
-import javax.swing.*;
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Color;
-
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
+
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class WaterSlice extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Particle particle[] = new Particle[100];
 	public WaterSlice() 
 	{	

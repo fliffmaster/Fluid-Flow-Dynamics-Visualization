@@ -1,15 +1,15 @@
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
-import java.awt.Color;
 
 public class Particle 
 {
-	Ellipse2D.Double seedEllipse;
-	private Color particleColor;
+	private Ellipse2D.Double seedEllipse;
+	private static Random generator = new Random();
+	//private Color particleColor;
 	
 	public Particle()
 	{
-		Random generator = new Random();
+		
 		
 		int xBounds = generator.nextInt(10);
 		int yBounds = generator.nextInt(210);

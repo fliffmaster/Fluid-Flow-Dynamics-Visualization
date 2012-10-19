@@ -47,10 +47,7 @@ public class FFBatchReactor //extends Thread
 
 	public FFBatchReactor()
 	{
-		this.tCurr = 0;
-		this.tFinal = 1000;
-		this.cInit = this.cCurr = 1;
-		this.kInit =  0.001;
+		this(1,1000.0,0.1);
 	}
 
 	public FFBatchReactor(double time, double cInit, double reactionK)
@@ -70,6 +67,10 @@ public class FFBatchReactor //extends Thread
 	public double getCurrentConcentration()
 	{
 		return cCurr = cInit * Math.exp((-1) * kInit * tCurr);
+	}
+	
+	public double getPercentageOfConcentrationLeft(){
+		return getCurrentConcentration() /cInit;
 	}
 
 //	public void decrementCurrentConcentration()
