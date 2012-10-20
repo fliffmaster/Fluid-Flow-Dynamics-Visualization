@@ -155,6 +155,7 @@ public class FluidFlowReactorPanel extends JPanel{
 		DecimalFormat df =  new DecimalFormat("#.##");
 		public void actionPerformed(ActionEvent evt) {
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
+			if (txtConcentrationLog != null)
 			txtConcentrationLog.setText ("Concentration at time "
 					+ (int) reactor.getCurrentTime() + " is "
 					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
