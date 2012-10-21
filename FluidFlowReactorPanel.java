@@ -28,9 +28,11 @@ public class FluidFlowReactorPanel extends JPanel{
 	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
+	private int upperCornerX;
 	
-	public FluidFlowReactorPanel(int numDots, int diameter)
+	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
 	{
+		this.setUpperCornerX(upperCornerX);
 		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
@@ -128,6 +130,14 @@ public class FluidFlowReactorPanel extends JPanel{
 	public void setDotDiameter(int diameter)
 	{
 		
+	}
+
+	public int getUpperCornerX() {
+		return upperCornerX;
+	}
+
+	public void setUpperCornerX(int upperCornerX) {
+		this.upperCornerX = upperCornerX;
 	}
 
 	class AnimationTimerListener implements ActionListener {

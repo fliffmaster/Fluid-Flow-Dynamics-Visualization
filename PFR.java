@@ -13,19 +13,30 @@ public class PFR extends JPanel
 	 */
 	private static final long serialVersionUID = 1L;
 	//private WaterSlice panel_1 = new WaterSlice();
-	private FluidFlowReactorPanel panel_1;
+	private FluidFlowReactorPanel[] batchPanels;
 	private int x = 0;
-	private Timer timer = new Timer(200, new TimerListener());
+	private Timer timer = new Timer(209, new TimerListener());
+	private int batchPanelWidth;
 	
 	public PFR()
 	{
+		batchPanelWidth = this.getWidth() / 20;
+		//panel_1 = new FluidFlowReactorPanel(2090, 2);
+		batchPanels = new FluidFlowReactorPanel[22];
 		
-		panel_1 = new FluidFlowReactorPanel(2000, 2);
+		for(int i = 0; i < 22; i++)
+		{
+			int upperCornerX = i * batchPanelWidth * (-1);
+			batchPanels[i] = new FluidFlowReactorPanel(1000, 2, upperCornerX);
+			batchPanels[i].setBounds(upperCornerX, 0, batchPanelWidth, 209);
+			add(batchPanels[i]);
+			batchPanels[i].setLayout(null);
+		}
 		
 		timer.setRepeats(true);
-		panel_1.setBounds(0, 0, 40, 209);
-		add(panel_1);
-		panel_1.setLayout(null);
+		//panel_1.setBounds(0, 0, 40, 209);
+		//add(panel_1);
+		//panel_1.setLayout(null);
 		
 	}
 	
@@ -35,35 +46,51 @@ public class PFR extends JPanel
 //		add(panel_1);
 //		panel_1.setLayout(null);
 //	}
-	public void setAnimationTimer(int delay){
-		panel_1.setAnimationTimer(delay);
-		
+	public void setAnimationTimers(int delay){
+		for(int i = 0; i < 22; i++)
+			batchPanels[i].setAnimationTimer(delay);	
 	}
-	public void setReactor(FFBatchReactor newReactor) {
-		panel_1.setReactor(newReactor);
+	
+	public void setReactor(FFBatchReactor newReactor, int index) {
+		batchPanels[index].setReactor(newReactor);
 		
 	}
 	
 	public void startReactor(){
 		timer.start();
-		panel_1.startAnimation();
+		for(int i = 0; i < 22; i++)
+			batchPanels[i].startAnimation();
+		
 		//panel_1.startReaction();
 	}
 	
 	public void stopReactor(){
 		timer.stop();
-		panel_1.stopAnimation();
+		for(int i = 0; i < 22; i++)
+			batchPanels[i].stopAnimation();
 		//panel_1.stopReaction();
 	}
 	
-	
+	public void resetBatchReactorLocation()
+	{
+		for(int i = 0; i < 22; i++)
+			batchPanels[i].setBounds(batchPanels[i].getUpperCornerX(), 0, batchPanelWidth, 209);
+		//panel_1.setBounds(x, 0, 40, 209);
+		repaint();
+		
+	}
 	
 	class TimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent arg) 
 		{
 			x++;
-			panel_1.setBounds(x, 0, 40, 209);
+			for(int i = 0; i < 22; i++)
+			{
+				batchPanels[i].setBounds(batchPanels[i].getUpperCornerX() + x, 0, batchPanelWidth, 209);
+				if(batchPanels[i].getUpperCornerX() + x == 0)
+					batchPanels[i].startReaction();	
+			}
 			repaint();
 		}
 		

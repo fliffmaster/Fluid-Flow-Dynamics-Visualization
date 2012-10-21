@@ -114,7 +114,7 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
 		//JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3);
+		panel = new FluidFlowReactorPanel(2000, 3, 0);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(583, 78, 242, 338);
 		panel.setLogTextArea(txtConcentrationLog);
@@ -175,7 +175,7 @@ public class FluidFlowDynamicsVisualization {
 		pfrPanel.setBounds(28, 550, 626, 209);
 		MainFrame.getContentPane().add(pfrPanel);
 		pfrPanel.setLayout(null);
-		pfrPanel.setReactor(panel.getReactor() );
+		//pfrPanel.setReactor(panel.getReactor() );
 		
 		
 		resetReactor();
@@ -189,7 +189,7 @@ public class FluidFlowDynamicsVisualization {
 		panel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 		panel.setCurrentTime(0);
 		txtConcentrationLog.setText("");
-		pfrPanel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 		
 		panel.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
 		panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
@@ -208,7 +208,7 @@ public class FluidFlowDynamicsVisualization {
 			panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 			panel.startAnimation();
 			panel.startReaction();
-			pfrPanel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 			pfrPanel.startReactor();
 		}
 
@@ -229,6 +229,7 @@ public class FluidFlowDynamicsVisualization {
 
 		public void actionPerformed(ActionEvent evt) {
 			resetReactor();
+			pfrPanel.resetBatchReactorLocation();
 		}
 
 	}
