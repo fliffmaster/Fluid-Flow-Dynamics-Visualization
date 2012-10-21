@@ -24,7 +24,7 @@ public class FluidFlowDynamicsVisualization {
 	private JTextField txtParticleNumber;
 	private JTextField txtTimeRate;
 	private JTextField txtParticleMoveRate;
-	private PFR  pfrPanel = new PFR();
+	private PFR  pfrPanel;
 
 	/**
 	 * Launch the application.
@@ -118,6 +118,7 @@ public class FluidFlowDynamicsVisualization {
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(583, 78, 242, 338);
 		panel.setLogTextArea(txtConcentrationLog);
+		pfrPanel = new PFR();
 		
 		MainFrame.getContentPane().add(panel);
 		

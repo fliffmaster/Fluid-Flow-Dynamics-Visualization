@@ -20,7 +20,8 @@ public class PFR extends JPanel
 	
 	public PFR()
 	{
-		batchPanelWidth = this.getWidth() / 20;
+		
+		batchPanelWidth = /*this.getWidth()*/ 626 / 20;
 		//panel_1 = new FluidFlowReactorPanel(2090, 2);
 		batchPanels = new FluidFlowReactorPanel[22];
 		
@@ -90,6 +91,8 @@ public class PFR extends JPanel
 				batchPanels[i].setBounds(batchPanels[i].getUpperCornerX() + x, 0, batchPanelWidth, 209);
 				if(batchPanels[i].getUpperCornerX() + x == 0)
 					batchPanels[i].startReaction();	
+				//if(batchPanels[i].getUpperCornerX() + x - batchPanelWidth == 0)
+					//batchPanels[i].makeDots();
 			}
 			repaint();
 		}
