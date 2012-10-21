@@ -27,10 +27,12 @@ public class FluidFlowReactorPanel extends JPanel{
 	private Timer reactionTimer = new Timer( 100, new ReactionTimerListener());
 	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
+	private int dotDiameter;
 	
-	public FluidFlowReactorPanel(int numDots)
+	public FluidFlowReactorPanel(int numDots, int diameter)
 	{
 		//System.out.println(this.getBounds().getHeight());
+		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = numDots;
 		dots = new ArrayList<FFDot>();
@@ -83,7 +85,7 @@ public class FluidFlowReactorPanel extends JPanel{
 	{
 
 		for(int i = 0; i < currentNumberOfDots; i++)
-			dots.add(new FFDot(this.getBounds()));
+			dots.add(new FFDot(this.getBounds(), dotDiameter));
 	}
 	
 	public void clearDots()
@@ -122,6 +124,11 @@ public class FluidFlowReactorPanel extends JPanel{
 		reactor = null;
 		reactor = newReactor;
 	}
+	
+	public void setDotDiameter(int diameter)
+	{
+		
+	}
 
 	class AnimationTimerListener implements ActionListener {
 
@@ -159,15 +166,15 @@ class FFDot
 	private int diameter;
 	private Random rando = new Random();
 	
-	public FFDot(Rectangle boundary)
+	public FFDot(Rectangle boundary, int diameter)
 	{
 		
-		diameter = 3;
+		this.diameter = diameter;
 		int height = (int) boundary.getHeight();
 		//System.out.println(height);
 		int width = (int) boundary.getWidth();
-		y = rando.nextInt((int)(height - diameter )) + 5;
-		x = rando.nextInt((int)(width - diameter )) + 5 ;	
+		y = rando.nextInt((int)(height - diameter )) + 1;
+		x = rando.nextInt((int)(width - diameter )) + 1;	
 	}
 	
 	public FFDot(int x, int y, Rectangle boundary)
@@ -178,6 +185,11 @@ class FFDot
 	public Ellipse2D.Double getEllipse()
 	{
 		return new Ellipse2D.Double(x, y, diameter, diameter);
+	}
+	
+	public void setDiameter(int diameter)
+	{
+		this.diameter = diameter;
 	}
 	/*public void drawDot(Graphics2D g2)
 	{

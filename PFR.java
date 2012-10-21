@@ -20,7 +20,7 @@ public class PFR extends JPanel
 	public PFR()
 	{
 		
-		panel_1 = new FluidFlowReactorPanel(2000);
+		panel_1 = new FluidFlowReactorPanel(2000, 2);
 		
 		timer.setRepeats(true);
 		panel_1.setBounds(0, 0, 40, 209);

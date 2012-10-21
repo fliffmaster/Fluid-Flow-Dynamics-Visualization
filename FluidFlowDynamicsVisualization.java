@@ -114,7 +114,7 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
 		//JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000);
+		panel = new FluidFlowReactorPanel(2000, 3);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(583, 78, 242, 338);
 		panel.setLogTextArea(txtConcentrationLog);
