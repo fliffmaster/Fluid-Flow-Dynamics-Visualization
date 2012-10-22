@@ -89,7 +89,7 @@ public class PFR extends JPanel
 			for(int i = 0; i < 22; i++)
 			{
 				batchPanels[i].setBounds(batchPanels[i].getUpperCornerX() + x, 0, batchPanelWidth, 209);
-				if(batchPanels[i].getUpperCornerX() + x == 0)
+				if(batchPanels[i].getUpperCornerX() + x == 1)
 					batchPanels[i].startReaction();	
 				//if(batchPanels[i].getUpperCornerX() + x - batchPanelWidth == 0)
 					//batchPanels[i].makeDots();

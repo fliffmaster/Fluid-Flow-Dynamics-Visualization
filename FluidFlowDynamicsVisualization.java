@@ -88,7 +88,7 @@ public class FluidFlowDynamicsVisualization {
 				resetReactor();
 			}
 		});
-		txtRateConstant.setText(".1");
+		txtRateConstant.setText(".01");
 		txtRateConstant.setBounds(239, 90, 114, 19);
 		MainFrame.getContentPane().add(txtRateConstant);
 		txtRateConstant.setColumns(10);

@@ -47,7 +47,7 @@ public class FFBatchReactor //extends Thread
 
 	public FFBatchReactor()
 	{
-		this(1,1000.0,0.1);
+		this(1,1000.0,0.01);
 	}
 
 	public FFBatchReactor(double time, double cInit, double reactionK)
