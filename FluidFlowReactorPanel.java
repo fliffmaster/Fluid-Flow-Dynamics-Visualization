@@ -25,14 +25,13 @@ public class FluidFlowReactorPanel extends JPanel{
 	private double initialConcentration;
 	private Timer animationTimer = new Timer(500,new AnimationTimerListener());
 	private Timer reactionTimer = new Timer( 100, new ReactionTimerListener());
-	private FFBatchReactor reactor;
+	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
 	private int upperCornerX;
 	
 	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
 	{
-		reactor = new FFBatchReactor();
 		this.setUpperCornerX(upperCornerX);
 		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
@@ -156,12 +155,10 @@ public class FluidFlowReactorPanel extends JPanel{
 		DecimalFormat df =  new DecimalFormat("#.##");
 		public void actionPerformed(ActionEvent evt) {
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if(txtConcentrationLog != null)
-			{
+			if (txtConcentrationLog != null)
 			txtConcentrationLog.setText ("Concentration at time "
 					+ (int) reactor.getCurrentTime() + " is "
 					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
-			}
 			clearDots();
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
@@ -187,8 +184,8 @@ class FFDot
 		int height = (int) boundary.getHeight();
 		//System.out.println(height);
 		int width = (int) boundary.getWidth();
-		y = rando.nextInt((int)(height - diameter ));
-		x = rando.nextInt((int)(width - diameter ));	
+		y = rando.nextInt((int)(height - diameter )) + 1;
+		x = rando.nextInt((int)(width - diameter )) + 1;	
 	}
 	
 	public FFDot(int x, int y, Rectangle boundary)
