@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class FluidFlowDynamicsVisualization {
 
@@ -25,6 +27,7 @@ public class FluidFlowDynamicsVisualization {
 	private JTextField txtTimeRate;
 	private JTextField txtParticleMoveRate;
 	private PFR  pfrPanel;
+	private FluidFlowReactorPanel2 panel2;
 
 	/**
 	 * Launch the application.
@@ -109,15 +112,20 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(btnReset);
 
 		txtConcentrationLog = new JTextArea();
+		txtConcentrationLog.setBackground(new Color(127, 255, 212));
 		txtConcentrationLog.setLineWrap(true);
-		txtConcentrationLog.setBounds(28, 255, 520, 266);
+		txtConcentrationLog.setBounds(28, 273, 246, 266);
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
 		//JPanel panel = new JPanel();
 		panel = new FluidFlowReactorPanel(2000, 3, 0);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
-		panel.setBounds(583, 78, 242, 338);
+		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
+		panel2 = new FluidFlowReactorPanel2(2000, 3, 0);
+		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
+		panel2.setBounds(597, 290, 182, 218);
+		MainFrame.getContentPane().add(panel2);
 		pfrPanel = new PFR();
 		
 		MainFrame.getContentPane().add(panel);
@@ -176,6 +184,32 @@ public class FluidFlowDynamicsVisualization {
 		pfrPanel.setBounds(28, 550, 626, 209);
 		MainFrame.getContentPane().add(pfrPanel);
 		pfrPanel.setLayout(null);
+		
+//		JPanel panel2 = new JPanel();
+//		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
+//		panel2.setBounds(597, 290, 182, 218);
+//		MainFrame.getContentPane().add(panel2);
+		
+		JLabel lblNewLabel_1 = new JLabel("Batch Reactor Visualization");
+		lblNewLabel_1.setBounds(608, 16, 135, 14);
+		MainFrame.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
+		lblCstrVisualization.setBounds(608, 270, 101, 14);
+		MainFrame.getContentPane().add(lblCstrVisualization);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBackground(new Color(127, 255, 212));
+		textArea.setBounds(294, 273, 239, 266);
+		MainFrame.getContentPane().add(textArea);
+		
+		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
+		lblBatchReactorData.setBounds(69, 254, 135, 14);
+		MainFrame.getContentPane().add(lblBatchReactorData);
+		
+		JLabel lblCstrData = new JLabel("CSTR Data");
+		lblCstrData.setBounds(338, 254, 71, 14);
+		MainFrame.getContentPane().add(lblCstrData);
 		//pfrPanel.setReactor(panel.getReactor() );
 		
 		
@@ -199,6 +233,20 @@ public class FluidFlowDynamicsVisualization {
 		panel.makeDots();
 		panel.repaint();
 		
+//		panel2.setInitialConcentration(Double
+//				.parseDouble(txtInitialConcentration.getText()));
+//		panel2.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+//		panel2.setCurrentTime(0);
+//		txtConcentrationLog.setText("");
+//		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+//		
+//		panel2.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
+//		panel2.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+//		panel2.clearDots();
+//		panel2.setTotalNumberOfDots(Integer.parseInt(txtParticleNumber.getText()));
+//		panel2.makeDots();
+//		panel2.repaint();
+		
 	}
 
 	class ButtonGoListener implements ActionListener {
@@ -209,6 +257,10 @@ public class FluidFlowDynamicsVisualization {
 			panel.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 			panel.startAnimation();
 			panel.startReaction();
+			panel2.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
+			panel2.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
+			panel2.startAnimation();
+			panel2.startReaction();
 			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 			pfrPanel.startReactor();
 		}
@@ -221,6 +273,8 @@ public class FluidFlowDynamicsVisualization {
 			
 			panel.stopReaction();
 			panel.stopAnimation();
+			panel2.stopReaction();
+			panel2.stopAnimation();
 			pfrPanel.stopReactor();
 		}
 
@@ -234,6 +288,4 @@ public class FluidFlowDynamicsVisualization {
 		}
 
 	}
-
-
 }
