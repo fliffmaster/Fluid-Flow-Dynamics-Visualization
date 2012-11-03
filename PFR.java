@@ -31,7 +31,9 @@ public class PFR extends JPanel
 		
 		
 		batchPanels.add(new FluidFlowReactorPanel(1000, 2, 0));
-		add(batchPanels);
+		for(FluidFlowReactorPanel f : batchPanels)
+			add(f);
+		//add(batchPanels.get(0));
 		
 //		for(int i = 0; i < 22; i++)
 //		{			
@@ -98,11 +100,12 @@ public class PFR extends JPanel
 		public void actionPerformed(ActionEvent arg) 
 		{
 			x++;
-			for(int i = 0; i < 22; i++)
+			int size = batchPanels.size();
+			for(int i = 0; i < size; i++)
 			{
-				batchPanels[i].setBounds(batchPanels[i].getUpperCornerX() + x, 0, batchPanelWidth, 209);
-				if(batchPanels[i].getUpperCornerX() + x == 1)
-					batchPanels[i].startReaction();	
+				batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX() + x, 0, batchPanelWidth, 209);
+				if(batchPanels.get(i).getUpperCornerX() + x == 1)
+					batchPanels.get(i).startReaction();	
 				//if(batchPanels[i].getUpperCornerX() + x - batchPanelWidth == 0)
 					//batchPanels[i].makeDots();
 			}
