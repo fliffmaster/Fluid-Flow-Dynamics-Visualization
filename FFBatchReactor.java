@@ -70,7 +70,7 @@ public class FFBatchReactor //extends Thread
 	}
 	
 	public double getPercentageOfConcentrationLeft(){
-		return getCurrentConcentration() /cInit;
+		return getCurrentConcentration() / cInit;
 	}
 
 //	public void decrementCurrentConcentration()
