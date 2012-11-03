@@ -29,9 +29,11 @@ public class FluidFlowReactorPanel extends JPanel{
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
 	private int upperCornerX;
+	private int xPos;
 	
 	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
 	{
+		xPos = -upperCornerX;
 		this.setUpperCornerX(upperCornerX);
 		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
@@ -57,6 +59,21 @@ public class FluidFlowReactorPanel extends JPanel{
 	
 	public void setCurrentTime(double time){
 		getReactor().setCurrentTime(time);
+	}
+	
+	public int getXPos()
+	{
+		return xPos;
+	}
+	
+	public void setXPos()
+	{
+		xPos++;
+	}
+	
+	public void resetXPos()
+	{
+		
 	}
 	
 	public void startReaction(){
