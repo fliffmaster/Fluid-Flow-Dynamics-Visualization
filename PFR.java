@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -13,26 +14,32 @@ public class PFR extends JPanel
 	 */
 	private static final long serialVersionUID = 1L;
 	//private WaterSlice panel_1 = new WaterSlice();
-	private FluidFlowReactorPanel[] batchPanels;
+	private ArrayList<FluidFlowReactorPanel> batchPanels;
+	//private FluidFlowReactorPanel[] batchPanels;
 	private int x = 0;
 	private Timer timer = new Timer(209, new TimerListener());
 	private int batchPanelWidth;
+	int upperCornerX;
 	
 	public PFR()
 	{
 		
 		batchPanelWidth = /*this.getWidth()*/ 626 / 20;
 		//panel_1 = new FluidFlowReactorPanel(2090, 2);
-		batchPanels = new FluidFlowReactorPanel[22];
+		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		
-		for(int i = 0; i < 22; i++)
-		{
-			int upperCornerX = i * batchPanelWidth * (-1);
-			batchPanels[i] = new FluidFlowReactorPanel(1000, 2, upperCornerX);
-			batchPanels[i].setBounds(upperCornerX, 0, batchPanelWidth, 209);
-			add(batchPanels[i]);
-			batchPanels[i].setLayout(null);
-		}
+		
+		
+		batchPanels.add(new FluidFlowReactorPanel(1000, 2, 0));
+		add(batchPanels);
+		
+//		for(int i = 0; i < 22; i++)
+//		{			
+//			batchPanels[i] = new FluidFlowReactorPanel(1000, 2, upperCornerX);
+//			batchPanels[i].setBounds(upperCornerX, 0, batchPanelWidth, 209);
+//			add(batchPanels[i]);
+//			batchPanels[i].setLayout(null);
+//		}
 		
 		timer.setRepeats(true);
 		//panel_1.setBounds(0, 0, 40, 209);
@@ -40,42 +47,47 @@ public class PFR extends JPanel
 		//panel_1.setLayout(null);
 		
 	}
-	
-//	public void setReactorPanel(FluidFlowReactorPanel newPanel){
+
+	//	public void setReactorPanel(FluidFlowReactorPanel newPanel){
 //		panel_1 = newPanel;
 //		panel_1.setBounds(x, 0, 10, 209);
 //		add(panel_1);
 //		panel_1.setLayout(null);
 //	}
 	public void setAnimationTimers(int delay){
-		for(int i = 0; i < 22; i++)
-			batchPanels[i].setAnimationTimer(delay);	
+		int size = batchPanels.size();
+		
+		for(int i = 0; i < size; i++)
+			batchPanels.get(i).setAnimationTimer(delay);	
 	}
 	
 	public void setReactor(FFBatchReactor newReactor, int index) {
-		batchPanels[index].setReactor(newReactor);
+		batchPanels.get(index).setReactor(newReactor);
 		
 	}
 	
 	public void startReactor(){
 		timer.start();
-		for(int i = 0; i < 22; i++)
-			batchPanels[i].startAnimation();
+		int size = batchPanels.size();
+		for(int i = 0; i < size; i++)
+			batchPanels.get(i).startAnimation();
 		
 		//panel_1.startReaction();
 	}
 	
 	public void stopReactor(){
 		timer.stop();
-		for(int i = 0; i < 22; i++)
-			batchPanels[i].stopAnimation();
+		int size = batchPanels.size();
+		for(int i = 0; i < size; i++)
+			batchPanels.get(i).stopAnimation();
 		//panel_1.stopReaction();
 	}
 	
 	public void resetBatchReactorLocation()
 	{
-		for(int i = 0; i < 22; i++)
-			batchPanels[i].setBounds(batchPanels[i].getUpperCornerX(), 0, batchPanelWidth, 209);
+		int size = batchPanels.size();
+		for(int i = 0; i < size; i++)
+			batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX(), 0, batchPanelWidth, 209);
 		//panel_1.setBounds(x, 0, 40, 209);
 		repaint();
 		
