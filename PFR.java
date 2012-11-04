@@ -89,7 +89,9 @@ public class PFR extends JPanel
 	{
 		int size = batchPanels.size();
 		for(int i = 0; i < size; i++)
+		{
 			batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX(), 0, batchPanelWidth, 209);
+		}
 		//panel_1.setBounds(x, 0, 40, 209);
 		repaint();
 		
@@ -99,11 +101,11 @@ public class PFR extends JPanel
 	{
 		public void actionPerformed(ActionEvent arg) 
 		{
-			x++;
 			int size = batchPanels.size();
 			for(int i = 0; i < size; i++)
 			{
-				batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX() + x, 0, batchPanelWidth, 209);
+				batchPanels.get(i).setXPos();
+				batchPanels.get(i).setBounds(batchPanels.get(i).getXPos(), 0, batchPanelWidth, 209);
 				if(batchPanels.get(i).getUpperCornerX() + x == 1)
 					batchPanels.get(i).startReaction();	
 				//if(batchPanels[i].getUpperCornerX() + x - batchPanelWidth == 0)
