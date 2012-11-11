@@ -1,11 +1,9 @@
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.border.LineBorder;
 
 public class PFR extends JPanel
 {
@@ -13,68 +11,67 @@ public class PFR extends JPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//private WaterSlice panel_1 = new WaterSlice();
 	private ArrayList<FluidFlowReactorPanel> batchPanels;
-	//private FluidFlowReactorPanel[] batchPanels;
-	private int x = 0;
-	private Timer timer = new Timer(209, new TimerListener());
+	//private int x = 0;
+	private Timer timer = new Timer(50, new TimerListener());
 	private int batchPanelWidth;
-	int upperCornerX;
+	//private int upperCornerX;
+	private boolean flowing = true;
+	private boolean started = false;
 	
 	public PFR()
 	{
-		
 		batchPanelWidth = /*this.getWidth()*/ 626 / 20;
-		//panel_1 = new FluidFlowReactorPanel(2090, 2);
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		
-		
-		
-//		batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
-//		for(FluidFlowReactorPanel f : batchPanels)
-//			add(f);
-		//add(batchPanels.get(0));
-		
-//		for(int i = 0; i < 22; i++)
-//		{			
-//			batchPanels[i] = new FluidFlowReactorPanel(1000, 2, upperCornerX);
-//			batchPanels[i].setBounds(upperCornerX, 0, batchPanelWidth, 209);
-//			add(batchPanels[i]);
-//			batchPanels[i].setLayout(null);
-//		}
-		
-		timer.setRepeats(true);
-		//panel_1.setBounds(0, 0, 40, 209);
-		//add(panel_1);
-		//panel_1.setLayout(null);
-		
+		timer.setRepeats(true);		
+	}
+	
+	public boolean isFlowing()
+	{
+		return flowing;
+	}
+	
+	public void toggleFlowing()
+	{
+		if(flowing == true)
+			flowing = false;
+		else
+			flowing = true;
+	}
+	
+	public boolean isStarted()
+	{
+		return started;
+	}
+	
+	public void toggleStarted()
+	{
+		if(started == false)
+			started = true;
+		else
+			started = false;
 	}
 
-	//	public void setReactorPanel(FluidFlowReactorPanel newPanel){
-//		panel_1 = newPanel;
-//		panel_1.setBounds(x, 0, 10, 209);
-//		add(panel_1);
-//		panel_1.setLayout(null);
-//	}
-	public void setAnimationTimers(int delay){
-		int size = batchPanels.size();
-		
-		for(int i = 0; i < size; i++)
-			batchPanels.get(i).setAnimationTimer(delay);	
+	public void setAnimationTimers(int delay)
+	{
+		for(FluidFlowReactorPanel f : batchPanels)
+			f.setAnimationTimer(delay);
 	}
 	
-	public void setReactor(FFBatchReactor newReactor, int index) {
+	public void setReactor(FFBatchReactor newReactor, int index)
+	{
 		batchPanels.get(index).setReactor(newReactor);
-		
 	}
 	
-	public void startAnimation(){
+	public void startAnimation()
+	{
 		timer.start();
-		int size = batchPanels.size();
-		for(int i = 0; i < size; i++)
-			batchPanels.get(i).startAnimation();
-		
-		//panel_1.startReaction();
+//		int size = batchPanels.size();
+//		for(int i = 0; i < size; i++)
+//			batchPanels.get(i).startAnimation();
+		for(FluidFlowReactorPanel f : batchPanels)
+			f.startAnimation();
 	}
 	
 	public void startReactor()
@@ -107,24 +104,11 @@ public class PFR extends JPanel
 	
 	public void resetBatchReactorLocation()
 	{
-//		int size = batchPanels.size();
-		
-//		for(FluidFlowReactorPanel f : batchPanels)
-	//		f.setBounds(f.getUpperCornerX(), 0, batchPanelWidth, 209);
-		//for(FluidFlowReactorPanel f: batchPanels)
 		removeAll();
 		batchPanels.clear();
 		System.out.println(batchPanels.isEmpty());
 		
-		
-		
-//		for(int i = 0; i < size; i++)
-//		{
-//			batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX(), 0, batchPanelWidth, 209);
-//		}
-		//panel_1.setBounds(x, 0, 40, 209);
 		repaint();
-		
 	}
 	
 	class TimerListener implements ActionListener
@@ -139,13 +123,22 @@ public class PFR extends JPanel
 				if(f.getXPos() >= 0)
 					f.startReaction();	
 			}
-			if(batchPanels.get(size - 1).getXPos() >= 0)
+
+			if(flowing == true)
 			{
-				batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
-				add(batchPanels.get(size));
+				if(batchPanels.get(size - 1).getXPos() >= 0)
+				{
+					batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+					add(batchPanels.get(size));
+					batchPanels.get(size).startAnimation();
+				}
 			}
-			
-			
+			if(batchPanels.get(0).getXPos() == 600)
+			{
+				remove(0);
+				batchPanels.remove(0);
+			}
+
 			repaint();
 		}	
 	}

@@ -98,17 +98,17 @@ public class FluidFlowDynamicsVisualization {
 
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ButtonGoListener());
-		btnGo.setBounds(127, 218, 117, 25);
+		btnGo.setBounds(247, 218, 81, 25);
 		MainFrame.getContentPane().add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ButtonStopListener());
-		btnStop.setBounds(254, 218, 117, 25);
+		btnStop.setBounds(338, 218, 71, 25);
 		MainFrame.getContentPane().add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ButtonResetListener());
-		btnReset.setBounds(383, 218, 117, 25);
+		btnReset.setBounds(419, 218, 81, 25);
 		MainFrame.getContentPane().add(btnReset);
 
 		txtConcentrationLog = new JTextArea();
@@ -210,6 +210,17 @@ public class FluidFlowDynamicsVisualization {
 		JLabel lblCstrData = new JLabel("CSTR Data");
 		lblCstrData.setBounds(338, 254, 71, 14);
 		MainFrame.getContentPane().add(lblCstrData);
+		
+		JButton btnToggleFlow = new JButton("Toggle Flow");
+		btnToggleFlow.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				pfrPanel.toggleFlowing();
+			}
+		});
+		btnToggleFlow.setBounds(148, 219, 89, 23);
+		MainFrame.getContentPane().add(btnToggleFlow);
 		//pfrPanel.setReactor(panel.getReactor() );
 		
 		
