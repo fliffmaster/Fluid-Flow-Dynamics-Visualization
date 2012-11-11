@@ -30,9 +30,9 @@ public class PFR extends JPanel
 		
 		
 		
-		batchPanels.add(new FluidFlowReactorPanel(1000, 2, 0));
-		for(FluidFlowReactorPanel f : batchPanels)
-			add(f);
+//		batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+//		for(FluidFlowReactorPanel f : batchPanels)
+//			add(f);
 		//add(batchPanels.get(0));
 		
 //		for(int i = 0; i < 22; i++)
@@ -68,7 +68,7 @@ public class PFR extends JPanel
 		
 	}
 	
-	public void startReactor(){
+	public void startAnimation(){
 		timer.start();
 		int size = batchPanels.size();
 		for(int i = 0; i < size; i++)
@@ -77,21 +77,51 @@ public class PFR extends JPanel
 		//panel_1.startReaction();
 	}
 	
-	public void stopReactor(){
+	public void startReactor()
+	{
+		for(FluidFlowReactorPanel f : batchPanels)
+			f.startReaction();
+	}
+	
+	public void beginAnimation()
+	{
+		batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+		for(FluidFlowReactorPanel f : batchPanels)
+			add(f);
+	}
+	
+	public void stopReactor()
+	{
 		timer.stop();
 		int size = batchPanels.size();
 		for(int i = 0; i < size; i++)
-			batchPanels.get(i).stopAnimation();
+			batchPanels.get(i).stopReaction();
 		//panel_1.stopReaction();
+	}
+	
+	public void stopAnimation()
+	{
+		for(FluidFlowReactorPanel f : batchPanels)
+			f.stopAnimation();
 	}
 	
 	public void resetBatchReactorLocation()
 	{
-		int size = batchPanels.size();
-		for(int i = 0; i < size; i++)
-		{
-			batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX(), 0, batchPanelWidth, 209);
-		}
+//		int size = batchPanels.size();
+		
+//		for(FluidFlowReactorPanel f : batchPanels)
+	//		f.setBounds(f.getUpperCornerX(), 0, batchPanelWidth, 209);
+		//for(FluidFlowReactorPanel f: batchPanels)
+		removeAll();
+		batchPanels.clear();
+		System.out.println(batchPanels.isEmpty());
+		
+		
+		
+//		for(int i = 0; i < size; i++)
+//		{
+//			batchPanels.get(i).setBounds(batchPanels.get(i).getUpperCornerX(), 0, batchPanelWidth, 209);
+//		}
 		//panel_1.setBounds(x, 0, 40, 209);
 		repaint();
 		
@@ -102,17 +132,19 @@ public class PFR extends JPanel
 		public void actionPerformed(ActionEvent arg) 
 		{
 			int size = batchPanels.size();
-			for(int i = 0; i < size; i++)
+			for(FluidFlowReactorPanel f : batchPanels)
 			{
-				batchPanels.get(i).setXPos();
-				batchPanels.get(i).setBounds(batchPanels.get(i).getXPos(), 0, batchPanelWidth, 209);
-				if(batchPanels.get(i).getUpperCornerX() + x == 1)
-					batchPanels.get(i).startReaction();	
-				//if(batchPanels[i].getUpperCornerX() + x - batchPanelWidth == 0)
-					//batchPanels[i].makeDots();
+				f.setXPos();
+				f.setBounds(f.getXPos(), 0, batchPanelWidth, 209);
+				if(f.getXPos() >= 0)
+					f.startReaction();	
 			}
+			//if(batchPanels.get(size - 1).getXPos() == 20)
+				//batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+			
+			//add(batchPanels.get(size));
+			
 			repaint();
-		}
-		
+		}	
 	}
 }

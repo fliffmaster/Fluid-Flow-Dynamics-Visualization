@@ -118,7 +118,7 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
 		//JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3, 0);
+		panel = new FluidFlowReactorPanel(2000, 2, 0);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
@@ -262,7 +262,9 @@ public class FluidFlowDynamicsVisualization {
 			panel2.startAnimation();
 			panel2.startReaction();
 			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-			pfrPanel.startReactor();
+			pfrPanel.startAnimation();
+			pfrPanel.beginAnimation();
+			//pfrPanel.startReactor();
 		}
 
 	}
@@ -276,6 +278,7 @@ public class FluidFlowDynamicsVisualization {
 			panel2.stopReaction();
 			panel2.stopAnimation();
 			pfrPanel.stopReactor();
+			pfrPanel.stopAnimation();
 		}
 
 	}
