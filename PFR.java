@@ -139,10 +139,12 @@ public class PFR extends JPanel
 				if(f.getXPos() >= 0)
 					f.startReaction();	
 			}
-			//if(batchPanels.get(size - 1).getXPos() == 20)
-				//batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+			if(batchPanels.get(size - 1).getXPos() >= 0)
+			{
+				batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+				add(batchPanels.get(size));
+			}
 			
-			//add(batchPanels.get(size));
 			
 			repaint();
 		}	
