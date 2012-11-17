@@ -12,7 +12,7 @@ public class FFCSTReactor {
 	
 	public FFCSTReactor()
 	{
-		this(1000.0, 1.0, 0.01, 1.0, 10.0, 1.0);
+		this(1000.0, 1.0, 0.001, 1.0, 100.0, 1.0);
 	}
 	
 	public FFCSTReactor(double tFinal, double cIn, double kInit, double flowRate, double reactorVolume, double defaultConcentration)
@@ -27,7 +27,7 @@ public class FFCSTReactor {
 		this.setDefaultConcentration(defaultConcentration);
 	}
 	
-	public double getCurrentConcentration()
+	public double getCCurrAndDecrement()
 	{
 		cCurr = cCurr * (1 - flowRate / reactorVolume) + cIn * (flowRate / reactorVolume);
 		cCurr = cCurr - (kInit * cCurr);
@@ -35,7 +35,8 @@ public class FFCSTReactor {
 	}
 	
 	public double getPercentageOfConcentrationLeft(){
-		return getCCurr() / defaultConcentration;
+		System.out.println(cIn * (flowRate / reactorVolume) +"\t" + cCurr / defaultConcentration);
+		return getCCurrAndDecrement() / defaultConcentration;
 	}
 
 	public double getFlowRate() {
@@ -101,6 +102,4 @@ public class FFCSTReactor {
 	public void setDefaultConcentration(double defaultConcentration) {
 		this.defaultConcentration = defaultConcentration;
 	}
-	
-	
 }

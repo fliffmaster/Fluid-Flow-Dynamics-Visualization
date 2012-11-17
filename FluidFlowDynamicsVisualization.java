@@ -57,29 +57,33 @@ public class FluidFlowDynamicsVisualization {
 	 */
 	private void initialize() {
 		
-		
+		//make the main frame for the application
 		MainFrame = new JFrame();
 		MainFrame.setTitle("Fluid Flow Dynamics Visualization");
 		MainFrame.setBounds(100, 100, 868, 813);
 		MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainFrame.getContentPane().setLayout(null);
-
+		
+		//Initial Concentration Label
 		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
 		lblInitialConcentration.setBounds(12, 67, 192, 15);
 		MainFrame.getContentPane().add(lblInitialConcentration);
-
+		
+		//Make Initial Concentration text field
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
 		txtInitialConcentration.setText("1000");
 		txtInitialConcentration.setBounds(239, 63, 114, 19);
 		MainFrame.getContentPane().add(txtInitialConcentration);
 		
+		//NEED TO FIX THIS, SHOULD NOT DO THIS (when you click around fields w/o changing anything, the whole thing resets)
 		txtInitialConcentration.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				resetReactor();
 			}
 		});
+		
 		JLabel lblNewLabel = new JLabel("Rate Constant per Minute");
 		lblNewLabel.setBounds(12, 94, 192, 15);
 		MainFrame.getContentPane().add(lblNewLabel);
@@ -98,17 +102,17 @@ public class FluidFlowDynamicsVisualization {
 
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ButtonGoListener());
-		btnGo.setBounds(127, 218, 117, 25);
+		btnGo.setBounds(247, 218, 81, 25);
 		MainFrame.getContentPane().add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ButtonStopListener());
-		btnStop.setBounds(254, 218, 117, 25);
+		btnStop.setBounds(338, 218, 71, 25);
 		MainFrame.getContentPane().add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ButtonResetListener());
-		btnReset.setBounds(383, 218, 117, 25);
+		btnReset.setBounds(419, 218, 81, 25);
 		MainFrame.getContentPane().add(btnReset);
 
 		txtConcentrationLog = new JTextArea();
@@ -117,15 +121,23 @@ public class FluidFlowDynamicsVisualization {
 		txtConcentrationLog.setBounds(28, 273, 246, 266);
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
+		JTextArea cstrLogArea = new JTextArea();
+		cstrLogArea.setBackground(new Color(127, 255, 212));
+		cstrLogArea.setBounds(294, 273, 239, 266);
+		MainFrame.getContentPane().add(cstrLogArea);
+		
 		//JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3, 0);
+		panel = new FluidFlowReactorPanel(2000, 2, 0);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
+		
 		panel2 = new FluidFlowReactorPanel2(2000, 3, 0);
 		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel2.setBounds(597, 290, 182, 218);
+		panel2.setLogTextArea(cstrLogArea);
 		MainFrame.getContentPane().add(panel2);
+		
 		pfrPanel = new PFR();
 		
 		MainFrame.getContentPane().add(panel);
@@ -198,11 +210,6 @@ public class FluidFlowDynamicsVisualization {
 		lblCstrVisualization.setBounds(608, 270, 101, 14);
 		MainFrame.getContentPane().add(lblCstrVisualization);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(127, 255, 212));
-		textArea.setBounds(294, 273, 239, 266);
-		MainFrame.getContentPane().add(textArea);
-		
 		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
 		lblBatchReactorData.setBounds(69, 254, 135, 14);
 		MainFrame.getContentPane().add(lblBatchReactorData);
@@ -210,6 +217,17 @@ public class FluidFlowDynamicsVisualization {
 		JLabel lblCstrData = new JLabel("CSTR Data");
 		lblCstrData.setBounds(338, 254, 71, 14);
 		MainFrame.getContentPane().add(lblCstrData);
+		
+		JButton btnToggleFlow = new JButton("Toggle Flow");
+		btnToggleFlow.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				pfrPanel.toggleFlowing();
+			}
+		});
+		btnToggleFlow.setBounds(148, 219, 89, 23);
+		MainFrame.getContentPane().add(btnToggleFlow);
 		//pfrPanel.setReactor(panel.getReactor() );
 		
 		
@@ -262,7 +280,9 @@ public class FluidFlowDynamicsVisualization {
 			panel2.startAnimation();
 			panel2.startReaction();
 			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-			pfrPanel.startReactor();
+			pfrPanel.startAnimation();
+			pfrPanel.beginAnimation();
+			//pfrPanel.startReactor();
 		}
 
 	}
@@ -276,6 +296,7 @@ public class FluidFlowDynamicsVisualization {
 			panel2.stopReaction();
 			panel2.stopAnimation();
 			pfrPanel.stopReactor();
+			pfrPanel.stopAnimation();
 		}
 
 	}

@@ -36,7 +36,7 @@ public class FluidFlowReactorPanel2 extends JPanel{
 		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
-		currentNumberOfDots = numDots;
+		currentNumberOfDots = 0;
 		dots = new ArrayList<FFDot>();
 		animationTimer.setRepeats(true);
 		reactionTimer.setRepeats(true);
@@ -97,7 +97,7 @@ public class FluidFlowReactorPanel2 extends JPanel{
 	
 	public void setTotalNumberOfDots(int index)
 	{
-		totalNumberOfDots = index;
+		//totalNumberOfDots = index;
 		currentNumberOfDots = index;
 	}
 	

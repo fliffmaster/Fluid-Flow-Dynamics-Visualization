@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class FluidFlowReactorPanel extends JPanel{
-	
+public class FluidFlowReactorPanel extends JPanel
+{
 	/**
 	 * 
 	 */
@@ -23,17 +23,18 @@ public class FluidFlowReactorPanel extends JPanel{
 	private int totalNumberOfDots;
 	private int currentNumberOfDots;
 	private double initialConcentration;
-	private Timer animationTimer = new Timer(500,new AnimationTimerListener());
-	private Timer reactionTimer = new Timer( 100, new ReactionTimerListener());
+	private Timer animationTimer = new Timer(500, new AnimationTimerListener());
+	private Timer reactionTimer = new Timer(50, new ReactionTimerListener());
 	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
 	private int upperCornerX;
+	private int xPos;
 	
 	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
 	{
+		xPos = -upperCornerX;
 		this.setUpperCornerX(upperCornerX);
-		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = numDots;
@@ -42,50 +43,74 @@ public class FluidFlowReactorPanel extends JPanel{
 		reactionTimer.setRepeats(true);
 	}
 	
-	public void setLogTextArea(JTextArea log){
+	public void setLogTextArea(JTextArea log)
+	{
 		txtConcentrationLog = log;
 	}
 	
-	public void setInitialConcentration(double concentration){
+	public void setInitialConcentration(double concentration)
+	{
 		initialConcentration = concentration;
 		getReactor().setInitialConcentration(concentration);
 	}
 	
-	public void setRateConstant(double rate){
+	public void setRateConstant(double rate)
+	{
 		getReactor().setRateConstant(rate);
 	}
 	
-	public void setCurrentTime(double time){
+	public void setCurrentTime(double time)
+	{
 		getReactor().setCurrentTime(time);
 	}
 	
-	public void startReaction(){
+	public int getXPos()
+	{
+		return xPos;
+	}
+	
+	public void setXPos()
+	{
+		xPos++;
+	}
+	
+	public void resetXPos()
+	{
+		
+	}
+	
+	public void startReaction()
+	{
 		reactionTimer.start();
 	}
 	
-	public void stopReaction(){
+	public void stopReaction()
+	{
 		reactionTimer.stop();
 	}
 
-	public void startAnimation(){
+	public void startAnimation()
+	{
 		animationTimer.start();
 	}
 	
-	public void stopAnimation(){
+	public void stopAnimation()
+	{
 		animationTimer.stop();
 	}
 	
-	public void setAnimationTimer(int delay){
+	public void setAnimationTimer(int delay)
+	{
 		animationTimer.setDelay(delay);
 	}
 
-	public void setReactionTimer(int delay){
+	public void setReactionTimer(int delay)
+	{
 		reactionTimer.setDelay(delay);
 	}
 
 	public void makeDots()
 	{
-
 		for(int i = 0; i < currentNumberOfDots; i++)
 			dots.add(new FFDot(this.getBounds(), dotDiameter));
 	}
@@ -101,7 +126,8 @@ public class FluidFlowReactorPanel extends JPanel{
 		currentNumberOfDots = index;
 	}
 	
-	public int getLastDot(){
+	public int getLastDot()
+	{
 		return totalNumberOfDots;
 	}
 	
@@ -118,11 +144,13 @@ public class FluidFlowReactorPanel extends JPanel{
 		}
 	}
 	
-	public FFBatchReactor getReactor() {
+	public FFBatchReactor getReactor() 
+	{
 		return reactor;
 	}
 
-	public void setReactor(FFBatchReactor newReactor) {
+	public void setReactor(FFBatchReactor newReactor) 
+	{
 		reactor = null;
 		reactor = newReactor;
 	}
@@ -132,83 +160,45 @@ public class FluidFlowReactorPanel extends JPanel{
 		
 	}
 
-	public int getUpperCornerX() {
+	public int getUpperCornerX() 
+	{
 		return upperCornerX;
 	}
 
-	public void setUpperCornerX(int upperCornerX) {
+	public void setUpperCornerX(int upperCornerX) 
+	{
 		this.upperCornerX = upperCornerX;
 	}
 
-	class AnimationTimerListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent evt) {
+	class AnimationTimerListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
 			clearDots();
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			makeDots();
 			repaint();
-	
 		}
 	}
 	
-	class ReactionTimerListener implements ActionListener {
+	class ReactionTimerListener implements ActionListener 
+	{
 		DecimalFormat df =  new DecimalFormat("#.##");
-		public void actionPerformed(ActionEvent evt) {
+		public void actionPerformed(ActionEvent evt) 
+		{
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
 			if (txtConcentrationLog != null)
-			txtConcentrationLog.setText ("Concentration at time "
-					+ (int) reactor.getCurrentTime() + " is "
-					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+			{
+				txtConcentrationLog.setText ("Concentration at time "
+				+ (int) reactor.getCurrentTime() + " is "
+				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+			}
 			clearDots();
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
 			makeDots();
 			repaint();
-	
 		}
 	}
-	
 }
-
-//class FFDot
-//{
-//	private int x;
-//	private int y;
-//	private int diameter;
-//	private Random rando = new Random();
-//	
-//	public FFDot(Rectangle boundary, int diameter)
-//	{
-//		
-//		this.diameter = diameter;
-//		int height = (int) boundary.getHeight();
-//		//System.out.println(height);
-//		int width = (int) boundary.getWidth();
-//		y = rando.nextInt((int)(height - diameter )) + 1;
-//		x = rando.nextInt((int)(width - diameter )) + 1;	
-//	}
-//	
-//	public FFDot(int x, int y, Rectangle boundary)
-//	{
-//		
-//	}
-//	
-//	public Ellipse2D.Double getEllipse()
-//	{
-//		return new Ellipse2D.Double(x, y, diameter, diameter);
-//	}
-//	
-//	public void setDiameter(int diameter)
-//	{
-//		this.diameter = diameter;
-//	}
-//	/*public void drawDot(Graphics2D g2)
-//	{
-//		Ellipse2D.Double dot = new Ellipse2D.Double(x, y, diameter, diameter);
-//		g2.setColor(Color.BLUE);
-//		g2.fill(dot);
-//		g2.setColor(Color.BLACK);
-//	}*/
-//	
-//}
 
