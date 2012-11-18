@@ -1,11 +1,7 @@
 
-public class FFCSTReactor {
-	
-	private double tFinal;
+public class FFCSTReactor extends FFReactor 
+{	
 	private double cIn;
-	private double kInit;
-	private double tCurr;
-	private double cCurr;
 	private double flowRate;
 	private double reactorVolume;
 	private double defaultConcentration;
@@ -17,11 +13,8 @@ public class FFCSTReactor {
 	
 	public FFCSTReactor(double tFinal, double cIn, double kInit, double flowRate, double reactorVolume, double defaultConcentration)
 	{
-		this.settFinal(tFinal);
+		super(tFinal, kInit, 0);
 		this.setcIn(cIn);
-		this.setkInit(kInit);
-		this.settCurr(0.0);
-		this.setCCurr(0.0);
 		this.setFlowRate(flowRate);
 		this.setReactorVolume(reactorVolume); 
 		this.setDefaultConcentration(defaultConcentration);
@@ -29,13 +22,12 @@ public class FFCSTReactor {
 	
 	public double getCCurrAndDecrement()
 	{
-		cCurr = cCurr * (1 - flowRate / reactorVolume) + cIn * (flowRate / reactorVolume);
-		cCurr = cCurr - (kInit * cCurr);
-		return cCurr;
+		setCCurr(getCCurr() * (1 - flowRate / reactorVolume) + cIn * (flowRate / reactorVolume));
+		setCCurr(getCCurr() - (getkInit() * getCCurr()));
+		return getCCurr();
 	}
 	
 	public double getPercentageOfConcentrationLeft(){
-		System.out.println(cIn * (flowRate / reactorVolume) +"\t" + cCurr / defaultConcentration);
 		return getCCurrAndDecrement() / defaultConcentration;
 	}
 
@@ -47,44 +39,12 @@ public class FFCSTReactor {
 		this.flowRate = flowRate;
 	}
 
-	public double gettFinal() {
-		return tFinal;
-	}
-
-	public void settFinal(double tFinal) {
-		this.tFinal = tFinal;
-	}
-
 	public double getcIn() {
 		return cIn;
 	}
 
 	public void setcIn(double cIn) {
 		this.cIn = cIn;
-	}
-
-	public double getkInit() {
-		return kInit;
-	}
-
-	public void setkInit(double kInit) {
-		this.kInit = kInit;
-	}
-
-	public double gettCurr() {
-		return tCurr;
-	}
-
-	public void settCurr(double tCurr) {
-		this.tCurr = tCurr;
-	}
-
-	public double getCCurr() {
-		return cCurr;
-	}
-
-	public void setCCurr(double cCurr) {
-		this.cCurr = cCurr;
 	}
 
 	public double getReactorVolume() {
