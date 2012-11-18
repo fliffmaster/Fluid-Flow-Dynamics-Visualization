@@ -5,15 +5,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.JPanel;
-import java.awt.SystemColor;
 
 public class FluidFlowDynamicsVisualization {
 
@@ -77,9 +74,11 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(txtInitialConcentration);
 		
 		//NEED TO FIX THIS, SHOULD NOT DO THIS (when you click around fields w/o changing anything, the whole thing resets)
-		txtInitialConcentration.addFocusListener(new FocusAdapter() {
+		txtInitialConcentration.addFocusListener(new FocusAdapter() 
+		{
 			@Override
-			public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent e) 
+			{
 				resetReactor();
 			}
 		});

@@ -21,7 +21,7 @@ public class PFR extends JPanel
 	
 	public PFR()
 	{
-		batchPanelWidth = /*this.getWidth()*/ 626 / 20;
+		batchPanelWidth = /*this.getWidth()*/ 20;  //This is where we would put in a variable for user input on batch size
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		
 		timer.setRepeats(true);		

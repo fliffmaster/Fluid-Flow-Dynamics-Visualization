@@ -69,9 +69,11 @@ public class FluidFlowReactorPanel extends JPanel
 		return xPos;
 	}
 	
+	//We need to make this a user variable so flow rate is a variable (also possible needs to be linked
+	//with batch panel width somehow for less gaps between plugs in PFR).
 	public void setXPos()
 	{
-		xPos++;
+		xPos += 20;
 	}
 	
 	public void resetXPos()
