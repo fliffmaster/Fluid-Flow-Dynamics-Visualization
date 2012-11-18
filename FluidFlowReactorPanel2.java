@@ -97,7 +97,7 @@ public class FluidFlowReactorPanel2 extends JPanel{
 	
 	public void setTotalNumberOfDots(int index)
 	{
-		totalNumberOfDots = index;
+		//totalNumberOfDots = index;
 		currentNumberOfDots = index;
 	}
 	

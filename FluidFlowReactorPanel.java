@@ -35,7 +35,6 @@ public class FluidFlowReactorPanel extends JPanel
 	{
 		xPos = -upperCornerX;
 		this.setUpperCornerX(upperCornerX);
-		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = numDots;

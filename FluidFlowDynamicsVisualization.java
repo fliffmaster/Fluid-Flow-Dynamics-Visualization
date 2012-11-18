@@ -57,29 +57,33 @@ public class FluidFlowDynamicsVisualization {
 	 */
 	private void initialize() {
 		
-		
+		//make the main frame for the application
 		MainFrame = new JFrame();
 		MainFrame.setTitle("Fluid Flow Dynamics Visualization");
 		MainFrame.setBounds(100, 100, 868, 813);
 		MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainFrame.getContentPane().setLayout(null);
-
+		
+		//Initial Concentration Label
 		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
 		lblInitialConcentration.setBounds(12, 67, 192, 15);
 		MainFrame.getContentPane().add(lblInitialConcentration);
-
+		
+		//Make Initial Concentration text field
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
 		txtInitialConcentration.setText("1000");
 		txtInitialConcentration.setBounds(239, 63, 114, 19);
 		MainFrame.getContentPane().add(txtInitialConcentration);
 		
+		//NEED TO FIX THIS, SHOULD NOT DO THIS (when you click around fields w/o changing anything, the whole thing resets)
 		txtInitialConcentration.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				resetReactor();
 			}
 		});
+		
 		JLabel lblNewLabel = new JLabel("Rate Constant per Minute");
 		lblNewLabel.setBounds(12, 94, 192, 15);
 		MainFrame.getContentPane().add(lblNewLabel);
@@ -117,15 +121,23 @@ public class FluidFlowDynamicsVisualization {
 		txtConcentrationLog.setBounds(28, 273, 246, 266);
 		MainFrame.getContentPane().add(txtConcentrationLog);
 		
+		JTextArea cstrLogArea = new JTextArea();
+		cstrLogArea.setBackground(new Color(127, 255, 212));
+		cstrLogArea.setBounds(294, 273, 239, 266);
+		MainFrame.getContentPane().add(cstrLogArea);
+		
 		//JPanel panel = new JPanel();
 		panel = new FluidFlowReactorPanel(2000, 2, 0);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
+		
 		panel2 = new FluidFlowReactorPanel2(2000, 3, 0);
 		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel2.setBounds(597, 290, 182, 218);
+		panel2.setLogTextArea(cstrLogArea);
 		MainFrame.getContentPane().add(panel2);
+		
 		pfrPanel = new PFR();
 		
 		MainFrame.getContentPane().add(panel);
@@ -197,11 +209,6 @@ public class FluidFlowDynamicsVisualization {
 		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
 		lblCstrVisualization.setBounds(608, 270, 101, 14);
 		MainFrame.getContentPane().add(lblCstrVisualization);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(127, 255, 212));
-		textArea.setBounds(294, 273, 239, 266);
-		MainFrame.getContentPane().add(textArea);
 		
 		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
 		lblBatchReactorData.setBounds(69, 254, 135, 14);
