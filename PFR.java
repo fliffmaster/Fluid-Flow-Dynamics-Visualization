@@ -21,7 +21,7 @@ public class PFR extends JPanel
 	
 	public PFR()
 	{
-		batchPanelWidth = /*this.getWidth()*/ 20;  //This is where we would put in a variable for user input on batch size
+		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		
 		timer.setRepeats(true);		
@@ -82,9 +82,9 @@ public class PFR extends JPanel
 	
 	public void beginAnimation()
 	{
-		batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
-		for(FluidFlowReactorPanel f : batchPanels)
-			add(f);
+			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+			for(FluidFlowReactorPanel f : batchPanels)
+				add(f);
 	}
 	
 	public void stopReactor()

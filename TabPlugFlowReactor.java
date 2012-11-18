@@ -177,57 +177,45 @@ public class TabPlugFlowReactor extends JPanel
 		});
 		btnToggleFlow.setBounds(148, 219, 89, 23);
 		add(btnToggleFlow);
-		//pfrPanel.setReactor(panel.getReactor() );
-		
-		
-		resetReactor();
-		
-		
+		//pfrPanel.setReactor(panel.getReactor() );		
+		resetReactor();		
 	}
 
-	private void resetReactor() {
+	private void resetReactor() 
+	{
 		txtConcentrationLog.setText("");
-		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-		
-//		panel2.setInitialConcentration(Double
-//				.parseDouble(txtInitialConcentration.getText()));
-//		panel2.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
-//		panel2.setCurrentTime(0);
-//		txtConcentrationLog.setText("");
-//		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-//		
-//		panel2.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
-//		panel2.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
-//		panel2.clearDots();
-//		panel2.setTotalNumberOfDots(Integer.parseInt(txtParticleNumber.getText()));
-//		panel2.makeDots();
-//		panel2.repaint();
-		
+		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));				
 	}
 
-	class ButtonGoListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent evt) {
+	class ButtonGoListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			if(pfrPanel.isFlowing() == true && pfrPanel.isStarted() == false)
+			{
 			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 			pfrPanel.startAnimation();
 			pfrPanel.beginAnimation();
-			//pfrPanel.startReactor();
+			}
 		}
-
 	}
 
-	class ButtonStopListener implements ActionListener {
+	class ButtonStopListener implements ActionListener 
+	{
 
-		public void actionPerformed(ActionEvent evt) {
+		public void actionPerformed(ActionEvent evt)
+		{
 			pfrPanel.stopReactor();
 			pfrPanel.stopAnimation();
 		}
 
 	}
 
-	class ButtonResetListener implements ActionListener {
+	class ButtonResetListener implements ActionListener 
+	{
 
-		public void actionPerformed(ActionEvent evt) {
+		public void actionPerformed(ActionEvent evt) 
+		{
 			resetReactor();
 			pfrPanel.resetBatchReactorLocation();
 		}
