@@ -377,8 +377,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchParticleColor.setText("FF0000");
 		
 		GridBagConstraints gbc_txtBatchParticleColor = new GridBagConstraints();
+		gbc_txtBatchParticleColor.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchParticleColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchParticleColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchParticleColor.gridx = 1;
 		gbc_txtBatchParticleColor.gridy = 1;
 		batchReactorPreferences.add(txtBatchParticleColor, gbc_txtBatchParticleColor);
@@ -397,8 +397,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchParticleSize = new JTextField();
 		txtBatchParticleSize.setText("2");
 		GridBagConstraints gbc_txtBatchParticleSize = new GridBagConstraints();
+		gbc_txtBatchParticleSize.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchParticleSize.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchParticleSize.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchParticleSize.gridx = 1;
 		gbc_txtBatchParticleSize.gridy = 2;
 		batchReactorPreferences.add(txtBatchParticleSize, gbc_txtBatchParticleSize);
@@ -415,8 +415,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchParticleNumber = new JTextField();
 		txtBatchParticleNumber.setText("5000");
 		GridBagConstraints gbc_txtBatchParticleNumber = new GridBagConstraints();
+		gbc_txtBatchParticleNumber.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchParticleNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchParticleNumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchParticleNumber.gridx = 1;
 		gbc_txtBatchParticleNumber.gridy = 3;
 		batchReactorPreferences.add(txtBatchParticleNumber, gbc_txtBatchParticleNumber);
@@ -433,8 +433,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchMotionRate = new JTextField();
 		txtBatchMotionRate.setText("50");
 		GridBagConstraints gbc_txtBatchMotionRate = new GridBagConstraints();
+		gbc_txtBatchMotionRate.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchMotionRate.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchMotionRate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchMotionRate.gridx = 1;
 		gbc_txtBatchMotionRate.gridy = 4;
 		batchReactorPreferences.add(txtBatchMotionRate, gbc_txtBatchMotionRate);
@@ -451,8 +451,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchBackgroundColor = new JTextField();
 		txtBatchBackgroundColor.setText("FFFFFF");
 		GridBagConstraints gbc_txtBatchBackgroundColor = new GridBagConstraints();
+		gbc_txtBatchBackgroundColor.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchBackgroundColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchBackgroundColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchBackgroundColor.gridx = 1;
 		gbc_txtBatchBackgroundColor.gridy = 5;
 		batchReactorPreferences.add(txtBatchBackgroundColor, gbc_txtBatchBackgroundColor);
@@ -469,8 +469,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchBorderColor = new JTextField();
 		txtBatchBorderColor.setText("000000");
 		GridBagConstraints gbc_txtBatchBorderColor = new GridBagConstraints();
+		gbc_txtBatchBorderColor.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchBorderColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchBorderColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchBorderColor.gridx = 1;
 		gbc_txtBatchBorderColor.gridy = 6;
 		batchReactorPreferences.add(txtBatchBorderColor, gbc_txtBatchBorderColor);
@@ -487,8 +487,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchInitialC = new JTextField();
 		txtBatchInitialC.setText("100");
 		GridBagConstraints gbc_txtBatchInitialC = new GridBagConstraints();
+		gbc_txtBatchInitialC.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchInitialC.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchInitialC.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchInitialC.gridx = 1;
 		gbc_txtBatchInitialC.gridy = 7;
 		batchReactorPreferences.add(txtBatchInitialC, gbc_txtBatchInitialC);
@@ -505,8 +505,8 @@ public class Preferences extends JTabbedPane {
 		txtBatchInitialK = new JTextField();
 		txtBatchInitialK.setText(".01");
 		GridBagConstraints gbc_txtBatchInitialK = new GridBagConstraints();
+		gbc_txtBatchInitialK.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchInitialK.insets = new Insets(0, 0, 5, 0);
-		gbc_txtBatchInitialK.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtBatchInitialK.gridx = 1;
 		gbc_txtBatchInitialK.gridy = 8;
 		batchReactorPreferences.add(txtBatchInitialK, gbc_txtBatchInitialK);
@@ -523,7 +523,7 @@ public class Preferences extends JTabbedPane {
 		txtBatchTimeStep = new JTextField();
 		txtBatchTimeStep.setText("100");
 		GridBagConstraints gbc_txtBatchTimeStep = new GridBagConstraints();
-		gbc_txtBatchTimeStep.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtBatchTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchTimeStep.gridx = 1;
 		gbc_txtBatchTimeStep.gridy = 9;
 		batchReactorPreferences.add(txtBatchTimeStep, gbc_txtBatchTimeStep);
@@ -557,8 +557,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowParticleColor = new JTextField();
 		txtPlugFlowParticleColor.setText("FF0000");
 		GridBagConstraints gbc_txtPlugFlowParticleColor = new GridBagConstraints();
+		gbc_txtPlugFlowParticleColor.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowParticleColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowParticleColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowParticleColor.gridx = 1;
 		gbc_txtPlugFlowParticleColor.gridy = 1;
 		plugFlowReactorPreferences.add(txtPlugFlowParticleColor, gbc_txtPlugFlowParticleColor);
@@ -575,8 +575,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowParticleSize = new JTextField();
 		txtPlugFlowParticleSize.setText("2");
 		GridBagConstraints gbc_txtPlugFlowParticleSize = new GridBagConstraints();
+		gbc_txtPlugFlowParticleSize.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowParticleSize.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowParticleSize.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowParticleSize.gridx = 1;
 		gbc_txtPlugFlowParticleSize.gridy = 2;
 		plugFlowReactorPreferences.add(txtPlugFlowParticleSize, gbc_txtPlugFlowParticleSize);
@@ -593,8 +593,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowParticleNumber = new JTextField();
 		txtPlugFlowParticleNumber.setText("5000");
 		GridBagConstraints gbc_txtPlugFlowParticleNumber = new GridBagConstraints();
+		gbc_txtPlugFlowParticleNumber.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowParticleNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowParticleNumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowParticleNumber.gridx = 1;
 		gbc_txtPlugFlowParticleNumber.gridy = 3;
 		plugFlowReactorPreferences.add(txtPlugFlowParticleNumber, gbc_txtPlugFlowParticleNumber);
@@ -611,8 +611,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowMotionRate = new JTextField();
 		txtPlugFlowMotionRate.setText("50");
 		GridBagConstraints gbc_txtPlugFlowMotionRate = new GridBagConstraints();
+		gbc_txtPlugFlowMotionRate.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowMotionRate.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowMotionRate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowMotionRate.gridx = 1;
 		gbc_txtPlugFlowMotionRate.gridy = 4;
 		plugFlowReactorPreferences.add(txtPlugFlowMotionRate, gbc_txtPlugFlowMotionRate);
@@ -629,8 +629,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowPlug1Background = new JTextField();
 		txtPlugFlowPlug1Background.setText("FFFFFF");
 		GridBagConstraints gbc_txtPlugFlowPlug1Background = new GridBagConstraints();
+		gbc_txtPlugFlowPlug1Background.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowPlug1Background.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowPlug1Background.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowPlug1Background.gridx = 1;
 		gbc_txtPlugFlowPlug1Background.gridy = 5;
 		plugFlowReactorPreferences.add(txtPlugFlowPlug1Background, gbc_txtPlugFlowPlug1Background);
@@ -647,8 +647,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowPlug2Background = new JTextField();
 		txtPlugFlowPlug2Background.setText("BBBBBB");
 		GridBagConstraints gbc_txtPlugFlowPlug2Background = new GridBagConstraints();
+		gbc_txtPlugFlowPlug2Background.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowPlug2Background.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowPlug2Background.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowPlug2Background.gridx = 1;
 		gbc_txtPlugFlowPlug2Background.gridy = 6;
 		plugFlowReactorPreferences.add(txtPlugFlowPlug2Background, gbc_txtPlugFlowPlug2Background);
@@ -665,8 +665,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowBorderColor = new JTextField();
 		txtPlugFlowBorderColor.setText("000000");
 		GridBagConstraints gbc_txtPlugFlowBorderColor = new GridBagConstraints();
+		gbc_txtPlugFlowBorderColor.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowBorderColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowBorderColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowBorderColor.gridx = 1;
 		gbc_txtPlugFlowBorderColor.gridy = 7;
 		plugFlowReactorPreferences.add(txtPlugFlowBorderColor, gbc_txtPlugFlowBorderColor);
@@ -683,8 +683,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowInitialC = new JTextField();
 		txtPlugFlowInitialC.setText("100");
 		GridBagConstraints gbc_txtPlugFlowInitialC = new GridBagConstraints();
+		gbc_txtPlugFlowInitialC.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowInitialC.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowInitialC.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowInitialC.gridx = 1;
 		gbc_txtPlugFlowInitialC.gridy = 8;
 		plugFlowReactorPreferences.add(txtPlugFlowInitialC, gbc_txtPlugFlowInitialC);
@@ -701,8 +701,8 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowInitialK = new JTextField();
 		txtPlugFlowInitialK.setText(".01");
 		GridBagConstraints gbc_txtPlugFlowInitialK = new GridBagConstraints();
+		gbc_txtPlugFlowInitialK.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowInitialK.insets = new Insets(0, 0, 5, 0);
-		gbc_txtPlugFlowInitialK.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlugFlowInitialK.gridx = 1;
 		gbc_txtPlugFlowInitialK.gridy = 9;
 		plugFlowReactorPreferences.add(txtPlugFlowInitialK, gbc_txtPlugFlowInitialK);
@@ -719,7 +719,7 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowTimeStep = new JTextField();
 		txtPlugFlowTimeStep.setText("100");
 		GridBagConstraints gbc_txtPlugFlowTimeStep = new GridBagConstraints();
-		gbc_txtPlugFlowTimeStep.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPlugFlowTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowTimeStep.gridx = 1;
 		gbc_txtPlugFlowTimeStep.gridy = 10;
 		plugFlowReactorPreferences.add(txtPlugFlowTimeStep, gbc_txtPlugFlowTimeStep);
@@ -754,8 +754,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredParticleColor = new JTextField();
 		txtContinuouslyStirredParticleColor.setText("FF0000");
 		GridBagConstraints gbc_txtContinuouslyStirredParticleColor = new GridBagConstraints();
+		gbc_txtContinuouslyStirredParticleColor.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredParticleColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredParticleColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredParticleColor.gridx = 1;
 		gbc_txtContinuouslyStirredParticleColor.gridy = 1;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredParticleColor, gbc_txtContinuouslyStirredParticleColor);
@@ -772,8 +772,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredParticleSize = new JTextField();
 		txtContinuouslyStirredParticleSize.setText("2");
 		GridBagConstraints gbc_txtContinuouslyStirredParticleSize = new GridBagConstraints();
+		gbc_txtContinuouslyStirredParticleSize.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredParticleSize.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredParticleSize.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredParticleSize.gridx = 1;
 		gbc_txtContinuouslyStirredParticleSize.gridy = 2;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredParticleSize, gbc_txtContinuouslyStirredParticleSize);
@@ -790,8 +790,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredParticleNumber = new JTextField();
 		txtContinuouslyStirredParticleNumber.setText("5000");
 		GridBagConstraints gbc_txtContinuouslyStirredParticleNumber = new GridBagConstraints();
+		gbc_txtContinuouslyStirredParticleNumber.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredParticleNumber.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredParticleNumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredParticleNumber.gridx = 1;
 		gbc_txtContinuouslyStirredParticleNumber.gridy = 3;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredParticleNumber, gbc_txtContinuouslyStirredParticleNumber);
@@ -808,8 +808,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredMotionRate = new JTextField();
 		txtContinuouslyStirredMotionRate.setText("50");
 		GridBagConstraints gbc_txtContinuouslyStirredMotionRate = new GridBagConstraints();
+		gbc_txtContinuouslyStirredMotionRate.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredMotionRate.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredMotionRate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredMotionRate.gridx = 1;
 		gbc_txtContinuouslyStirredMotionRate.gridy = 4;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredMotionRate, gbc_txtContinuouslyStirredMotionRate);
@@ -826,8 +826,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredBackgroundColor = new JTextField();
 		txtContinuouslyStirredBackgroundColor.setText("FFFFFF");
 		GridBagConstraints gbc_txtContinuouslyStirredBackgroundColor = new GridBagConstraints();
+		gbc_txtContinuouslyStirredBackgroundColor.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredBackgroundColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredBackgroundColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredBackgroundColor.gridx = 1;
 		gbc_txtContinuouslyStirredBackgroundColor.gridy = 5;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredBackgroundColor, gbc_txtContinuouslyStirredBackgroundColor);
@@ -844,8 +844,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredBorderColor = new JTextField();
 		txtContinuouslyStirredBorderColor.setText("000000");
 		GridBagConstraints gbc_txtContinuouslyStirredBorderColor = new GridBagConstraints();
+		gbc_txtContinuouslyStirredBorderColor.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredBorderColor.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredBorderColor.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredBorderColor.gridx = 1;
 		gbc_txtContinuouslyStirredBorderColor.gridy = 6;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredBorderColor, gbc_txtContinuouslyStirredBorderColor);
@@ -862,8 +862,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredInitialC = new JTextField();
 		txtContinuouslyStirredInitialC.setText("100");
 		GridBagConstraints gbc_txtContinuouslyStirredInitialC = new GridBagConstraints();
+		gbc_txtContinuouslyStirredInitialC.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredInitialC.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredInitialC.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredInitialC.gridx = 1;
 		gbc_txtContinuouslyStirredInitialC.gridy = 7;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredInitialC, gbc_txtContinuouslyStirredInitialC);
@@ -880,8 +880,8 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredInitialK = new JTextField();
 		txtContinuouslyStirredInitialK.setText(".01");
 		GridBagConstraints gbc_txtContinuouslyStirredInitialK = new GridBagConstraints();
+		gbc_txtContinuouslyStirredInitialK.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredInitialK.insets = new Insets(0, 0, 5, 0);
-		gbc_txtContinuouslyStirredInitialK.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtContinuouslyStirredInitialK.gridx = 1;
 		gbc_txtContinuouslyStirredInitialK.gridy = 8;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredInitialK, gbc_txtContinuouslyStirredInitialK);
@@ -898,7 +898,7 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredTimeStep = new JTextField();
 		txtContinuouslyStirredTimeStep.setText("100");
 		GridBagConstraints gbc_txtContinuouslyStirredTimeStep = new GridBagConstraints();
-		gbc_txtContinuouslyStirredTimeStep.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtContinuouslyStirredTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredTimeStep.gridx = 1;
 		gbc_txtContinuouslyStirredTimeStep.gridy = 9;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredTimeStep, gbc_txtContinuouslyStirredTimeStep);
