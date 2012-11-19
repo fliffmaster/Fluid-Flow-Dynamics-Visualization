@@ -8,11 +8,7 @@ public class FFCSTReactor extends FFReactor
 	
 	public FFCSTReactor()
 	{
-		super();
-		this.setcIn(1.0);
-		this.setFlowRate(1.0);
-		this.setReactorVolume(100.0);
-		this.setDefaultConcentration(1.0);
+		this(1000.0, 1.0, 0.001, 1.0, 100.0, 1.0);
 	}
 	
 	public FFCSTReactor(double tFinal, double cIn, double kInit, double flowRate, double reactorVolume, double defaultConcentration)
