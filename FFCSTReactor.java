@@ -20,15 +20,20 @@ public class FFCSTReactor extends FFReactor
 		this.setDefaultConcentration(defaultConcentration);
 	}
 	
-	public double getCCurrAndDecrement()
+	//public double getCCurrAndDecrement()
+	//{
+	//	return getCCurr();
+	//}
+	
+	public void doReactionStep()
 	{
 		setCCurr(getCCurr() * (1 - flowRate / reactorVolume) + cIn * (flowRate / reactorVolume));
 		setCCurr(getCCurr() - (getkInit() * getCCurr()));
-		return getCCurr();
 	}
 	
 	public double getPercentageOfConcentrationLeft(){
-		return getCCurrAndDecrement() / defaultConcentration;
+		doReactionStep();
+		return getCCurr() / defaultConcentration;
 	}
 
 	public double getFlowRate() {

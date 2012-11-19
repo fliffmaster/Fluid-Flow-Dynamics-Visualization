@@ -39,14 +39,14 @@ public class FFBatchReactor extends FFReactor //extends Thread
 		this.setInitialConcentration(cInit);
 	}
 
-	public double getCurrentConcentration()
+	public void doReactionStep()
 	{
 		setCCurr(cInit * Math.exp((-1) * getkInit() * gettCurr()));
-		return getCCurr();
 	}
 	
 	public double getPercentageOfConcentrationLeft()
 	{
-		return getCurrentConcentration() / cInit;
+		doReactionStep();
+		return getCCurr() / cInit;
 	}
 }
