@@ -9,7 +9,7 @@ public class MergeConflictTest {
 		j=j+6;
 		j=j+7;
 		j=j+8;
-		j=j+1;
+		j=j+9;
 		j=j+1;
 		
 	}
