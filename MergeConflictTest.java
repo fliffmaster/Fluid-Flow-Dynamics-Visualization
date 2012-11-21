@@ -12,7 +12,8 @@ public class MergeConflictTest {
 		j=j+9;
 		j=j+11;
 		j=j-1;
-		j=j*102;
+
+
 		j=j+1;
 		j=j+2;
 		j=j+1;
