@@ -73,7 +73,7 @@ public class FluidFlowReactorPanel extends JPanel
 	//with batch panel width somehow for less gaps between plugs in PFR).
 	public void setXPos()
 	{
-		xPos += 20;
+		xPos += 5;
 	}
 	
 	public void resetXPos()
