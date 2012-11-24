@@ -1,105 +1,55 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FFBatchReactor
+//
+// Purpose: This class encapsulates encapsulates the functionality of a batch
+//			reactor by implementing FFReactor and adding a variable for initial
+//			reactor concentration.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 import java.lang.Math;
 
-public class FFBatchReactor //extends Thread
+public class FFBatchReactor extends FFReactor 
 {
-	private double tFinal;
 	private double cInit;
-	private double kInit;
-	private double tCurr;
-	private double cCurr;
-	
-	//private double kCurr;
 
+	//Default constructor w/initial concentration of 1.0
+	public FFBatchReactor()
+	{
+		super(); //default FFReactor constructor
+		this.setInitialConcentration(1.0);
+	}
+	
+	//Constructor for setting all variables.  Initial concentration
+	//and current concentration are set to the same value initially.
+	public FFBatchReactor(double time, double cInit, double reactionK)
+	{
+		super(time, reactionK, cInit);
+		this.setInitialConcentration(cInit);
+	}
+	
+	//Uses the equation C(current) = C(initial) * e^(-kt)
+	public void doReactionStep()
+	{
+		setCurrentConcentration(cInit * Math.exp((-1) * getReactionConstant() * getCurrentTime()));
+	}
+	
+	//Returns the ratio of the current concentration to the initial
+	//concentration as a percentage.  This method does calls doReactionStep()
+	//to set the current concentration since current concentration is not set
+	//incrementally adjusted in this type of reactor like it is in the CSTR
+	public double getPercentageOfConcentrationLeft()
+	{
+		doReactionStep();
+		return getCurrentConcentration() / cInit;
+	}
+	
+	//Accessor and mutator methods for Batch Reactor specific vars
 	public double getInitialConcentration() {
 		return cInit;
 	}
-
+	
 	public void setInitialConcentration(double cInit) {
 		this.cInit = cInit;
 	}
-
-	public double getRateConstant() {
-		return kInit;
-	}
-
-	public void setRateConstant(double kInit) {
-		this.kInit = kInit;
-	}
-
-	public double getCurrentTime() {
-		return tCurr;
-	}
-
-	public void setCurrentTime(double tCurr) {
-		this.tCurr = tCurr;
-	}
-
-	public double getcCurr() {
-		return cCurr;
-	}
-
-
-	public double gettFinal() {
-		return tFinal;
-	}
-
-	//can add another variable for timestep size
-
-	public FFBatchReactor()
-	{
-		this(1,1000.0,0.01);
-	}
-
-	public FFBatchReactor(double time, double cInit, double reactionK)
-	{
-		this.tCurr = 0;
-		this.tFinal = time;
-		this.cInit = this.cCurr = cInit;
-		this.kInit =  reactionK;
-	}
-
-//	public void reactionStep() //permanently alters tCurr and cCurr
-//	{
-//		decrementCurrentConcentration();
-//		tCurr = tCurr + 1;
-//	}
-
-	public double getCurrentConcentration()
-	{
-		return cCurr = cInit * Math.exp((-1) * kInit * tCurr);
-	}
-	
-	public double getPercentageOfConcentrationLeft(){
-		return getCurrentConcentration() / cInit;
-	}
-
-//	public void decrementCurrentConcentration()
-//	{
-//		cCurr = cCurr - (kInit * cCurr);
-//	}
-//
-//	public void run()
-//	{
-//		while(tCurr < tFinal)
-//		{
-//			System.out.print("Conc: " + cCurr + " Time: " + tCurr);
-//			System.out.println(" Conc: " + getCurrentConcentration() + " Time: " + tCurr);
-//			reactionStep();
-//
-//			try
-//			{
-//				Thread.sleep(400);
-//			}
-//			catch(InterruptedException e)
-//			{
-//				System.out.println("Couldn't sleep thread");
-//			}
-//		}
-//	}
-//
-//	public static void main(String[] args)
-//	{
-//		FFBatchReactor reactor = new FFBatchReactor();
-//		reactor.start();
-//	}
 }

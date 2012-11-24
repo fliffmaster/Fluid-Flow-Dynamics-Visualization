@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,9 +13,6 @@ import javax.swing.border.LineBorder;
 
 public class TabBatchReactor extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public TabBatchReactor() {
@@ -107,7 +103,7 @@ public class TabBatchReactor extends JPanel {
 		add(txtConcentrationLog);
 
 		// JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3, 0);
+		panel = new FluidFlowReactorPanel(2000, 3, 0, 50, 500);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
@@ -178,7 +174,7 @@ public class TabBatchReactor extends JPanel {
 	private void resetReactor() {
 		panel.setInitialConcentration(Double
 				.parseDouble(txtInitialConcentration.getText()));
-		panel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+		panel.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
 		panel.setCurrentTime(0);
 		txtConcentrationLog.setText("");
 

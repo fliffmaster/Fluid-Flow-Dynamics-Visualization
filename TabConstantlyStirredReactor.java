@@ -99,7 +99,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnReset.addActionListener(new ButtonResetListener());
 		btnReset.setBounds(383, 218, 117, 25);
 		add(btnReset);
-		panel2 = new FluidFlowReactorPanel2(2000, 3, 0);
+		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
 		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel2.setBounds(597, 290, 182, 218);
 		add(panel2);

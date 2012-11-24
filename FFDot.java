@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FFDot
+//
+// Purpose: This class encapsulates the functionality of the small particles used
+//			in our simulations, based on drawing an ellipse at (x,y) coordinates
+//			within a rectangular boundary.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
@@ -9,22 +18,17 @@ public class FFDot
 	private int diameter;
 	private Random rando = new Random();
 	
+	//Constructs a new dot w/given diameter at random coordinates within a rectangle
 	public FFDot(Rectangle boundary, int diameter)
-	{
-		
+	{	
 		this.diameter = diameter;
 		int height = (int) boundary.getHeight();
-		//System.out.println(height);
 		int width = (int) boundary.getWidth();
 		y = rando.nextInt((int)(height - diameter )) + 1;
 		x = rando.nextInt((int)(width - diameter )) + 1;	
 	}
 	
-	public FFDot(int x, int y, Rectangle boundary)
-	{
-		
-	}
-	
+	//returns the ellipse
 	public Ellipse2D.Double getEllipse()
 	{
 		return new Ellipse2D.Double(x, y, diameter, diameter);
@@ -33,13 +37,5 @@ public class FFDot
 	public void setDiameter(int diameter)
 	{
 		this.diameter = diameter;
-	}
-	/*public void drawDot(Graphics2D g2)
-	{
-		Ellipse2D.Double dot = new Ellipse2D.Double(x, y, diameter, diameter);
-		g2.setColor(Color.BLUE);
-		g2.fill(dot);
-		g2.setColor(Color.BLACK);
-	}*/
-	
+	}	
 }

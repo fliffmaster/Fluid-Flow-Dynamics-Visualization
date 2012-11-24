@@ -1,67 +1,46 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class FluidFlowReactorPanel extends JPanel
+public class FluidFlowReactorPanel extends ReactorPanel
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private ArrayList<FFDot> dots;
-	private int totalNumberOfDots;
-	private int currentNumberOfDots;
-	private double initialConcentration;
-	private Timer animationTimer = new Timer(500, new AnimationTimerListener());
-	private Timer reactionTimer = new Timer(50, new ReactionTimerListener());
-	private FFBatchReactor reactor = new FFBatchReactor();
-	private JTextArea txtConcentrationLog;
-	private int dotDiameter;
-	private int upperCornerX;
+	private Timer animationTimer;
+	private Timer reactionTimer;
+	private FFBatchReactor reactor;
 	private int xPos;
 	
-	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
+	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
+		super(numDots, diameter, upperCornerX, rDelta, aDelta);
+		reactor = new FFBatchReactor();
 		xPos = -upperCornerX;
-		this.setUpperCornerX(upperCornerX);
-		dotDiameter = diameter;
-		totalNumberOfDots = numDots;
-		currentNumberOfDots = numDots;
-		dots = new ArrayList<FFDot>();
+		animationTimer = new Timer(aDelta, new AnimationTimerListener());
+		reactionTimer = new Timer(rDelta, new ReactionTimerListener());
 		animationTimer.setRepeats(true);
 		reactionTimer.setRepeats(true);
 	}
 	
-	public void setLogTextArea(JTextArea log)
-	{
-		txtConcentrationLog = log;
-	}
-	
 	public void setInitialConcentration(double concentration)
 	{
-		initialConcentration = concentration;
-		getReactor().setInitialConcentration(concentration);
+		reactor.setInitialConcentration(concentration);
 	}
 	
-	public void setRateConstant(double rate)
+	public void setReactionConstant(double rate)
 	{
-		getReactor().setRateConstant(rate);
+		reactor.setReactionConstant(rate);
 	}
 	
 	public void setCurrentTime(double time)
 	{
-		getReactor().setCurrentTime(time);
+		reactor.setCurrentTime(time);
 	}
 	
 	public int getXPos()
@@ -69,14 +48,11 @@ public class FluidFlowReactorPanel extends JPanel
 		return xPos;
 	}
 	
+	//We need to make this a user variable so flow rate is a variable (also possible needs to be linked
+	//with batch panel width somehow for less gaps between plugs in PFR).
 	public void setXPos()
 	{
-		xPos++;
-	}
-	
-	public void resetXPos()
-	{
-		
+		xPos += 5;
 	}
 	
 	public void startReaction()
@@ -108,41 +84,6 @@ public class FluidFlowReactorPanel extends JPanel
 	{
 		reactionTimer.setDelay(delay);
 	}
-
-	public void makeDots()
-	{
-		for(int i = 0; i < currentNumberOfDots; i++)
-			dots.add(new FFDot(this.getBounds(), dotDiameter));
-	}
-	
-	public void clearDots()
-	{
-		dots = new ArrayList<FFDot>();
-	}
-	
-	public void setTotalNumberOfDots(int index)
-	{
-		totalNumberOfDots = index;
-		currentNumberOfDots = index;
-	}
-	
-	public int getLastDot()
-	{
-		return totalNumberOfDots;
-	}
-	
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.RED);
-		makeDots();
-		for(int i = 0; i < currentNumberOfDots; i++)
-		{
-			Ellipse2D.Double dot = dots.get(i).getEllipse();
-			g2.fill(dot);
-		}
-	}
 	
 	public FFBatchReactor getReactor() 
 	{
@@ -154,28 +95,13 @@ public class FluidFlowReactorPanel extends JPanel
 		reactor = null;
 		reactor = newReactor;
 	}
-	
-	public void setDotDiameter(int diameter)
-	{
-		
-	}
-
-	public int getUpperCornerX() 
-	{
-		return upperCornerX;
-	}
-
-	public void setUpperCornerX(int upperCornerX) 
-	{
-		this.upperCornerX = upperCornerX;
-	}
 
 	class AnimationTimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent evt) 
 		{
 			clearDots();
-			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
+			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
 			repaint();
 		}
@@ -187,15 +113,14 @@ public class FluidFlowReactorPanel extends JPanel
 		public void actionPerformed(ActionEvent evt) 
 		{
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if (txtConcentrationLog != null)
+			if (getTextLogArea() != null)
 			{
-				txtConcentrationLog.setText ("Concentration at time "
+				getTextLogArea().setText ("Concentration at time "
 				+ (int) reactor.getCurrentTime() + " is "
-				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  getTextLogArea().getText() );
 			}
 			clearDots();
-			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
-			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
+			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
 			repaint();
 		}
