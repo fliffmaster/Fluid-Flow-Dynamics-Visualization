@@ -10,11 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class FluidFlowReactorPanel2 extends JPanel{
-	
-	/**
-	 * 
-	 */
+public class FluidFlowReactorPanel2 extends JPanel
+{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<FFDot> dots;
 	private int totalNumberOfDots;
@@ -30,7 +27,6 @@ public class FluidFlowReactorPanel2 extends JPanel{
 	public FluidFlowReactorPanel2(int numDots, int diameter, int upperCornerX)
 	{
 		this.setUpperCornerX(upperCornerX);
-		//System.out.println(this.getBounds().getHeight());
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = 0;
@@ -94,8 +90,14 @@ public class FluidFlowReactorPanel2 extends JPanel{
 	
 	public void setTotalNumberOfDots(int index)
 	{
+		totalNumberOfDots = index;
+	}
+	
+	public void setCurrentNumberOfDots(int index)
+	{
 		currentNumberOfDots = index;
 	}
+	
 	
 	public int getLastDot(){
 		return totalNumberOfDots;

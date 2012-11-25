@@ -103,7 +103,7 @@ public class TabBatchReactor extends JPanel {
 		add(txtConcentrationLog);
 
 		// JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3, 0);
+		panel = new FluidFlowReactorPanel(2000, 3, 0, 50, 500);
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);

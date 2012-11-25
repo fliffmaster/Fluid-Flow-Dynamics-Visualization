@@ -12,23 +12,20 @@ import javax.swing.Timer;
 
 public class FluidFlowReactorPanel extends JPanel
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<FFDot> dots;
 	private int totalNumberOfDots;
 	private int currentNumberOfDots;
 	//private double initialConcentration;
-	private Timer animationTimer = new Timer(500, new AnimationTimerListener());
-	private Timer reactionTimer = new Timer(50, new ReactionTimerListener());
+	private Timer animationTimer;
+	private Timer reactionTimer;
 	private FFBatchReactor reactor = new FFBatchReactor();
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
 	private int upperCornerX;
 	private int xPos;
 	
-	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX)
+	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
 		xPos = -upperCornerX;
 		this.setUpperCornerX(upperCornerX);
@@ -36,6 +33,8 @@ public class FluidFlowReactorPanel extends JPanel
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = numDots;
 		dots = new ArrayList<FFDot>();
+		animationTimer = new Timer(aDelta, new AnimationTimerListener());
+		reactionTimer = new Timer(rDelta, new ReactionTimerListener());
 		animationTimer.setRepeats(true);
 		reactionTimer.setRepeats(true);
 	}
@@ -48,7 +47,7 @@ public class FluidFlowReactorPanel extends JPanel
 	public void setInitialConcentration(double concentration)
 	{
 		//initialConcentration = concentration;
-		getReactor().setInitialConcentration(concentration);
+		reactor.setInitialConcentration(concentration);
 	}
 	
 	public void setReactionConstant(double rate)
@@ -122,6 +121,10 @@ public class FluidFlowReactorPanel extends JPanel
 	public void setTotalNumberOfDots(int index)
 	{
 		totalNumberOfDots = index;
+	}
+	
+	public void setCurrentNumberOfDots(int index)
+	{
 		currentNumberOfDots = index;
 	}
 	

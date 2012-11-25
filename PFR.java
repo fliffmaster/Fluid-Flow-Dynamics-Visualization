@@ -82,7 +82,7 @@ public class PFR extends JPanel
 	
 	public void beginAnimation()
 	{
-			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500));
 			for(FluidFlowReactorPanel f : batchPanels)
 				add(f);
 	}
@@ -128,7 +128,7 @@ public class PFR extends JPanel
 			{
 				if(batchPanels.get(size - 1).getXPos() >= - 5)
 				{
-					batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+					batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500));
 					add(batchPanels.get(size));
 					batchPanels.get(size).startAnimation();
 				}
