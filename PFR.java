@@ -1,10 +1,10 @@
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 
 public class PFR extends JPanel
 {
@@ -21,24 +21,73 @@ public class PFR extends JPanel
 	private boolean started = false;
 	private Preferences preferences;
 	private boolean colorToggle;
+	private int borderWidth = 0;
+	private int batchPanelHeight;
+	private int reactionTimeRate = 500;
+	private int particleMoveRate = 50;
+	private int flowParticleSize = 2;
+	private int initialConcentration = 1000;
 	
-	
+
+	public int getReactionTimeRate() {
+		return reactionTimeRate;
+	}
+
+	public void setReactionTimeRate(int reactionTimeRate) {
+		this.reactionTimeRate = reactionTimeRate;
+	}
+
+	public int getParticleMoveRate() {
+		return particleMoveRate;
+	}
+
+	public void setParticleMoveRate(int particleMoveRate) {
+		this.particleMoveRate = particleMoveRate;
+	}
+
+
+
+	private JPanel panel = new JPanel();
+
+
+	public void setBorder(LineBorder lb){
+		super.setBorder(lb);
+		
+		
+		borderWidth = lb.getThickness();
+		//panel.setBounds(borderWidth, borderWidth, getWidth(), 100);
+		panel.setBounds(borderWidth, borderWidth, getWidth() - (2*borderWidth), getHeight() - (2*borderWidth));
+		
+	}
 
 	public PFR(Preferences pref)
 	{
+		setLayout(null);
 		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
+		batchPanelHeight = this.getHeight() - (2 * borderWidth);
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		preferences = pref;
+		
 		colorToggle = true;
-		timer.setRepeats(true);		
+		timer.setRepeats(true);
+		panel.setBounds(1, 1, 100, 100);
+		//panel.setBounds(borderWidth, borderWidth, getWidth() - (2*borderWidth), getHeight() - (2*borderWidth));
+		panel.setLayout(null);
+		flowParticleSize = preferences.getPlugFlowParticleSize();
+		add(panel);
 	}
 	
 	
 	public PFR()
 	{
-		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
-		batchPanels = new ArrayList<FluidFlowReactorPanel>();
+		setLayout(null);
+		panel.setBounds(1, 1, 100, 100);
+		panel.setLayout(null);
 		
+		add(panel);
+		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
+		
+		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		timer.setRepeats(true);		
 	}
 	
@@ -97,9 +146,11 @@ public class PFR extends JPanel
 	
 	public void beginAnimation()
 	{
-			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500));
-			for(FluidFlowReactorPanel f : batchPanels)
-				add(f);
+			batchPanels.add(new FluidFlowReactorPanel(initialConcentration, flowParticleSize, batchPanelWidth, reactionTimeRate, particleMoveRate));
+			for(FluidFlowReactorPanel f : batchPanels){
+				f.startAnimation();
+				panel.add(f);
+			}
 	}
 	
 	public void stopReactor()
@@ -126,28 +177,32 @@ public class PFR extends JPanel
 		repaint();
 	}
 	
+
+	
 	class TimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent arg) 
 		{
 			int size = batchPanels.size();
+			batchPanelHeight = panel.getHeight();
 			for(FluidFlowReactorPanel f : batchPanels)
 			{
 				f.setXPos();
-				f.setBounds(f.getXPos(), 0, batchPanelWidth, 209);
+				f.setBounds(f.getXPos(), 0, batchPanelWidth, batchPanelHeight);
 				if(f.getXPos() >= 0)
 					f.startReaction();	
 			}
 
 			if(flowing == true)
 			{
-				if(batchPanels.get(size - 1).getXPos() >= - 5)
+				if(batchPanels.get(size - 1).getXPos() >= 0)
 				{
-					FluidFlowReactorPanel ffTemp = new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500);
+					FluidFlowReactorPanel ffTemp = new FluidFlowReactorPanel(initialConcentration, flowParticleSize, batchPanelWidth, reactionTimeRate, particleMoveRate);
+					ffTemp.startAnimation();
 					if(preferences != null){
 						ffTemp.setDotSize(preferences.getPlugFlowParticleSize());
 						ffTemp.setDotColor(preferences.getPlugFlowParticleColor());
-						if(colorToggle) {
+						if(!colorToggle) {
 							ffTemp.setBackground(preferences.getPlugFlowPlug1Background());
 						} else {
 							ffTemp.setBackground(preferences.getPlugFlowPlug2Background());
@@ -155,17 +210,28 @@ public class PFR extends JPanel
 						colorToggle = !colorToggle;
 					}
 					batchPanels.add(ffTemp);
-					add(batchPanels.get(size));
+					panel.add(batchPanels.get(size));
 					batchPanels.get(size).startAnimation();
 				}
 			}
-			if(batchPanels.get(0).getXPos() == 600)
+			if(batchPanels.get(0).getXPos() > panel.getWidth())
 			{
-				remove(0);
+				panel.remove(0);
 				batchPanels.remove(0);
 			}
-
+			
 			repaint();
+			
 		}	
+	}
+
+
+
+	public int getInitialConcentration() {
+		return initialConcentration;
+	}
+
+	public void setInitialConcentration(int initialConcentration) {
+		this.initialConcentration = initialConcentration;
 	}
 }

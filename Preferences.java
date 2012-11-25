@@ -1,12 +1,15 @@
-import javax.swing.JColorChooser;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JTextField;
-import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
@@ -354,9 +357,9 @@ public class Preferences extends JTabbedPane {
 		addTab("Batch Reactor", null, batchReactorPreferences, null);
 		GridBagLayout gbl_batchReactorPreferences = new GridBagLayout();
 		gbl_batchReactorPreferences.columnWidths = new int[]{137, 0, 0};
-		gbl_batchReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0};
+		gbl_batchReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0};
 		gbl_batchReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_batchReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_batchReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		batchReactorPreferences.setLayout(gbl_batchReactorPreferences);
 		
 		JLabel lblParticles = new JLabel("Particles");
@@ -516,7 +519,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep = new GridBagConstraints();
-		gbc_lblTimeStep.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep.gridx = 0;
 		gbc_lblTimeStep.gridy = 9;
@@ -525,19 +528,32 @@ public class Preferences extends JTabbedPane {
 		txtBatchTimeStep = new JTextField();
 		txtBatchTimeStep.setText("100");
 		GridBagConstraints gbc_txtBatchTimeStep = new GridBagConstraints();
+		gbc_txtBatchTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtBatchTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchTimeStep.gridx = 1;
 		gbc_txtBatchTimeStep.gridy = 9;
 		batchReactorPreferences.add(txtBatchTimeStep, gbc_txtBatchTimeStep);
 		txtBatchTimeStep.setColumns(10);
 		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave = new GridBagConstraints();
+		gbc_btnSave.anchor = GridBagConstraints.WEST;
+		gbc_btnSave.gridx = 1;
+		gbc_btnSave.gridy = 10;
+		batchReactorPreferences.add(btnSave, gbc_btnSave);
+		
 		JPanel plugFlowReactorPreferences = new JPanel();
 		addTab("Plug Flow Reactor", null, plugFlowReactorPreferences, null);
 		GridBagLayout gbl_plugFlowReactorPreferences = new GridBagLayout();
 		gbl_plugFlowReactorPreferences.columnWidths = new int[]{152, 0, 0};
-		gbl_plugFlowReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 0};
+		gbl_plugFlowReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 0, 0};
 		gbl_plugFlowReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_plugFlowReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_plugFlowReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		plugFlowReactorPreferences.setLayout(gbl_plugFlowReactorPreferences);
 		
 		JLabel lblParticles2 = new JLabel("Particles");
@@ -712,7 +728,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep2 = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep2 = new GridBagConstraints();
-		gbc_lblTimeStep2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep2.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep2.gridx = 0;
 		gbc_lblTimeStep2.gridy = 10;
@@ -721,20 +737,33 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowTimeStep = new JTextField();
 		txtPlugFlowTimeStep.setText("100");
 		GridBagConstraints gbc_txtPlugFlowTimeStep = new GridBagConstraints();
+		gbc_txtPlugFlowTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPlugFlowTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowTimeStep.gridx = 1;
 		gbc_txtPlugFlowTimeStep.gridy = 10;
 		plugFlowReactorPreferences.add(txtPlugFlowTimeStep, gbc_txtPlugFlowTimeStep);
 		txtPlugFlowTimeStep.setColumns(10);
 		
+		JButton btnSave_1 = new JButton("Save");
+		btnSave_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave_1 = new GridBagConstraints();
+		gbc_btnSave_1.anchor = GridBagConstraints.WEST;
+		gbc_btnSave_1.gridx = 1;
+		gbc_btnSave_1.gridy = 11;
+		plugFlowReactorPreferences.add(btnSave_1, gbc_btnSave_1);
+		
 		JPanel continuouslyStirredReactorPreferences = new JPanel();
 		addTab("Continuously Stirred Reactor", null, continuouslyStirredReactorPreferences, null);
 
 		GridBagLayout gbl_continuouslyStirredReactorPreferences = new GridBagLayout();
 		gbl_continuouslyStirredReactorPreferences.columnWidths = new int[]{137, 0, 0};
-		gbl_continuouslyStirredReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0};
+		gbl_continuouslyStirredReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0};
 		gbl_continuouslyStirredReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_continuouslyStirredReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_continuouslyStirredReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		continuouslyStirredReactorPreferences.setLayout(gbl_continuouslyStirredReactorPreferences);
 		
 		JLabel lblParticles3 = new JLabel("Particles");
@@ -891,7 +920,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep3 = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep3 = new GridBagConstraints();
-		gbc_lblTimeStep3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep3.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep3.gridx = 0;
 		gbc_lblTimeStep3.gridy = 9;
@@ -900,11 +929,24 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredTimeStep = new JTextField();
 		txtContinuouslyStirredTimeStep.setText("100");
 		GridBagConstraints gbc_txtContinuouslyStirredTimeStep = new GridBagConstraints();
+		gbc_txtContinuouslyStirredTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtContinuouslyStirredTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredTimeStep.gridx = 1;
 		gbc_txtContinuouslyStirredTimeStep.gridy = 9;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredTimeStep, gbc_txtContinuouslyStirredTimeStep);
 		txtContinuouslyStirredTimeStep.setColumns(10);
+		
+		JButton btnSave_2 = new JButton("Save");
+		btnSave_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave_2 = new GridBagConstraints();
+		gbc_btnSave_2.anchor = GridBagConstraints.WEST;
+		gbc_btnSave_2.gridx = 1;
+		gbc_btnSave_2.gridy = 10;
+		continuouslyStirredReactorPreferences.add(btnSave_2, gbc_btnSave_2);
 	}
 	
 	public void loadPreferences(){

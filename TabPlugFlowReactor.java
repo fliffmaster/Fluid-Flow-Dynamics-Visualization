@@ -117,7 +117,7 @@ public class TabPlugFlowReactor extends JPanel
 		txtParticleNumber.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				resetReactor();
+				pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
 			}
 		});
 		txtParticleNumber.setText(preferences.getPlugFlowParticleNumber().toString());
@@ -133,7 +133,7 @@ public class TabPlugFlowReactor extends JPanel
 		txtTimeRate.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				resetReactor();
+				pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
 			}
 		});
 		txtTimeRate.setText(preferences.getPlugFlowTimeStep().toString());
@@ -149,7 +149,7 @@ public class TabPlugFlowReactor extends JPanel
 		txtParticleMoveRate.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				resetReactor();
+				pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
 			}
 		});
 		txtParticleMoveRate.setText(preferences.getPlugFlowMotionRate().toString());
@@ -162,12 +162,15 @@ public class TabPlugFlowReactor extends JPanel
 		add(lblRateOfRepaint);
 
 		
-		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+
 		//Timer
 		pfrPanel.setBounds(71, 339, 626, 209);
+		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
-		
+		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
+		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
+		pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
 		
 		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
 		lblBatchReactorData.setBounds(629, 37, 135, 14);

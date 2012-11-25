@@ -191,9 +191,11 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(lblRateOfRepaint);
 
 		
-		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		
+
 		//Timer
-		pfrPanel.setBounds(28, 550, 626, 209);
+		pfrPanel.setBounds(132, 551, 626, 209);
+		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		MainFrame.getContentPane().add(pfrPanel);
 		pfrPanel.setLayout(null);
 		

@@ -1,13 +1,7 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+
 import javax.swing.Timer;
 
 public class FluidFlowReactorPanel extends ReactorPanel
@@ -57,7 +51,7 @@ public class FluidFlowReactorPanel extends ReactorPanel
 	//with batch panel width somehow for less gaps between plugs in PFR).
 	public void setXPos()
 	{
-		xPos += 5;
+		xPos += 1;
 	}
 	
 	public void startReaction()
@@ -127,7 +121,7 @@ public class FluidFlowReactorPanel extends ReactorPanel
 			clearDots();
 			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
-			repaint();
+			//repaint();
 		}
 	}
 }

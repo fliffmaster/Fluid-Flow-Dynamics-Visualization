@@ -1,14 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.Timer;
 
 public class ReactorPanel extends JPanel 
 {
@@ -27,7 +24,7 @@ public class ReactorPanel extends JPanel
 		this.setUpperCornerX(upperCornerX);
 		dotDiameter = diameter;
 		totalNumberOfDots = numDots;
-		currentNumberOfDots = 0;
+		currentNumberOfDots = numDots;
 		dots = new ArrayList<FFDot>();
 		dotColor = Color.RED;
 		backgroundColor = Color.WHITE;
