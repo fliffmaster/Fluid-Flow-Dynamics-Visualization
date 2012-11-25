@@ -10,50 +10,35 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class FluidFlowReactorPanel2 extends JPanel
+public class FluidFlowReactorPanel2 extends ReactorPanel
 {
-	private static final long serialVersionUID = 1L;
-	private ArrayList<FFDot> dots;
-	private int totalNumberOfDots;
-	private int currentNumberOfDots;
 	private Timer animationTimer;
 	private Timer reactionTimer;
-	private FFCSTReactor reactor = new FFCSTReactor();
-	private JTextArea txtConcentrationLog;
-	private int dotDiameter;
-	private int upperCornerX;
+	private FFCSTReactor reactor;
 	
 	public FluidFlowReactorPanel2(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
-		this.setUpperCornerX(upperCornerX);
-		dotDiameter = diameter;
-		totalNumberOfDots = numDots;
-		currentNumberOfDots = 0;
-		dots = new ArrayList<FFDot>();
+		super(numDots, diameter, upperCornerX, rDelta, aDelta);
+		reactor = new FFCSTReactor();
 		animationTimer = new Timer(aDelta,new AnimationTimerListener());
 		reactionTimer = new Timer(rDelta, new ReactionTimerListener());
 		animationTimer.setRepeats(true);
 		reactionTimer.setRepeats(true);
 	}
 	
-	public void setLogTextArea(JTextArea log)
-	{
-		txtConcentrationLog = log;
-	}
-	
 	public void setInflowConcentration(double concentration)
 	{
-		getReactor().setInflowConcentration(concentration);
+		reactor.setInflowConcentration(concentration);
 	}
 	
 	public void setReactionConstant(double rate)
 	{
-		getReactor().setReactionConstant(rate);
+		reactor.setReactionConstant(rate);
 	}
 	
 	public void setCurrentTime(double time)
 	{
-		getReactor().setCurrentTime(time);
+		reactor.setCurrentTime(time);
 	}
 	
 	public void startReaction()
@@ -85,47 +70,6 @@ public class FluidFlowReactorPanel2 extends JPanel
 	{
 		reactionTimer.setDelay(delay);
 	}
-
-	public void makeDots()
-	{
-
-		for(int i = 0; i < currentNumberOfDots; i++)
-			dots.add(new FFDot(this.getBounds(), dotDiameter));
-	}
-	
-	public void clearDots()
-	{
-		dots = new ArrayList<FFDot>();
-	}
-	
-	public void setTotalNumberOfDots(int index)
-	{
-		totalNumberOfDots = index;
-	}
-	
-	public void setCurrentNumberOfDots(int index)
-	{
-		currentNumberOfDots = index;
-	}
-	
-	
-	public int getLastDot()
-	{
-		return totalNumberOfDots;
-	}
-	
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.RED);
-		makeDots();
-		for(int i = 0; i < currentNumberOfDots; i++)
-		{
-			Ellipse2D.Double dot = dots.get(i).getEllipse();
-			g2.fill(dot);
-		}
-	}
 	
 	public FFCSTReactor getReactor() 
 	{
@@ -137,24 +81,13 @@ public class FluidFlowReactorPanel2 extends JPanel
 		reactor = null;
 		reactor = newReactor;
 	}
-	
-	public int getUpperCornerX() 
-	{
-		return upperCornerX;
-	}
 
-	public void setUpperCornerX(int upperCornerX) 
+	class AnimationTimerListener implements ActionListener
 	{
-		this.upperCornerX = upperCornerX;
-	}
-
-	class AnimationTimerListener implements ActionListener 
-	{
-
 		public void actionPerformed(ActionEvent evt) 
 		{
 			clearDots();
-			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
+			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
 			repaint();
 		}
@@ -166,15 +99,16 @@ public class FluidFlowReactorPanel2 extends JPanel
 		public void actionPerformed(ActionEvent evt) 
 		{
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if (txtConcentrationLog != null)
-			txtConcentrationLog.setText ("Concentration at time "
-					+ (int) reactor.getCurrentTime() + " is "
-					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
+			if (getTextLogArea() != null)
+			{
+				getTextLogArea().setText ("Concentration at time "
+				+ (int) reactor.getCurrentTime() + " is "
+				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  getTextLogArea().getText() );
+			}
 			clearDots();
-			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
+			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
 			repaint();
-	
 		}
 	}
 	
