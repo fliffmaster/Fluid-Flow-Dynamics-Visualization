@@ -1,14 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -22,7 +19,7 @@ public class FluidFlowReactorPanel extends JPanel
 	private ArrayList<FFDot> dots;
 	private int totalNumberOfDots;
 	private int currentNumberOfDots;
-	private double initialConcentration;
+	//private double initialConcentration;
 	private Timer animationTimer = new Timer(500, new AnimationTimerListener());
 	private Timer reactionTimer = new Timer(50, new ReactionTimerListener());
 	private FFBatchReactor reactor = new FFBatchReactor();
@@ -50,13 +47,13 @@ public class FluidFlowReactorPanel extends JPanel
 	
 	public void setInitialConcentration(double concentration)
 	{
-		initialConcentration = concentration;
+		//initialConcentration = concentration;
 		getReactor().setInitialConcentration(concentration);
 	}
 	
-	public void setRateConstant(double rate)
+	public void setReactionConstant(double rate)
 	{
-		getReactor().setRateConstant(rate);
+		getReactor().setReactionConstant(rate);
 	}
 	
 	public void setCurrentTime(double time)

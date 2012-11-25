@@ -1,14 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -22,7 +19,7 @@ public class FluidFlowReactorPanel2 extends JPanel{
 	private ArrayList<FFDot> dots;
 	private int totalNumberOfDots;
 	private int currentNumberOfDots;
-	private double initialConcentration;
+	//private double initialConcentration;
 	private Timer animationTimer = new Timer(500,new AnimationTimerListener());
 	private Timer reactionTimer = new Timer( 100, new ReactionTimerListener());
 	private FFCSTReactor reactor = new FFCSTReactor();
@@ -46,17 +43,17 @@ public class FluidFlowReactorPanel2 extends JPanel{
 		txtConcentrationLog = log;
 	}
 	
-	public void setInitialConcentration(double concentration){
-		initialConcentration = concentration;
-		getReactor().setcIn(concentration);
+	public void setInflowConcentration(double concentration){
+	//	initialConcentration = concentration;
+		getReactor().setInflowConcentration(concentration);
 	}
 	
-	public void setRateConstant(double rate){
-		getReactor().setkInit(rate);
+	public void setReactionConstant(double rate){
+		getReactor().setReactionConstant(rate);
 	}
 	
 	public void setCurrentTime(double time){
-		getReactor().settCurr(time);
+		getReactor().setCurrentTime(time);
 	}
 	
 	public void startReaction(){
@@ -146,17 +143,16 @@ public class FluidFlowReactorPanel2 extends JPanel{
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
 			makeDots();
 			repaint();
-	
 		}
 	}
 	
 	class ReactionTimerListener implements ActionListener {
 		DecimalFormat df =  new DecimalFormat("#.##");
 		public void actionPerformed(ActionEvent evt) {
-			reactor.settCurr(reactor.gettCurr() + 1);
+			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
 			if (txtConcentrationLog != null)
 			txtConcentrationLog.setText ("Concentration at time "
-					+ (int) reactor.gettCurr() + " is "
+					+ (int) reactor.getCurrentTime() + " is "
 					+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  txtConcentrationLog.getText() );
 			clearDots();
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);

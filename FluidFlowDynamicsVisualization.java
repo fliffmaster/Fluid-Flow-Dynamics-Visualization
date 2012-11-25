@@ -238,7 +238,7 @@ public class FluidFlowDynamicsVisualization {
 	private void resetReactor() {
 		panel.setInitialConcentration(Double
 				.parseDouble(txtInitialConcentration.getText()));
-		panel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+		panel.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
 		panel.setCurrentTime(0);
 		txtConcentrationLog.setText("");
 		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
