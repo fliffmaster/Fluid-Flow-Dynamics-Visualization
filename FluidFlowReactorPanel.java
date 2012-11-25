@@ -12,10 +12,15 @@ import javax.swing.Timer;
 
 public class FluidFlowReactorPanel extends ReactorPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Timer animationTimer;
 	private Timer reactionTimer;
 	private FFBatchReactor reactor;
 	private int xPos;
+	
 	
 	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{

@@ -12,13 +12,18 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 public class TabBatchReactor extends JPanel {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	private Preferences preferences;
+	
 	public TabBatchReactor() {
 		initialize();
 	}
-
+	
+	public TabBatchReactor(Preferences pref) {
+		preferences = pref;
+		initialize();
+	}
 	public TabBatchReactor(LayoutManager layout) {
 		super(layout);
 		initialize();
@@ -55,7 +60,7 @@ public class TabBatchReactor extends JPanel {
 
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
-		txtInitialConcentration.setText("1000");
+		txtInitialConcentration.setText(preferences.getBatchInitialC().toString() );
 		txtInitialConcentration.setBounds(239, 63, 114, 19);
 		add(txtInitialConcentration);
 
@@ -76,7 +81,7 @@ public class TabBatchReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtRateConstant.setText(".01");
+		txtRateConstant.setText(preferences.getBatchInitialK().toString() );
 		txtRateConstant.setBounds(239, 90, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
@@ -102,13 +107,7 @@ public class TabBatchReactor extends JPanel {
 		txtConcentrationLog.setBounds(28, 273, 246, 266);
 		add(txtConcentrationLog);
 
-		// JPanel panel = new JPanel();
-		panel = new FluidFlowReactorPanel(2000, 3, 0, 50, 500);
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 4));
-		panel.setBounds(598, 41, 192, 218);
-		panel.setLogTextArea(txtConcentrationLog);
 
-		add(panel);
 
 		txtParticleNumber = new JTextField();
 		txtParticleNumber.addFocusListener(new FocusAdapter() {
@@ -117,7 +116,7 @@ public class TabBatchReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtParticleNumber.setText("5000");
+		txtParticleNumber.setText(preferences.getBatchParticleNumber().toString());
 		txtParticleNumber.setBounds(239, 121, 114, 19);
 		add(txtParticleNumber);
 		txtParticleNumber.setColumns(10);
@@ -133,7 +132,7 @@ public class TabBatchReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtTimeRate.setText("1000");
+		txtTimeRate.setText(preferences.getBatchTimeStep().toString());
 		txtTimeRate.setBounds(239, 152, 114, 19);
 		add(txtTimeRate);
 		txtTimeRate.setColumns(10);
@@ -149,7 +148,7 @@ public class TabBatchReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtParticleMoveRate.setText("50");
+		txtParticleMoveRate.setText(preferences.getBatchMotionRate().toString());
 		txtParticleMoveRate.setBounds(239, 183, 114, 19);
 		add(txtParticleMoveRate);
 		txtParticleMoveRate.setColumns(10);
@@ -167,6 +166,19 @@ public class TabBatchReactor extends JPanel {
 		add(lblBatchReactorData);
 		// pfrPanel.setReactor(panel.getReactor() );
 
+		// JPanel panel = new JPanel();
+		panel = new FluidFlowReactorPanel(2000, 3, 0, 50, 500);
+		panel.setBorder(new LineBorder(preferences.getBatchBorderColor(), 4));
+		panel.setBounds(598, 41, 192, 218);
+		panel.setLogTextArea(txtConcentrationLog);
+		panel.setDotSize(preferences.getBatchParticleSize());
+		panel.setDotColor(preferences.getBatchParticleColor());
+		panel.setBackground(preferences.getBatchBackgroundColor());
+		
+		
+
+		add(panel);
+		
 		resetReactor();
 
 	}

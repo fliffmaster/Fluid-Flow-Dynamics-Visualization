@@ -19,6 +19,8 @@ public class ReactorPanel extends JPanel
 	private JTextArea txtConcentrationLog;
 	private int dotDiameter;
 	private int upperCornerX;
+	private Color dotColor;
+	private Color backgroundColor;
 	
 	public ReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
@@ -27,6 +29,9 @@ public class ReactorPanel extends JPanel
 		totalNumberOfDots = numDots;
 		currentNumberOfDots = 0;
 		dots = new ArrayList<FFDot>();
+		dotColor = Color.RED;
+		backgroundColor = Color.WHITE;
+		setBackground(backgroundColor);
 	}
 	
 	public void setLogTextArea(JTextArea log)
@@ -76,11 +81,24 @@ public class ReactorPanel extends JPanel
 		return totalNumberOfDots;
 	}
 	
+	public void setDotColor(Color RGB){
+		dotColor = RGB;
+	}
+	
+	public void setBgColor(Color RGB){
+		backgroundColor = RGB;
+		setBackground(backgroundColor);
+	}
+	
+	public void setDotSize(int sz){
+		dotDiameter = sz;
+	}
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(Color.RED);
+		g2.setColor(dotColor);
 		makeDots();
 		for(int i = 0; i < currentNumberOfDots; i++)
 		{

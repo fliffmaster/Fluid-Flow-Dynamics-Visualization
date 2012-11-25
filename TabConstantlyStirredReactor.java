@@ -19,11 +19,16 @@ public class TabConstantlyStirredReactor extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private Preferences preferences;
+	
 	public TabConstantlyStirredReactor() {
 		initialize();
 	}
-
+	
+	public TabConstantlyStirredReactor(Preferences pref) {
+		preferences = pref;
+		initialize();
+	}
 	public TabConstantlyStirredReactor(LayoutManager layout) {
 		super(layout);
 		initialize();
@@ -59,7 +64,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
-		txtInitialConcentration.setText("1000");
+		txtInitialConcentration.setText(preferences.getContinuouslyStirredInitialC().toString());
 		txtInitialConcentration.setBounds(239, 63, 114, 19);
 		add(txtInitialConcentration);
 
@@ -80,7 +85,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtRateConstant.setText(".01");
+		txtRateConstant.setText(preferences.getContinuouslyStirredInitialK().toString());
 		txtRateConstant.setBounds(239, 90, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
@@ -100,8 +105,11 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnReset.setBounds(383, 218, 117, 25);
 		add(btnReset);
 		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
-		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
+		panel2.setBorder(new LineBorder(preferences.getContinuouslyStirredBorderColor(), 4));
 		panel2.setBounds(597, 290, 182, 218);
+		panel2.setDotSize(preferences.getContinuouslyStirredParticleSize());
+		panel2.setDotColor(preferences.getContinuouslyStirredParticleColor());
+		panel2.setBackground(preferences.getContinuouslyStirredBackgroundColor());
 		add(panel2);
 
 		txtParticleNumber = new JTextField();
@@ -111,7 +119,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtParticleNumber.setText("5000");
+		txtParticleNumber.setText(preferences.getContinuouslyStirredParticleNumber().toString());
 		txtParticleNumber.setBounds(239, 121, 114, 19);
 		add(txtParticleNumber);
 		txtParticleNumber.setColumns(10);
@@ -127,7 +135,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtTimeRate.setText("1000");
+		txtTimeRate.setText(preferences.getContinuouslyStirredTimeStep().toString());
 		txtTimeRate.setBounds(239, 152, 114, 19);
 		add(txtTimeRate);
 		txtTimeRate.setColumns(10);
@@ -143,7 +151,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 				resetReactor();
 			}
 		});
-		txtParticleMoveRate.setText("50");
+		txtParticleMoveRate.setText(preferences.getContinuouslyStirredMotionRate().toString());
 		txtParticleMoveRate.setBounds(239, 183, 114, 19);
 		add(txtParticleMoveRate);
 		txtParticleMoveRate.setColumns(10);

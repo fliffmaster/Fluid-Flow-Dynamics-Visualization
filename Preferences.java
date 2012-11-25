@@ -647,7 +647,7 @@ public class Preferences extends JTabbedPane {
 		plugFlowReactorPreferences.add(lblPlugBackground, gbc_lblPlugBackground);
 		
 		txtPlugFlowPlug2Background = new JTextField();
-		txtPlugFlowPlug2Background.setText("BBBBBB");
+		txtPlugFlowPlug2Background.setText("DDDDDD");
 		GridBagConstraints gbc_txtPlugFlowPlug2Background = new GridBagConstraints();
 		gbc_txtPlugFlowPlug2Background.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowPlug2Background.insets = new Insets(0, 0, 5, 0);
@@ -754,7 +754,7 @@ public class Preferences extends JTabbedPane {
 		continuouslyStirredReactorPreferences.add(lblColor3, gbc_lblColor3);
 		
 		txtContinuouslyStirredParticleColor = new JTextField();
-		txtContinuouslyStirredParticleColor.setText("FF0000");
+		txtContinuouslyStirredParticleColor.setText("0000FF");
 		GridBagConstraints gbc_txtContinuouslyStirredParticleColor = new GridBagConstraints();
 		gbc_txtContinuouslyStirredParticleColor.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredParticleColor.insets = new Insets(0, 0, 5, 0);
