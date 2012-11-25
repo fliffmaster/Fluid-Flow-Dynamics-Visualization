@@ -132,7 +132,7 @@ public class FluidFlowDynamicsVisualization {
 		panel.setBounds(598, 41, 192, 218);
 		panel.setLogTextArea(txtConcentrationLog);
 		
-		panel2 = new FluidFlowReactorPanel2(2000, 3, 0);
+		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
 		panel2.setBorder(new LineBorder(new Color(0, 0, 0), 4));
 		panel2.setBounds(597, 290, 182, 218);
 		panel2.setLogTextArea(cstrConcentrationLog);
@@ -225,10 +225,7 @@ public class FluidFlowDynamicsVisualization {
 		MainFrame.getContentPane().add(btnToggleFlow);
 		//pfrPanel.setReactor(panel.getReactor() );
 		
-		
-		//resetReactor();
-		
-		
+		resetReactor();	
 	}
 
 	private void resetReactor() {

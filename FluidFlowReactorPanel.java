@@ -16,7 +16,6 @@ public class FluidFlowReactorPanel extends JPanel
 	private ArrayList<FFDot> dots;
 	private int totalNumberOfDots;
 	private int currentNumberOfDots;
-	//private double initialConcentration;
 	private Timer animationTimer;
 	private Timer reactionTimer;
 	private FFBatchReactor reactor = new FFBatchReactor();
@@ -46,7 +45,6 @@ public class FluidFlowReactorPanel extends JPanel
 	
 	public void setInitialConcentration(double concentration)
 	{
-		//initialConcentration = concentration;
 		reactor.setInitialConcentration(concentration);
 	}
 	
@@ -70,11 +68,6 @@ public class FluidFlowReactorPanel extends JPanel
 	public void setXPos()
 	{
 		xPos += 5;
-	}
-	
-	public void resetXPos()
-	{
-		
 	}
 	
 	public void startReaction()
@@ -156,11 +149,6 @@ public class FluidFlowReactorPanel extends JPanel
 		reactor = null;
 		reactor = newReactor;
 	}
-	
-	public void setDotDiameter(int diameter)
-	{
-		
-	}
 
 	public int getUpperCornerX() 
 	{
@@ -197,7 +185,6 @@ public class FluidFlowReactorPanel extends JPanel
 			}
 			clearDots();
 			currentNumberOfDots = (int) (reactor.getPercentageOfConcentrationLeft() * totalNumberOfDots);
-			//setLastDot((int) (reactor.getCurrentConcentration() / Double.parseDouble(txtInitialConcentration.getText())* Integer.parseInt(txtParticleNumber.getText())));
 			makeDots();
 			repaint();
 		}
