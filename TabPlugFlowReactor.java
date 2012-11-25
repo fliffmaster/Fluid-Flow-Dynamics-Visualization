@@ -5,7 +5,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -26,7 +25,8 @@ public class TabPlugFlowReactor extends JPanel
 	private JTextField txtTimeRate;
 	private JTextField txtParticleMoveRate;
 	private PFR  pfrPanel;
-
+	private Preferences preferences;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -35,6 +35,11 @@ public class TabPlugFlowReactor extends JPanel
 	 * Create the application.
 	 */
 	public TabPlugFlowReactor() {
+		initialize();
+	}
+	
+	public TabPlugFlowReactor(Preferences pref) {
+		preferences = pref;
 		initialize();
 	}
 
@@ -55,7 +60,7 @@ public class TabPlugFlowReactor extends JPanel
 		//Make Initial Concentration text field
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
-		txtInitialConcentration.setText("1000");
+		txtInitialConcentration.setText(preferences.getPlugFlowInitialC().toString());
 		txtInitialConcentration.setBounds(239, 63, 114, 19);
 		add(txtInitialConcentration);
 		
@@ -80,7 +85,7 @@ public class TabPlugFlowReactor extends JPanel
 				resetReactor();
 			}
 		});
-		txtRateConstant.setText(".01");
+		txtRateConstant.setText(preferences.getPlugFlowInitialK().toString());
 		txtRateConstant.setBounds(239, 90, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
@@ -106,7 +111,7 @@ public class TabPlugFlowReactor extends JPanel
 		txtConcentrationLog.setBounds(569, 62, 246, 266);
 		add(txtConcentrationLog);
 		
-		pfrPanel = new PFR();
+		pfrPanel = new PFR(preferences);
 		
 		txtParticleNumber = new JTextField();
 		txtParticleNumber.addFocusListener(new FocusAdapter() {
@@ -115,7 +120,7 @@ public class TabPlugFlowReactor extends JPanel
 				resetReactor();
 			}
 		});
-		txtParticleNumber.setText("5000");
+		txtParticleNumber.setText(preferences.getPlugFlowParticleNumber().toString());
 		txtParticleNumber.setBounds(239, 121, 114, 19);
 		add(txtParticleNumber);
 		txtParticleNumber.setColumns(10);
@@ -131,7 +136,7 @@ public class TabPlugFlowReactor extends JPanel
 				resetReactor();
 			}
 		});
-		txtTimeRate.setText("1000");
+		txtTimeRate.setText(preferences.getPlugFlowTimeStep().toString());
 		txtTimeRate.setBounds(239, 152, 114, 19);
 		add(txtTimeRate);
 		txtTimeRate.setColumns(10);
@@ -147,7 +152,7 @@ public class TabPlugFlowReactor extends JPanel
 				resetReactor();
 			}
 		});
-		txtParticleMoveRate.setText("50");
+		txtParticleMoveRate.setText(preferences.getPlugFlowMotionRate().toString());
 		txtParticleMoveRate.setBounds(239, 183, 114, 19);
 		add(txtParticleMoveRate);
 		txtParticleMoveRate.setColumns(10);
@@ -162,6 +167,7 @@ public class TabPlugFlowReactor extends JPanel
 		pfrPanel.setBounds(71, 339, 626, 209);
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
+		
 		
 		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
 		lblBatchReactorData.setBounds(629, 37, 135, 14);

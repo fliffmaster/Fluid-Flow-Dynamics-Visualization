@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,6 +19,20 @@ public class PFR extends JPanel
 	//private int upperCornerX;
 	private boolean flowing = true;
 	private boolean started = false;
+	private Preferences preferences;
+	private boolean colorToggle;
+	
+	
+
+	public PFR(Preferences pref)
+	{
+		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
+		batchPanels = new ArrayList<FluidFlowReactorPanel>();
+		preferences = pref;
+		colorToggle = true;
+		timer.setRepeats(true);		
+	}
+	
 	
 	public PFR()
 	{
@@ -82,7 +97,7 @@ public class PFR extends JPanel
 	
 	public void beginAnimation()
 	{
-			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+			batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500));
 			for(FluidFlowReactorPanel f : batchPanels)
 				add(f);
 	}
@@ -128,7 +143,18 @@ public class PFR extends JPanel
 			{
 				if(batchPanels.get(size - 1).getXPos() >= - 5)
 				{
-					batchPanels.add(new FluidFlowReactorPanel(1000, 2, batchPanelWidth));
+					FluidFlowReactorPanel ffTemp = new FluidFlowReactorPanel(1000, 2, batchPanelWidth, 50, 500);
+					if(preferences != null){
+						ffTemp.setDotSize(preferences.getPlugFlowParticleSize());
+						ffTemp.setDotColor(preferences.getPlugFlowParticleColor());
+						if(colorToggle) {
+							ffTemp.setBackground(preferences.getPlugFlowPlug1Background());
+						} else {
+							ffTemp.setBackground(preferences.getPlugFlowPlug2Background());
+						}
+						colorToggle = !colorToggle;
+					}
+					batchPanels.add(ffTemp);
 					add(batchPanels.get(size));
 					batchPanels.get(size).startAnimation();
 				}

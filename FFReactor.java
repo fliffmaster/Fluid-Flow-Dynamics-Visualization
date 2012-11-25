@@ -12,44 +12,44 @@ public abstract class FFReactor {
 	
 	public FFReactor(double tFinal, double kInit, double cCurr)
 	{
-		this.settFinal(tFinal);
-		this.setkInit(kInit);
-		this.setCCurr(cCurr);
-		this.settCurr(0);
+		this.tFinal = tFinal;
+		this.tCurr = 0;
+		this.kInit = kInit;
+		this.cCurr = cCurr;
 	}
 
 	public abstract double getPercentageOfConcentrationLeft();
 	public abstract void doReactionStep();
 	
-	public double gettCurr() {
+	public double getCurrentTime() {
 		return tCurr;
 	}
 
-	public void settCurr(double tCurr) {
+	public void setCurrentTime(double tCurr) {
 		this.tCurr = tCurr;
 	}
 
-	public double getCCurr() {
+	public double getCurrentConcentration() {
 		return cCurr;
 	}
 
-	public void setCCurr(double cCurr) {
+	public void setCurrentConcentration(double cCurr) {
 		this.cCurr = cCurr;
 	}
 
-	public double getkInit() {
+	public double getReactionConstant() {
 		return kInit;
 	}
 
-	public void setkInit(double kInit) {
+	public void setReactionConstant(double kInit) {
 		this.kInit = kInit;
 	}
 
-	public double gettFinal() {
+	public double getFinalTime() {
 		return tFinal;
 	}
 
-	public void settFinal(double tFinal) {
+	public void setFinalTime(double tFinal) {
 		this.tFinal = tFinal;
 	}
 }
