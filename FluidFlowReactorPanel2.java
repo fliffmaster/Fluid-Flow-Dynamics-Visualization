@@ -13,4 +13,22 @@ public class FluidFlowReactorPanel2 extends ReactorPanel
 		FFCSTReactor react = (FFCSTReactor) getReactor();
 		react.setInflowConcentration(concentration);
 	}
+	
+	public double getInflowConcentration()
+	{
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		return react.getInflowConcentration();
+	}
+	
+	public void setFlowRate(double rate)
+	{
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		react.setFlowRate(rate);
+	}
+	
+	public double getFlowRate(double concentration)
+	{
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		return react.getFlowRate();
+	}
 }

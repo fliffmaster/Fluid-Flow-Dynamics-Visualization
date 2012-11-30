@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.swing.JLabel;
 
 public class ReactorPanel extends JPanel 
 {
@@ -25,6 +26,8 @@ public class ReactorPanel extends JPanel
 	private Timer animationTimer;
 	private Timer reactionTimer;
 	private FFReactor reactor;
+	private JLabel concentrationLabel;
+	private JLabel percentageLabel;
 	
 	public ReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
@@ -196,12 +199,27 @@ public class ReactorPanel extends JPanel
 		reactor = newReactor;
 	}
 	
+	public JLabel getConcentrationLabel() {
+		return concentrationLabel;
+	}
+
+	public void setConcentrationLabel(JLabel concentrationLabel) {
+		this.concentrationLabel = concentrationLabel;
+	}
+
+	public JLabel getPercentageLabel() {
+		return percentageLabel;
+	}
+
+	public void setPercentageLabel(JLabel percentageLabel) {
+		this.percentageLabel = percentageLabel;
+	}
+
 	class AnimationTimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent evt) 
 		{
 			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
 			makeDots();
 			repaint();
 		}
@@ -212,12 +230,14 @@ public class ReactorPanel extends JPanel
 		DecimalFormat df =  new DecimalFormat("#.##");
 		public void actionPerformed(ActionEvent evt) 
 		{
+			concentrationLabel.setText(df.format(reactor.getCurrentConcentration()));
+			percentageLabel.setText(df.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
 			if (getTextLogArea() != null)
 			{
-				getTextLogArea().setText ("Concentration at time "
+				getTextLogArea().append("Concentration at time "
 				+ (int) reactor.getCurrentTime() + " is "
-				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  getTextLogArea().getText() );
+				+ df.format(reactor.getCurrentConcentration()) + "\n");
 			}
 			clearDots();
 			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));

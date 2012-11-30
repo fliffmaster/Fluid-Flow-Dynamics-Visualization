@@ -4,22 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
+import javax.swing.ScrollPaneConstants;
+import java.awt.Font;
+import java.awt.Panel;
 
 public class TabConstantlyStirredReactor extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Preferences preferences;
+	private JTextArea textLogArea;
+	private JTextField txtInflowConcentration;
+	private JTextField txtRateConstant;
+	private FluidFlowReactorPanel2 panel2;
+	private JTextField txtFlowRate;
 	
 	public TabConstantlyStirredReactor() {
 		initialize();
@@ -44,135 +50,134 @@ public class TabConstantlyStirredReactor extends JPanel {
 		super(layout, isDoubleBuffered);
 		initialize();
 	}
-	
-	private JTextField txtInitialConcentration;
-	private JTextField txtRateConstant;
-	private JTextField txtParticleNumber;
-	private JTextField txtTimeRate;
-	private JTextField txtParticleMoveRate;
-	private FluidFlowReactorPanel2 panel2;
 
-	private void initialize() {
-
-		//setBounds(100, 100, 868, 813);
+	private void initialize() 
+	{
 		setBounds(0, 0, 800, 600);
 		setLayout(null);
 
-		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
-		lblInitialConcentration.setBounds(12, 67, 192, 15);
+		JLabel lblInitialConcentration = new JLabel("Inflow Concentration");
+		lblInitialConcentration.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblInitialConcentration.setBounds(30, 114, 192, 15);
 		add(lblInitialConcentration);
 
-		txtInitialConcentration = new JTextField();
-		lblInitialConcentration.setLabelFor(txtInitialConcentration);
-		txtInitialConcentration.setText(preferences.getContinuouslyStirredInitialC().toString());
-		txtInitialConcentration.setBounds(239, 63, 114, 19);
-		add(txtInitialConcentration);
+		txtInflowConcentration = new JTextField();
+		lblInitialConcentration.setLabelFor(txtInflowConcentration);
+		txtInflowConcentration.setText(preferences.getContinuouslyStirredInitialC().toString());
+		txtInflowConcentration.setBounds(181, 107, 114, 19);
+		add(txtInflowConcentration);
 
-		txtInitialConcentration.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				resetReactor();
-			}
-		});
 		JLabel lblNewLabel = new JLabel("Rate Constant per Minute");
-		lblNewLabel.setBounds(12, 94, 192, 15);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setBounds(30, 141, 192, 15);
 		add(lblNewLabel);
 
 		txtRateConstant = new JTextField();
-		txtRateConstant.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				resetReactor();
-			}
-		});
 		txtRateConstant.setText(preferences.getContinuouslyStirredInitialK().toString());
-		txtRateConstant.setBounds(239, 90, 114, 19);
+		txtRateConstant.setBounds(181, 134, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 
 		JButton btnGo = new JButton("Go");
+		btnGo.setBackground(new Color(0, 128, 0));
+		btnGo.setForeground(new Color(240, 255, 255));
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnGo.addActionListener(new ButtonGoListener());
-		btnGo.setBounds(127, 218, 117, 25);
+		btnGo.setBounds(65, 11, 174, 71);
 		add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
+		btnStop.setBackground(new Color(255, 0, 0));
+		btnStop.setForeground(new Color(240, 255, 255));
+		btnStop.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnStop.addActionListener(new ButtonStopListener());
-		btnStop.setBounds(254, 218, 117, 25);
+		btnStop.setBounds(309, 11, 174, 71);
 		add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
+		btnReset.setForeground(new Color(240, 255, 255));
+		btnReset.setBackground(new Color(184, 134, 11));
+		btnReset.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnReset.addActionListener(new ButtonResetListener());
-		btnReset.setBounds(383, 218, 117, 25);
+		btnReset.setBounds(551, 11, 174, 71);
 		add(btnReset);
 		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
 		panel2.setBorder(new LineBorder(preferences.getContinuouslyStirredBorderColor(), 4));
-		panel2.setBounds(597, 290, 182, 218);
+		panel2.setBounds(339, 138, 433, 358);
 		panel2.setDotSize(preferences.getContinuouslyStirredParticleSize());
 		panel2.setDotColor(preferences.getContinuouslyStirredParticleColor());
-		panel2.setBackground(preferences.getContinuouslyStirredBackgroundColor());
+		panel2.setBackground(new Color(240, 255, 255));
 		add(panel2);
 
-		txtParticleNumber = new JTextField();
-		txtParticleNumber.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				resetReactor();
-			}
-		});
-		txtParticleNumber.setText(preferences.getContinuouslyStirredParticleNumber().toString());
-		txtParticleNumber.setBounds(239, 121, 114, 19);
-		add(txtParticleNumber);
-		txtParticleNumber.setColumns(10);
-
-		JLabel lblNumberOfParticles = new JLabel("Number of particles");
-		lblNumberOfParticles.setBounds(12, 121, 192, 15);
-		add(lblNumberOfParticles);
-
-		txtTimeRate = new JTextField();
-		txtTimeRate.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				resetReactor();
-			}
-		});
-		txtTimeRate.setText(preferences.getContinuouslyStirredTimeStep().toString());
-		txtTimeRate.setBounds(239, 152, 114, 19);
-		add(txtTimeRate);
-		txtTimeRate.setColumns(10);
-
-		JLabel lblRateOfReaction = new JLabel("Rate of reaction steps");
-		lblRateOfReaction.setBounds(12, 154, 220, 15);
-		add(lblRateOfReaction);
-
-		txtParticleMoveRate = new JTextField();
-		txtParticleMoveRate.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				resetReactor();
-			}
-		});
-		txtParticleMoveRate.setText(preferences.getContinuouslyStirredMotionRate().toString());
-		txtParticleMoveRate.setBounds(239, 183, 114, 19);
-		add(txtParticleMoveRate);
-		txtParticleMoveRate.setColumns(10);
-
-		JLabel lblRateOfRepaint = new JLabel("Rate of repaint of particles");
-		lblRateOfRepaint.setBounds(12, 185, 192, 15);
-		add(lblRateOfRepaint);
-
 		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
-		lblCstrVisualization.setBounds(608, 270, 101, 14);
+		lblCstrVisualization.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCstrVisualization.setBounds(452, 107, 192, 27);
 		add(lblCstrVisualization);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(127, 255, 212));
-		textArea.setBounds(294, 273, 239, 266);
-		add(textArea);
-
+		textLogArea = new JTextArea();
+		JScrollPane logPane = new JScrollPane(textLogArea);
+		logPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		textLogArea.setBackground(new Color(245, 245, 220));
+		logPane.setBounds(23, 265, 375, 264);
+		panel2.setLogTextArea(textLogArea);
 		JLabel lblCstrData = new JLabel("CSTR Data");
-		lblCstrData.setBounds(338, 254, 71, 14);
+		lblCstrData.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblCstrData.setBounds(113, 253, 107, 27);
 		add(lblCstrData);
-		// pfrPanel.setReactor(panel.getReactor() );
+		
+		JLabel lblInflowRate = new JLabel("Inflow Rate");
+		lblInflowRate.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblInflowRate.setBounds(30, 167, 114, 14);
+		add(lblInflowRate);
+		
+		txtFlowRate = new JTextField();
+		txtFlowRate.setText(preferences.getContinuouslyStirredFlowRate().toString());
+		txtFlowRate.setBounds(181, 161, 114, 20);
+		add(txtFlowRate);
+		txtFlowRate.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		panel.setBounds(30, 281, 265, 264);
+		panel.add(logPane);
+		add(panel);
+		
+		JButton applyButton = new JButton("Apply");
+		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton.setToolTipText("Click here to apply parameter changes");
+		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.addActionListener(new ApplyButtonListener());
+		add(applyButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("0.0");
+		lblNewLabel_1.setForeground(new Color(0, 0, 255));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setBounds(624, 507, 46, 14);
+		panel2.setConcentrationLabel(lblNewLabel_1);
+		add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("0.00%");
+		lblNewLabel_2.setForeground(new Color(0, 0, 255));
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_2.setBounds(624, 532, 64, 14);
+		panel2.setPercentageLabel(lblNewLabel_2);
+		add(lblNewLabel_2);
+		
+		JLabel lblCurrentConcentration = new JLabel("Current Concentration:");
+		lblCurrentConcentration.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblCurrentConcentration.setBounds(339, 507, 183, 18);
+		add(lblCurrentConcentration);
+		
+		JLabel lblPercentageOfInflow = new JLabel("Percentage of Inflow Concentation:");
+		lblPercentageOfInflow.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPercentageOfInflow.setBounds(339, 536, 250, 14);
+		add(lblPercentageOfInflow);
+		
+		Panel panel_1 = new Panel();
+		panel_1.setBackground(new Color(176, 196, 222));
+		panel_1.setBounds(0, 0, 800, 91);
+		add(panel_1);
 
 		resetReactor();
 
@@ -180,41 +185,50 @@ public class TabConstantlyStirredReactor extends JPanel {
 
 	private void resetReactor() {
 
+		panel2.setInflowConcentration(1.0);
+		panel2.getReactor().setCurrentConcentration(0.0);
+		panel2.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
+		panel2.setCurrentTime(0);
+		textLogArea.setText("");
+		panel2.clearDots();
+		panel2.setCurrentNumberOfDots(0);
+		panel2.repaint();
+		
 	}
 
-	class ButtonGoListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent evt) {
-
-
-			panel2.setReactionTimer(Integer.parseInt(txtTimeRate.getText()));
-			panel2.setAnimationTimer(Integer.parseInt(txtParticleMoveRate
-					.getText()));
+	class ButtonGoListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
 			panel2.startAnimation();
 			panel2.startReaction();
-
 		}
-
 	}
 
-	class ButtonStopListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent evt) {
-
+	class ButtonStopListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
 			panel2.stopReaction();
 			panel2.stopAnimation();
-
 		}
-
 	}
 
-	class ButtonResetListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent evt) {
+	class ButtonResetListener implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
 			resetReactor();
-
 		}
-
 	}
-
+	
+	class ApplyButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			panel2.setInflowConcentration(Integer.parseInt(txtInflowConcentration.getText()));
+			panel2.getReactor().setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
+			panel2.setFlowRate(Double.parseDouble(txtFlowRate.getText()));
+		}
+	}
 }

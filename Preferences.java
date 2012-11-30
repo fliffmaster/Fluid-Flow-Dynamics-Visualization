@@ -49,6 +49,7 @@ public class Preferences extends JTabbedPane {
 	private JTextField txtContinuouslyStirredParticleColor;
 	private JTextField txtContinuouslyStirredBackgroundColor;
 	private JTextField txtContinuouslyStirredBorderColor;
+	private JTextField txtContinuouslyStirredFlowRate;
 
 //	private int dblBatchParticleSize;
 //	private int dblBatchParticleNumber;
@@ -344,6 +345,10 @@ public class Preferences extends JTabbedPane {
 			Color clrContinuouslyStirredBorderColor) {
 		//this.clrContinuouslyStirredBorderColor = clrContinuouslyStirredBorderColor;
 		txtContinuouslyStirredBorderColor.setText(clrContinuouslyStirredBorderColor.toString());
+	}
+	
+	public Double getContinuouslyStirredFlowRate() {
+		return Double.parseDouble( txtContinuouslyStirredFlowRate.getText());
 	}
 
 
@@ -891,7 +896,7 @@ public class Preferences extends JTabbedPane {
 		continuouslyStirredReactorPreferences.add(lblInitialC3, gbc_lblInitialC3);
 		
 		txtContinuouslyStirredInitialC = new JTextField();
-		txtContinuouslyStirredInitialC.setText("100");
+		txtContinuouslyStirredInitialC.setText("1");
 		GridBagConstraints gbc_txtContinuouslyStirredInitialC = new GridBagConstraints();
 		gbc_txtContinuouslyStirredInitialC.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredInitialC.insets = new Insets(0, 0, 5, 0);
@@ -936,6 +941,24 @@ public class Preferences extends JTabbedPane {
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredTimeStep, gbc_txtContinuouslyStirredTimeStep);
 		txtContinuouslyStirredTimeStep.setColumns(10);
 		
+		JLabel lblFlowRate = new JLabel("FlowRate");
+		GridBagConstraints gbc_lblFlowRate = new GridBagConstraints();
+		gbc_lblFlowRate.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblFlowRate.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFlowRate.gridx = 0;
+		gbc_lblFlowRate.gridy = 10;
+		continuouslyStirredReactorPreferences.add(lblFlowRate, gbc_lblFlowRate);
+		
+		txtContinuouslyStirredFlowRate = new JTextField();
+		txtContinuouslyStirredFlowRate.setText("1.0");
+		GridBagConstraints gbc_txtContinuouslyStirredFlowRate = new GridBagConstraints();
+		gbc_txtContinuouslyStirredFlowRate.anchor = GridBagConstraints.WEST;
+		gbc_txtContinuouslyStirredFlowRate.insets = new Insets(0, 0, 5, 0);
+		gbc_txtContinuouslyStirredFlowRate.gridx = 1;
+		gbc_txtContinuouslyStirredFlowRate.gridy = 10;
+		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredFlowRate, gbc_txtContinuouslyStirredFlowRate);
+		txtContinuouslyStirredInitialK.setColumns(10);
+		
 		JButton btnSave_2 = new JButton("Save");
 		btnSave_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -945,7 +968,7 @@ public class Preferences extends JTabbedPane {
 		GridBagConstraints gbc_btnSave_2 = new GridBagConstraints();
 		gbc_btnSave_2.anchor = GridBagConstraints.WEST;
 		gbc_btnSave_2.gridx = 1;
-		gbc_btnSave_2.gridy = 10;
+		gbc_btnSave_2.gridy = 11;
 		continuouslyStirredReactorPreferences.add(btnSave_2, gbc_btnSave_2);
 	}
 	

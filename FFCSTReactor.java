@@ -39,9 +39,9 @@ public class FFCSTReactor extends FFReactor
 	
 	//This version only returns percentage w/o executing a reaction step.
 	//Not yet used
-	public double getPercentageOnly()
+	public double getPercentageOfUpperLimit()
 	{
-		return getCurrentConcentration() / defaultConcentration;
+		return getCurrentConcentration() / cIn;
 	}
 
 	// Accessor and mutator methods for CSTR specific variables

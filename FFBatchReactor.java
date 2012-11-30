@@ -44,6 +44,11 @@ public class FFBatchReactor extends FFReactor
 		return getCurrentConcentration() / cInit;
 	}
 	
+	public double getPercentageOfUpperLimit()
+	{
+		return getCurrentConcentration() / cInit;
+	}
+	
 	//Accessor and mutator methods for Batch Reactor specific vars
 	public double getInitialConcentration() {
 		return cInit;

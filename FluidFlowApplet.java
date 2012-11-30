@@ -30,7 +30,7 @@ public class FluidFlowApplet extends JApplet {
 	public FluidFlowApplet(boolean b) {
 		MainFrame = new JFrame();
 		MainFrame.setTitle("Fluid Flow Dynamics Visualization");
-		MainFrame.setBounds(100, 100, 850, 650);
+		MainFrame.setBounds(100, 100, 820, 650);
 		MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		appPane = MainFrame.getContentPane();
 		isApplet = false;

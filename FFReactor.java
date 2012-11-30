@@ -19,6 +19,7 @@ public abstract class FFReactor {
 	}
 
 	public abstract double getPercentageOfConcentrationLeft();
+	public abstract double getPercentageOfUpperLimit();
 	public abstract void doReactionStep();
 	
 	public double getCurrentTime() {
