@@ -107,8 +107,8 @@ public class ReactorPanel extends JPanel
 		public void actionPerformed(ActionEvent evt) 
 		{
 			//Updates the dynamic labels to reflect new concentration and %
-			concentrationLabel.setText(df1.format(reactor.getCurrentConcentration()));
-			percentageLabel.setText(df2.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
+			if (concentrationLabel != null) concentrationLabel.setText(df1.format(reactor.getCurrentConcentration()));
+			if (percentageLabel != null) percentageLabel.setText(df2.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1); //increment time by 1
 			if (getTextLogArea() != null)
 			{

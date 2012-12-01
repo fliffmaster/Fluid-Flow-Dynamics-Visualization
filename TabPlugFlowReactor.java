@@ -55,9 +55,6 @@ public class TabPlugFlowReactor extends JPanel
 		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
-		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
-		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
-		pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
 		
 		//Create labels for text fields
 		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
@@ -183,6 +180,9 @@ public class TabPlugFlowReactor extends JPanel
 		});
 		btnToggleFlow.setBounds(148, 219, 89, 23);
 		add(btnToggleFlow);
+		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
+		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
+		pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
 
 		//Reset the Reactor
 		resetReactor();		

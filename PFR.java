@@ -172,8 +172,10 @@ public class PFR extends JPanel
 	{
 		removeAll();
 		batchPanels.clear();
-		System.out.println(batchPanels.isEmpty());
 		
+		//System.out.println(batchPanels.isEmpty());
+		flowing = true;
+		started = false;
 		repaint();
 	}
 	
