@@ -112,8 +112,8 @@ public class FluidFlowApplet extends JApplet
 		preferences.setPlugFlow(plugFlowReactor);
 
 		//No preferences tab for an applet
-		if (isApplet == false)
-			tabbedPane.addTab("Preferences", null, preferences, null);
+//		if (isApplet == false)
+//			tabbedPane.addTab("Preferences", null, preferences, null);
 	}
 
 }

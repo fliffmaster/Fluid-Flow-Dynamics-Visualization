@@ -24,8 +24,8 @@ public class FFDot
 		this.diameter = diameter;
 		int height = (int) boundary.getHeight();
 		int width = (int) boundary.getWidth();
-		y = rando.nextInt((int)(height - diameter + 1)) ;
-		x = rando.nextInt((int)(width - diameter + 1)) ;	
+		y =  rando.nextInt(Math.abs((int)(height - diameter + 1)) );
+		x = rando.nextInt(Math.abs((int)(width - diameter + 1))) ;	
 	}
 	
 	//returns the ellipse for the dot with specified coordinates and diameter

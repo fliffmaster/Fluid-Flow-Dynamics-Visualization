@@ -13,10 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -32,6 +35,7 @@ public class TabPlugFlowReactor extends JPanel
 	private JTextField txtParticleMoveRate;
 	private PFR  pfrPanel;
 	private Preferences preferences;
+	private JSlider flowRateSlider;
 	
 	//Constructors all use the initialize() method
 	public TabPlugFlowReactor() {
@@ -178,16 +182,41 @@ public class TabPlugFlowReactor extends JPanel
 				pfrPanel.toggleFlowing();
 			}
 		});
-		btnToggleFlow.setBounds(148, 219, 89, 23);
+		btnToggleFlow.setBounds(111, 219, 126, 23);
 		add(btnToggleFlow);
 		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
 		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
 		pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
+		
+		flowRateSlider = new JSlider();
+		flowRateSlider.setMaximum(300);
+		flowRateSlider.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				setFlowRate();
+			}
+		});
 
+
+		flowRateSlider.setBounds(68, 291, 200, 16);
+		add(flowRateSlider);
+		
+		JLabel lblFlowRate = new JLabel("Flow Rate");
+		lblFlowRate.setBounds(76, 271, 192, 15);
+		add(lblFlowRate);
+//		flowRateSlider.addPropertyChangeListener(new PropertyChangeListener() {
+//			public void propertyChange(PropertyChangeEvent arg0) {
+//				setFlowRate();
+//			}
+//		});
 		//Reset the Reactor
 		resetReactor();		
 	}
 
+	private void setFlowRate(){
+		System.out.println(flowRateSlider.getValue());
+		pfrPanel.setMoveTime(flowRateSlider.getValue() );
+	}
 	//Resets the reactor by reseting the initial concentration
 	//and reaction constant figures and dynamic label figures, 
 	//then remaking the dots and repainting
