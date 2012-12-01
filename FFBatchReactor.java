@@ -41,7 +41,10 @@ public class FFBatchReactor extends FFReactor
 	public double getPercentageOfConcentrationLeft()
 	{
 		doReactionStep();
-		return getCurrentConcentration() / cInit;
+		if(cInit != 0.0)
+			return getCurrentConcentration() / cInit;
+		else
+			return (Double) null;
 	}
 	
 	//Returns the ratio of the current concentration to the initial

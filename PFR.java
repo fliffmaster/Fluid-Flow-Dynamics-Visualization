@@ -15,14 +15,9 @@ public class PFR extends JPanel
 	private ArrayList<FluidFlowReactorPanel> batchPanels;
 	//private int x = 0;
 	private Timer timer = new Timer(50, new TimerListener());
-	private Timer plugMoveTimer = new Timer(50, new plugMoveTimerListener());
 	private int batchPanelWidth;
 	//private int upperCornerX;
 	private boolean flowing = true;
-
-
-
-
 	private boolean started = false;
 	private Preferences preferences;
 	private boolean colorToggle;
@@ -136,7 +131,6 @@ public class PFR extends JPanel
 	public void startAnimation()
 	{
 		timer.start();
-		plugMoveTimer.start();
 //		int size = batchPanels.size();
 //		for(int i = 0; i < size; i++)
 //			batchPanels.get(i).startAnimation();
@@ -162,7 +156,6 @@ public class PFR extends JPanel
 	public void stopReactor()
 	{
 		timer.stop();
-		plugMoveTimer.stop();
 		int size = batchPanels.size();
 		for(int i = 0; i < size; i++)
 			batchPanels.get(i).stopReaction();
@@ -195,13 +188,13 @@ public class PFR extends JPanel
 		{
 			int size = batchPanels.size();
 			batchPanelHeight = panel.getHeight();
-//			for(FluidFlowReactorPanel f : batchPanels)
-//			{
-//				f.setXPos();
-//				f.setBounds(f.getXPos(), 0, batchPanelWidth, batchPanelHeight);
-//				if(f.getXPos() >= 0)
-//					f.startReaction();	
-//			}
+			for(FluidFlowReactorPanel f : batchPanels)
+			{
+				f.setXPos();
+				f.setBounds(f.getXPos(), 0, batchPanelWidth, batchPanelHeight);
+				if(f.getXPos() >= 0)
+					f.startReaction();	
+			}
 
 			if(flowing == true)
 			{
@@ -234,33 +227,7 @@ public class PFR extends JPanel
 			
 		}	
 	}
-
-	class plugMoveTimerListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent arg) 
-		{
-
-			for(FluidFlowReactorPanel f : batchPanels)
-			{
-				f.setXPos();
-				f.setBounds(f.getXPos(), 0, batchPanelWidth, batchPanelHeight);
-				if(f.getXPos() >= 0)
-					f.startReaction();	
-			}
-
-		}	
-	}
-
-	public int getMoveTime(){
-		return plugMoveTimer.getDelay();
-	}
 	
-	public void setMoveTime(int rate){
-		plugMoveTimer.setDelay(rate);
-		
-	}
-	
-
 	public int getInitialConcentration() {
 		return initialConcentration;
 	}
@@ -268,12 +235,9 @@ public class PFR extends JPanel
 	public void setInitialConcentration(int initialConcentration) {
 		this.initialConcentration = initialConcentration;
 	}
-
-	public void setFlowing(boolean flowing) {
-		this.flowing = flowing;
-	}
 	
-	public boolean getFlowing(){
+	public boolean getFlowing()
+	{
 		return flowing;
 	}
 }

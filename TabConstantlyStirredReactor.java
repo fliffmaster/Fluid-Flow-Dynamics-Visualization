@@ -95,18 +95,18 @@ public class TabConstantlyStirredReactor extends JPanel {
 		txtInflowConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInflowConcentration);
 		txtInflowConcentration.setText(preferences.getContinuouslyStirredInitialC().toString());
-		txtInflowConcentration.setBounds(181, 107, 114, 19);
+		txtInflowConcentration.setBounds(200, 110, 114, 19);
 		add(txtInflowConcentration);
 
 		txtRateConstant = new JTextField();
 		txtRateConstant.setText(preferences.getContinuouslyStirredInitialK().toString());
-		txtRateConstant.setBounds(181, 134, 114, 19);
+		txtRateConstant.setBounds(200, 137, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 		
 		txtFlowRate = new JTextField();
 		txtFlowRate.setText(preferences.getContinuouslyStirredFlowRate().toString());
-		txtFlowRate.setBounds(181, 161, 114, 20);
+		txtFlowRate.setBounds(200, 164, 114, 20);
 		add(txtFlowRate);
 		txtFlowRate.setColumns(10);
 
@@ -138,7 +138,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		//Create label for reactor
 		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
 		lblCstrVisualization.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblCstrVisualization.setBounds(452, 107, 192, 27);
+		lblCstrVisualization.setBounds(452, 107, 273, 27);
 		add(lblCstrVisualization);
 		
 		//Create data log
@@ -167,7 +167,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		JButton applyButton = new JButton("Apply");
 		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		applyButton.setToolTipText("Click here to apply parameter changes");
-		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.setBounds(225, 192, 89, 33);
 		applyButton.addActionListener(new ApplyButtonListener());
 		add(applyButton);
 		
@@ -175,26 +175,26 @@ public class TabConstantlyStirredReactor extends JPanel {
 		JLabel dynamicConcentrationLabel = new JLabel("0.0");
 		dynamicConcentrationLabel.setForeground(new Color(0, 0, 255));
 		dynamicConcentrationLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		dynamicConcentrationLabel.setBounds(624, 507, 101, 14);
+		dynamicConcentrationLabel.setBounds(645, 511, 101, 14);
 		panel2.setConcentrationLabel(dynamicConcentrationLabel);
 		add(dynamicConcentrationLabel);
 		
 		JLabel dynamicPercentLabel = new JLabel("0.00%");
 		dynamicPercentLabel.setForeground(new Color(0, 0, 255));
 		dynamicPercentLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		dynamicPercentLabel.setBounds(624, 532, 101, 14);
+		dynamicPercentLabel.setBounds(645, 536, 101, 14);
 		panel2.setPercentageLabel(dynamicPercentLabel);
 		add(dynamicPercentLabel);
 		
 		//Create labels for dynamic concentration and percentage figures
 		JLabel lblCurrentConcentration = new JLabel("Current Concentration:");
 		lblCurrentConcentration.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCurrentConcentration.setBounds(339, 507, 183, 18);
+		lblCurrentConcentration.setBounds(339, 507, 234, 18);
 		add(lblCurrentConcentration);
 		
 		JLabel lblPercentageOfInflow = new JLabel("Percentage of Inflow Concentation:");
 		lblPercentageOfInflow.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPercentageOfInflow.setBounds(339, 536, 250, 14);
+		lblPercentageOfInflow.setBounds(339, 536, 290, 14);
 		add(lblPercentageOfInflow);
 		
 		//Just a cosmetic panel
