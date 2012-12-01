@@ -95,18 +95,18 @@ public class TabConstantlyStirredReactor extends JPanel {
 		txtInflowConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInflowConcentration);
 		txtInflowConcentration.setText(preferences.getContinuouslyStirredInitialC().toString());
-		txtInflowConcentration.setBounds(181, 107, 114, 19);
+		txtInflowConcentration.setBounds(200, 110, 114, 19);
 		add(txtInflowConcentration);
 
 		txtRateConstant = new JTextField();
 		txtRateConstant.setText(preferences.getContinuouslyStirredInitialK().toString());
-		txtRateConstant.setBounds(181, 134, 114, 19);
+		txtRateConstant.setBounds(200, 137, 114, 19);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 		
 		txtFlowRate = new JTextField();
 		txtFlowRate.setText(preferences.getContinuouslyStirredFlowRate().toString());
-		txtFlowRate.setBounds(181, 161, 114, 20);
+		txtFlowRate.setBounds(200, 164, 114, 20);
 		add(txtFlowRate);
 		txtFlowRate.setColumns(10);
 
@@ -167,7 +167,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		JButton applyButton = new JButton("Apply");
 		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		applyButton.setToolTipText("Click here to apply parameter changes");
-		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.setBounds(225, 192, 89, 33);
 		applyButton.addActionListener(new ApplyButtonListener());
 		add(applyButton);
 		

@@ -84,19 +84,19 @@ public class TabBatchReactor extends JPanel {
 		
 		JLabel lblRateConstant = new JLabel("Rate Constant per Minute");
 		lblRateConstant.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblRateConstant.setBounds(30, 163, 114, 14);
+		lblRateConstant.setBounds(30, 163, 190, 14);
 		add(lblRateConstant);
 		
 		//Create text fields
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
 		txtInitialConcentration.setText(preferences.getBatchInitialC().toString() );
-		txtInitialConcentration.setBounds(181, 134, 114, 19);
+		txtInitialConcentration.setBounds(204, 132, 114, 19);
 		add(txtInitialConcentration);
 
 		txtRateConstant = new JTextField();
 		txtRateConstant.setText(preferences.getBatchInitialK().toString() );
-		txtRateConstant.setBounds(181, 161, 114, 20);
+		txtRateConstant.setBounds(204, 159, 114, 20);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 		
@@ -157,7 +157,7 @@ public class TabBatchReactor extends JPanel {
 		JButton applyButton = new JButton("Apply");
 		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		applyButton.setToolTipText("Click here to apply parameter changes");
-		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.setBounds(229, 190, 89, 33);
 		applyButton.addActionListener(new ApplyButtonListener());
 		add(applyButton);
 		
