@@ -170,12 +170,13 @@ public class PFR extends JPanel
 	
 	public void resetBatchReactorLocation()
 	{
-		removeAll();
+		panel.removeAll();
 		batchPanels.clear();
 		
 		//System.out.println(batchPanels.isEmpty());
 		flowing = true;
 		started = false;
+		colorToggle = true;
 		repaint();
 	}
 	
