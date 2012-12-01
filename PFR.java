@@ -227,14 +227,17 @@ public class PFR extends JPanel
 			
 		}	
 	}
-
-
-
+	
 	public int getInitialConcentration() {
 		return initialConcentration;
 	}
 
 	public void setInitialConcentration(int initialConcentration) {
 		this.initialConcentration = initialConcentration;
+	}
+	
+	public boolean getFlowing()
+	{
+		return flowing;
 	}
 }
