@@ -1,14 +1,17 @@
-import javax.swing.JColorChooser;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JTextField;
-import java.awt.Color;
+import javax.swing.JButton;
 
-
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Preferences extends JTabbedPane {
 
@@ -46,299 +49,323 @@ public class Preferences extends JTabbedPane {
 	private JTextField txtContinuouslyStirredParticleColor;
 	private JTextField txtContinuouslyStirredBackgroundColor;
 	private JTextField txtContinuouslyStirredBorderColor;
-
-	private Double dblBatchParticleSize;
-	private Double dblBatchParticleNumber;
-	private Double dblBatchMotionRate;
-	private Double dblBatchInitialC;
-	private Double dblBatchInitialK;
-	private Double dblBatchTimeStep;
-	private Color clrBatchParticleColor;
-	private Color clrBatchBackgroundColor;
-	private Color clrBatchBorderColor;
-
-	private Double dblPlugFlowParticleSize;
-	private Double dblPlugFlowParticleNumber;
-	private Double dblPlugFlowMotionRate;
-	private Double dblPlugFlowInitialC;
-	private Double dblPlugFlowInitialK;
-	private Double dblPlugFlowTimeStep;
-	private Color clrPlugFlowParticleColor;
-	private Color clrPlugFlowPlug1Background;
-	private Color clrPlugFlowBorderColor;
-	private Color clrPlugFlowPlug2Background;
+	private JTextField txtContinuouslyStirredFlowRate;
 	
-	private Double dblContinuouslyStirredParticleSize;
-	private Double dblContinuouslyStirredParticleNumber;
-	private Double dblContinuouslyStirredMotionRate;
-	private Double dblContinuouslyStirredInitialC;
-	private Double dblContinuouslyStirredInitialK;
-	private Double dblContinuouslyStirredTimeStep;
-	private Color clrContinuouslyStirredParticleColor;
-	private Color clrContinuouslyStirredBackgroundColor;
-	private Color clrContinuouslyStirredBorderColor;
+	private TabBatchReactor batch;
+	private TabConstantlyStirredReactor cstr;
+	private TabPlugFlowReactor plug;
+
+//	private int dblBatchParticleSize;
+//	private int dblBatchParticleNumber;
+//	private int dblBatchMotionRate;
+//	private int dblBatchInitialC;
+//	private int dblBatchInitialK;
+//	private int dblBatchTimeStep;
+//	private Color clrBatchParticleColor;
+//	private Color clrBatchBackgroundColor;
+//	private Color clrBatchBorderColor;
+
+//	private int dblPlugFlowParticleSize;
+//	private int dblPlugFlowParticleNumber;
+//	private int dblPlugFlowMotionRate;
+//	private int dblPlugFlowInitialC;
+//	private Double dblPlugFlowInitialK;
+//	private int dblPlugFlowTimeStep;
+//	private Color clrPlugFlowParticleColor;
+//	private Color clrPlugFlowPlug1Background;
+//	private Color clrPlugFlowBorderColor;
+//	private Color clrPlugFlowPlug2Background;
 	
-		
+//	private int dblContinuouslyStirredParticleSize;
+//	private int dblContinuouslyStirredParticleNumber;
+//	private int dblContinuouslyStirredMotionRate;
+//	private int dblContinuouslyStirredInitialC;
+//	private Double dblContinuouslyStirredInitialK;
+//	private int dblContinuouslyStirredTimeStep;
+//	private Color clrContinuouslyStirredParticleColor;
+//	private Color clrContinuouslyStirredBackgroundColor;
+//	private Color clrContinuouslyStirredBorderColor;
 	
-	public Double getBatchParticleSize() {
-		return dblBatchParticleSize;
+	public void setBatch(TabBatchReactor batch)
+	{
+		this.batch = batch;
+	}
+	
+	public void setConstantlyStirred(TabConstantlyStirredReactor cstr)
+	{
+		this.cstr = cstr;
+	}
+	
+	public void setPlugFlow(TabPlugFlowReactor plug)
+	{
+		this.plug = plug;
+	}
+	
+	public Integer getBatchParticleSize() {
+		return Integer.parseInt( txtBatchParticleSize.getText()) ;
 	}
 
-	public void setBatchParticleSize(Double dblBatchParticleSize) {
-		this.dblBatchParticleSize = dblBatchParticleSize;
-		txtBatchParticleSize.setText(Double.toString(dblBatchParticleSize));
+	public void setBatchParticleSize(int dblBatchParticleSize) {
+		//this.dblBatchParticleSize = dblBatchParticleSize;
+		txtBatchParticleSize.setText(Integer.toString(dblBatchParticleSize));
 	}
 
-	public Double getBatchParticleNumber() {
-		return dblBatchParticleNumber;
+	public Integer getBatchParticleNumber() {
+		return Integer.parseInt( txtBatchParticleNumber.getText() );
 	}
 
-	public void setBatchParticleNumber(Double dblBatchParticleNumber) {
-		this.dblBatchParticleNumber = dblBatchParticleNumber;
-		txtBatchParticleNumber.setText(Double.toString(dblBatchParticleNumber));
+	public void setBatchParticleNumber(int dblBatchParticleNumber) {
+		//this.dblBatchParticleNumber = dblBatchParticleNumber;
+		txtBatchParticleNumber.setText(Integer.toString(dblBatchParticleNumber));
 	}
 
-	public Double getBatchMotionRate() {
-		return dblBatchMotionRate;
+	public Integer getBatchMotionRate() {
+		return Integer.parseInt( txtBatchMotionRate.getText() );
 	}
 
-	public void setBatchMotionRate(Double dblBatchMotionRate) {
-		this.dblBatchMotionRate = dblBatchMotionRate;
-		txtBatchMotionRate.setText(Double.toString(dblBatchMotionRate));
+	public void setBatchMotionRate(int dblBatchMotionRate) {
+		//this.dblBatchMotionRate = dblBatchMotionRate;
+		txtBatchMotionRate.setText(Integer.toString(dblBatchMotionRate));
 	}
 
-	public Double getBatchInitialC() {
-		return dblBatchInitialC;
+	public Integer getBatchInitialC() {
+		return Integer.parseInt(txtBatchInitialC.getText() );
 	}
 
-	public void setBatchInitialC(Double dblBatchInitialC) {
-		this.dblBatchInitialC = dblBatchInitialC;
-		txtBatchInitialC.setText(Double.toString(dblBatchInitialC));
+	public void setBatchInitialC(int dblBatchInitialC) {
+		//this.dblBatchInitialC = dblBatchInitialC;
+		txtBatchInitialC.setText(Integer.toString(dblBatchInitialC));
 	}
 
 	public Double getBatchInitialK() {
-		return dblBatchInitialK;
+		return Double.parseDouble(txtBatchInitialK.getText() );
 	}
 
 	public void setBatchInitialK(Double dblBatchInitialK) {
-		this.dblBatchInitialK = dblBatchInitialK;
+		//this.dblBatchInitialK = dblBatchInitialK;
 		txtBatchInitialK.setText(Double.toString(dblBatchInitialK));
 	}
 
-	public Double getBatchTimeStep() {
-		return dblBatchTimeStep;
+	public Integer getBatchTimeStep() {
+		return Integer.parseInt(txtBatchTimeStep.getText() );
 	}
 
-	public void setBatchTimeStep(Double dblBatchTimeStep) {
-		this.dblBatchTimeStep = dblBatchTimeStep;
-		txtBatchTimeStep.setText(Double.toString(dblBatchTimeStep));
+	public void setBatchTimeStep(int dblBatchTimeStep) {
+		//this.dblBatchTimeStep = dblBatchTimeStep;
+		txtBatchTimeStep.setText(Integer.toString(dblBatchTimeStep));
 	}
 
 	public Color getBatchParticleColor() {
-		return clrBatchParticleColor;
+		return Color.decode("0x" + txtBatchParticleColor.getText()) ;
 	}
 
 	public void setBatchParticleColor(Color clrBatchParticleColor) {
-		this.clrBatchParticleColor = clrBatchParticleColor;
+		//this.clrBatchParticleColor = clrBatchParticleColor;
 		txtBatchParticleColor.setText(clrBatchParticleColor.toString() );
 	}
 
 	public Color getBatchBackgroundColor() {
-		return clrBatchBackgroundColor;
+		return Color.decode("0x" + txtBatchBackgroundColor.getText());
 	}
 
 	public void setBatchBackgroundColor(Color clrBatchBackgroundColor) {
-		this.clrBatchBackgroundColor = clrBatchBackgroundColor;
+		//this.clrBatchBackgroundColor = clrBatchBackgroundColor;
 		txtBatchBackgroundColor.setText(clrBatchBackgroundColor.toString());
 	}
 
 	public Color getBatchBorderColor() {
-		return clrBatchBorderColor;
+		//System.out.println("Border color = " + txtBatchBorderColor.getText());
+		return Color.decode("0x" + txtBatchBorderColor.getText());
+		
 	}
 
 	public void setBatchBorderColor(Color clrBatchBorderColor) {
-		this.clrBatchBorderColor = clrBatchBorderColor;
+		//this.clrBatchBorderColor = clrBatchBorderColor;
 		txtBatchBorderColor.setText(clrBatchBorderColor.toString());
 	}
 
-	public Double getPlugFlowParticleSize() {
-		return dblPlugFlowParticleSize;
+	public Integer getPlugFlowParticleSize() {
+		return Integer.parseInt(txtPlugFlowParticleSize.getText() );
 	}
 
-	public void setPlugFlowParticleSize(Double dblPlugFlowParticleSize) {
-		this.dblPlugFlowParticleSize = dblPlugFlowParticleSize;
-		txtPlugFlowParticleSize.setText(Double.toString(dblPlugFlowParticleSize));
+	public void setPlugFlowParticleSize(int dblPlugFlowParticleSize) {
+		//this.dblPlugFlowParticleSize = dblPlugFlowParticleSize;
+		txtPlugFlowParticleSize.setText(Integer.toString(dblPlugFlowParticleSize));
 	}
 
-	public Double getPlugFlowParticleNumber() {
-		return dblPlugFlowParticleNumber;
+	public Integer getPlugFlowParticleNumber() {
+		return Integer.parseInt(txtPlugFlowParticleNumber.getText() );
 	}
 
-	public void setPlugFlowParticleNumber(Double dblPlugFlowParticleNumber) {
-		this.dblPlugFlowParticleNumber = dblPlugFlowParticleNumber;
-		txtPlugFlowParticleNumber.setText(Double.toString(dblPlugFlowParticleNumber));
+	public void setPlugFlowParticleNumber(int dblPlugFlowParticleNumber) {
+		//this.dblPlugFlowParticleNumber = dblPlugFlowParticleNumber;
+		txtPlugFlowParticleNumber.setText(Integer.toString(dblPlugFlowParticleNumber));
 	}
 
-	public Double getPlugFlowMotionRate() {
-		return dblPlugFlowMotionRate;
+	public Integer getPlugFlowMotionRate() {
+		return Integer.parseInt(txtPlugFlowMotionRate.getText() );
 	}
 
-	public void setPlugFlowMotionRate(Double dblPlugFlowMotionRate) {
-		this.dblPlugFlowMotionRate = dblPlugFlowMotionRate;
-		txtPlugFlowMotionRate.setText(Double.toString(dblPlugFlowMotionRate));
+	public void setPlugFlowMotionRate(int dblPlugFlowMotionRate) {
+		//this.dblPlugFlowMotionRate = dblPlugFlowMotionRate;
+		txtPlugFlowMotionRate.setText(Integer.toString(dblPlugFlowMotionRate));
 	}
 
-	public Double getPlugFlowInitialC() {
-		return dblPlugFlowInitialC;
+	public Integer getPlugFlowInitialC() {
+		return Integer.parseInt(txtPlugFlowInitialC.getText() );
 	}
 
-	public void setPlugFlowInitialC(Double dblPlugFlowInitialC) {
-		this.dblPlugFlowInitialC = dblPlugFlowInitialC;
-		txtPlugFlowInitialC.setText(Double.toString(dblPlugFlowInitialC));
+	public void setPlugFlowInitialC(int dblPlugFlowInitialC) {
+		//this.dblPlugFlowInitialC = dblPlugFlowInitialC;
+		txtPlugFlowInitialC.setText(Integer.toString(dblPlugFlowInitialC));
 	}
 
 	public Double getPlugFlowInitialK() {
-		return dblPlugFlowInitialK;
+		return Double.parseDouble(txtPlugFlowInitialK.getText() );
 	}
 
 	public void setPlugFlowInitialK(Double dblPlugFlowInitialK) {
-		this.dblPlugFlowInitialK = dblPlugFlowInitialK;
+		//this.dblPlugFlowInitialK = dblPlugFlowInitialK;
 		txtPlugFlowInitialK.setText(Double.toString(dblPlugFlowInitialK));
 	}
 
-	public Double getPlugFlowTimeStep() {
-		return dblPlugFlowTimeStep;
+	public Integer getPlugFlowTimeStep() {
+		return Integer.parseInt(txtPlugFlowTimeStep.getText() );
 	}
 
-	public void setPlugFlowTimeStep(Double dblPlugFlowTimeStep) {
-		this.dblPlugFlowTimeStep = dblPlugFlowTimeStep;
-		txtPlugFlowTimeStep.setText(Double.toString(dblPlugFlowTimeStep));
+	public void setPlugFlowTimeStep(int dblPlugFlowTimeStep) {
+		//this.dblPlugFlowTimeStep = dblPlugFlowTimeStep;
+		txtPlugFlowTimeStep.setText(Integer.toString(dblPlugFlowTimeStep));
 	}
 
 	public Color getPlugFlowParticleColor() {
-		return clrPlugFlowParticleColor;
+		return Color.decode("0x" + txtPlugFlowParticleColor.getText());
 	}
 
 	public void setPlugFlowParticleColor(Color clrPlugFlowParticleColor) {
-		this.clrPlugFlowParticleColor = clrPlugFlowParticleColor;
+		//this.clrPlugFlowParticleColor = clrPlugFlowParticleColor;
 		txtPlugFlowParticleColor.setText(clrPlugFlowParticleColor.toString());
 	}
 
 	public Color getPlugFlowPlug1Background() {
-		return clrPlugFlowPlug1Background;
+		return Color.decode("0x" + txtPlugFlowPlug1Background.getText());
 	}
 
 	public void setPlugFlowPlug1Background(Color clrPlugFlowPlug1Background) {
-		this.clrPlugFlowPlug1Background = clrPlugFlowPlug1Background;
+		//this.clrPlugFlowPlug1Background = clrPlugFlowPlug1Background;
 		txtPlugFlowPlug1Background.setText(clrPlugFlowPlug1Background.toString());
 	}
 
 	public Color getPlugFlowBorderColor() {
-		return clrPlugFlowBorderColor;
+		return Color.decode("0x" + txtPlugFlowBorderColor.getText());
 	}
 
 	public void setPlugFlowBorderColor(Color clrPlugFlowBorderColor) {
-		this.clrPlugFlowBorderColor = clrPlugFlowBorderColor;
+		//this.clrPlugFlowBorderColor = clrPlugFlowBorderColor;
 		txtPlugFlowBorderColor.setText(clrPlugFlowBorderColor.toString());
 	}
 
 	public Color getPlugFlowPlug2Background() {
-		return clrPlugFlowPlug2Background;
+		return Color.decode("0x" + txtPlugFlowPlug2Background.getText());
 	}
 
 	public void setPlugFlowPlug2Background(Color clrPlugFlowPlug2Background) {
-		this.clrPlugFlowPlug2Background = clrPlugFlowPlug2Background;
+		//this.clrPlugFlowPlug2Background = clrPlugFlowPlug2Background;
 		txtPlugFlowPlug2Background.setText(clrPlugFlowPlug2Background.toString());
 	}
 
-	public Double getContinuouslyStirredParticleSize() {
-		return dblContinuouslyStirredParticleSize;
+	public Integer getContinuouslyStirredParticleSize() {
+		return Integer.parseInt( txtContinuouslyStirredParticleSize.getText());
 	}
 
 	public void setContinuouslyStirredParticleSize(
-			Double dblContinuouslyStirredParticleSize) {
-		this.dblContinuouslyStirredParticleSize = dblContinuouslyStirredParticleSize;
-		txtContinuouslyStirredParticleSize.setText(Double.toString(dblContinuouslyStirredParticleSize));
+			int dblContinuouslyStirredParticleSize) {
+		//this.dblContinuouslyStirredParticleSize = dblContinuouslyStirredParticleSize;
+		txtContinuouslyStirredParticleSize.setText(Integer.toString(dblContinuouslyStirredParticleSize));
 	}
 
-	public Double getContinuouslyStirredParticleNumber() {
-		return dblContinuouslyStirredParticleNumber;
+	public Integer getContinuouslyStirredParticleNumber() {
+		return  Integer.parseInt( txtContinuouslyStirredParticleNumber.getText());
 	}
 
 	public void setContinuouslyStirredParticleNumber(
-			Double dblContinuouslyStirredParticleNumber) {
-		this.dblContinuouslyStirredParticleNumber = dblContinuouslyStirredParticleNumber;
-		txtContinuouslyStirredParticleNumber.setText(Double.toString(dblContinuouslyStirredParticleNumber));
+			int dblContinuouslyStirredParticleNumber) {
+		//this.dblContinuouslyStirredParticleNumber = dblContinuouslyStirredParticleNumber;
+		txtContinuouslyStirredParticleNumber.setText(Integer.toString(dblContinuouslyStirredParticleNumber));
 	}
 
-	public Double getContinuouslyStirredMotionRate() {
-		return dblContinuouslyStirredMotionRate;
+	public Integer getContinuouslyStirredMotionRate() {
+		return Integer.parseInt( txtContinuouslyStirredMotionRate.getText());
 	}
 
 	public void setContinuouslyStirredMotionRate(
-			Double dblContinuouslyStirredMotionRate) {
-		this.dblContinuouslyStirredMotionRate = dblContinuouslyStirredMotionRate;
-		txtContinuouslyStirredMotionRate.setText(Double.toString(dblContinuouslyStirredMotionRate));
+			int dblContinuouslyStirredMotionRate) {
+		//this.dblContinuouslyStirredMotionRate = dblContinuouslyStirredMotionRate;
+		txtContinuouslyStirredMotionRate.setText(Integer.toString(dblContinuouslyStirredMotionRate));
 	}
 
-	public Double getContinuouslyStirredInitialC() {
-		return dblContinuouslyStirredInitialC;
+	public Integer getContinuouslyStirredInitialC() {
+		return Integer.parseInt( txtContinuouslyStirredInitialC.getText());
 	}
 
 	public void setContinuouslyStirredInitialC(
-			Double dblContinuouslyStirredInitialC) {
-		this.dblContinuouslyStirredInitialC = dblContinuouslyStirredInitialC;
-		txtContinuouslyStirredInitialC.setText(Double.toString(dblContinuouslyStirredInitialC));
+			int dblContinuouslyStirredInitialC) {
+		//this.dblContinuouslyStirredInitialC = dblContinuouslyStirredInitialC;
+		txtContinuouslyStirredInitialC.setText(Integer.toString(dblContinuouslyStirredInitialC));
 	}
 
 	public Double getContinuouslyStirredInitialK() {
-		return dblContinuouslyStirredInitialK;
+		return Double.parseDouble( txtContinuouslyStirredInitialK.getText());
 	}
 
 	public void setContinuouslyStirredInitialK(
 			Double dblContinuouslyStirredInitialK) {
-		this.dblContinuouslyStirredInitialK = dblContinuouslyStirredInitialK;
+		//this.dblContinuouslyStirredInitialK = dblContinuouslyStirredInitialK;
 		txtContinuouslyStirredInitialK.setText(Double.toString(dblContinuouslyStirredInitialK));
 	}
 
-	public Double getContinuouslyStirredTimeStep() {
-		return dblContinuouslyStirredTimeStep;
+	public Integer getContinuouslyStirredTimeStep() {
+		return Integer.parseInt( txtContinuouslyStirredTimeStep.getText());
 	}
 
 	public void setContinuouslyStirredTimeStep(
-			Double dblContinuouslyStirredTimeStep) {
-		this.dblContinuouslyStirredTimeStep = dblContinuouslyStirredTimeStep;
-		txtContinuouslyStirredTimeStep.setText(Double.toString(dblContinuouslyStirredTimeStep));
+			int dblContinuouslyStirredTimeStep) {
+		//this.dblContinuouslyStirredTimeStep = dblContinuouslyStirredTimeStep;
+		txtContinuouslyStirredTimeStep.setText(Integer.toString(dblContinuouslyStirredTimeStep));
 	}
 
 	public Color getContinuouslyStirredParticleColor() {
-		return clrContinuouslyStirredParticleColor;
+		return Color.decode("0x" + txtContinuouslyStirredParticleColor.getText());
 	}
 
 	public void setContinuouslyStirredParticleColor(
 			Color clrContinuouslyStirredParticleColor) {
-		this.clrContinuouslyStirredParticleColor = clrContinuouslyStirredParticleColor;
+		//this.clrContinuouslyStirredParticleColor = clrContinuouslyStirredParticleColor;
 		txtContinuouslyStirredParticleColor.setText(clrContinuouslyStirredParticleColor.toString());
 	}
 
 	public Color getContinuouslyStirredBackgroundColor() {
-		return clrContinuouslyStirredBackgroundColor;
+		return Color.decode("0x" + txtContinuouslyStirredBackgroundColor.getText());
 	}
 
 	public void setContinuouslyStirredBackgroundColor(
 			Color clrContinuouslyStirredBackgroundColor) {
-		this.clrContinuouslyStirredBackgroundColor = clrContinuouslyStirredBackgroundColor;
+		//this.clrContinuouslyStirredBackgroundColor = clrContinuouslyStirredBackgroundColor;
 		txtContinuouslyStirredBackgroundColor.setText(clrContinuouslyStirredBackgroundColor.toString());
 	}
 
 	public Color getContinuouslyStirredBorderColor() {
-		return clrContinuouslyStirredBorderColor;
+		return Color.decode("0x" + txtContinuouslyStirredBorderColor.getText());
 	}
 
 	public void setContinuouslyStirredBorderColor(
 			Color clrContinuouslyStirredBorderColor) {
-		this.clrContinuouslyStirredBorderColor = clrContinuouslyStirredBorderColor;
+		//this.clrContinuouslyStirredBorderColor = clrContinuouslyStirredBorderColor;
 		txtContinuouslyStirredBorderColor.setText(clrContinuouslyStirredBorderColor.toString());
+	}
+	
+	public Double getContinuouslyStirredFlowRate() {
+		return Double.parseDouble( txtContinuouslyStirredFlowRate.getText());
 	}
 
 
@@ -352,9 +379,9 @@ public class Preferences extends JTabbedPane {
 		addTab("Batch Reactor", null, batchReactorPreferences, null);
 		GridBagLayout gbl_batchReactorPreferences = new GridBagLayout();
 		gbl_batchReactorPreferences.columnWidths = new int[]{137, 0, 0};
-		gbl_batchReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0};
+		gbl_batchReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0};
 		gbl_batchReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_batchReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_batchReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		batchReactorPreferences.setLayout(gbl_batchReactorPreferences);
 		
 		JLabel lblParticles = new JLabel("Particles");
@@ -374,7 +401,7 @@ public class Preferences extends JTabbedPane {
 		batchReactorPreferences.add(lblColor, gbc_lblColor);
 		
 		txtBatchParticleColor = new JTextField();
-		txtBatchParticleColor.setText("FF0000");
+		txtBatchParticleColor.setText("0000FF");
 		
 		GridBagConstraints gbc_txtBatchParticleColor = new GridBagConstraints();
 		gbc_txtBatchParticleColor.anchor = GridBagConstraints.WEST;
@@ -514,7 +541,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep = new GridBagConstraints();
-		gbc_lblTimeStep.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep.gridx = 0;
 		gbc_lblTimeStep.gridy = 9;
@@ -523,19 +550,32 @@ public class Preferences extends JTabbedPane {
 		txtBatchTimeStep = new JTextField();
 		txtBatchTimeStep.setText("100");
 		GridBagConstraints gbc_txtBatchTimeStep = new GridBagConstraints();
+		gbc_txtBatchTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtBatchTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtBatchTimeStep.gridx = 1;
 		gbc_txtBatchTimeStep.gridy = 9;
 		batchReactorPreferences.add(txtBatchTimeStep, gbc_txtBatchTimeStep);
 		txtBatchTimeStep.setColumns(10);
 		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave = new GridBagConstraints();
+		gbc_btnSave.anchor = GridBagConstraints.WEST;
+		gbc_btnSave.gridx = 1;
+		gbc_btnSave.gridy = 10;
+		batchReactorPreferences.add(btnSave, gbc_btnSave);
+		
 		JPanel plugFlowReactorPreferences = new JPanel();
 		addTab("Plug Flow Reactor", null, plugFlowReactorPreferences, null);
 		GridBagLayout gbl_plugFlowReactorPreferences = new GridBagLayout();
 		gbl_plugFlowReactorPreferences.columnWidths = new int[]{152, 0, 0};
-		gbl_plugFlowReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 0};
+		gbl_plugFlowReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 0, 15, 15, 15, 15, 0, 0};
 		gbl_plugFlowReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_plugFlowReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_plugFlowReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		plugFlowReactorPreferences.setLayout(gbl_plugFlowReactorPreferences);
 		
 		JLabel lblParticles2 = new JLabel("Particles");
@@ -645,7 +685,7 @@ public class Preferences extends JTabbedPane {
 		plugFlowReactorPreferences.add(lblPlugBackground, gbc_lblPlugBackground);
 		
 		txtPlugFlowPlug2Background = new JTextField();
-		txtPlugFlowPlug2Background.setText("BBBBBB");
+		txtPlugFlowPlug2Background.setText("DDDDDD");
 		GridBagConstraints gbc_txtPlugFlowPlug2Background = new GridBagConstraints();
 		gbc_txtPlugFlowPlug2Background.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowPlug2Background.insets = new Insets(0, 0, 5, 0);
@@ -710,7 +750,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep2 = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep2 = new GridBagConstraints();
-		gbc_lblTimeStep2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep2.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep2.gridx = 0;
 		gbc_lblTimeStep2.gridy = 10;
@@ -719,20 +759,33 @@ public class Preferences extends JTabbedPane {
 		txtPlugFlowTimeStep = new JTextField();
 		txtPlugFlowTimeStep.setText("100");
 		GridBagConstraints gbc_txtPlugFlowTimeStep = new GridBagConstraints();
+		gbc_txtPlugFlowTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPlugFlowTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtPlugFlowTimeStep.gridx = 1;
 		gbc_txtPlugFlowTimeStep.gridy = 10;
 		plugFlowReactorPreferences.add(txtPlugFlowTimeStep, gbc_txtPlugFlowTimeStep);
 		txtPlugFlowTimeStep.setColumns(10);
 		
+		JButton btnSave_1 = new JButton("Save");
+		btnSave_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave_1 = new GridBagConstraints();
+		gbc_btnSave_1.anchor = GridBagConstraints.WEST;
+		gbc_btnSave_1.gridx = 1;
+		gbc_btnSave_1.gridy = 11;
+		plugFlowReactorPreferences.add(btnSave_1, gbc_btnSave_1);
+		
 		JPanel continuouslyStirredReactorPreferences = new JPanel();
 		addTab("Continuously Stirred Reactor", null, continuouslyStirredReactorPreferences, null);
 
 		GridBagLayout gbl_continuouslyStirredReactorPreferences = new GridBagLayout();
 		gbl_continuouslyStirredReactorPreferences.columnWidths = new int[]{137, 0, 0};
-		gbl_continuouslyStirredReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0};
+		gbl_continuouslyStirredReactorPreferences.rowHeights = new int[]{15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0};
 		gbl_continuouslyStirredReactorPreferences.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_continuouslyStirredReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_continuouslyStirredReactorPreferences.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		continuouslyStirredReactorPreferences.setLayout(gbl_continuouslyStirredReactorPreferences);
 		
 		JLabel lblParticles3 = new JLabel("Particles");
@@ -752,7 +805,7 @@ public class Preferences extends JTabbedPane {
 		continuouslyStirredReactorPreferences.add(lblColor3, gbc_lblColor3);
 		
 		txtContinuouslyStirredParticleColor = new JTextField();
-		txtContinuouslyStirredParticleColor.setText("FF0000");
+		txtContinuouslyStirredParticleColor.setText("0000FF");
 		GridBagConstraints gbc_txtContinuouslyStirredParticleColor = new GridBagConstraints();
 		gbc_txtContinuouslyStirredParticleColor.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredParticleColor.insets = new Insets(0, 0, 5, 0);
@@ -860,7 +913,7 @@ public class Preferences extends JTabbedPane {
 		continuouslyStirredReactorPreferences.add(lblInitialC3, gbc_lblInitialC3);
 		
 		txtContinuouslyStirredInitialC = new JTextField();
-		txtContinuouslyStirredInitialC.setText("100");
+		txtContinuouslyStirredInitialC.setText("1");
 		GridBagConstraints gbc_txtContinuouslyStirredInitialC = new GridBagConstraints();
 		gbc_txtContinuouslyStirredInitialC.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredInitialC.insets = new Insets(0, 0, 5, 0);
@@ -889,7 +942,7 @@ public class Preferences extends JTabbedPane {
 		
 		JLabel lblTimeStep3 = new JLabel("Time Step");
 		GridBagConstraints gbc_lblTimeStep3 = new GridBagConstraints();
-		gbc_lblTimeStep3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblTimeStep3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTimeStep3.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblTimeStep3.gridx = 0;
 		gbc_lblTimeStep3.gridy = 9;
@@ -898,10 +951,215 @@ public class Preferences extends JTabbedPane {
 		txtContinuouslyStirredTimeStep = new JTextField();
 		txtContinuouslyStirredTimeStep.setText("100");
 		GridBagConstraints gbc_txtContinuouslyStirredTimeStep = new GridBagConstraints();
+		gbc_txtContinuouslyStirredTimeStep.insets = new Insets(0, 0, 5, 0);
 		gbc_txtContinuouslyStirredTimeStep.anchor = GridBagConstraints.WEST;
 		gbc_txtContinuouslyStirredTimeStep.gridx = 1;
 		gbc_txtContinuouslyStirredTimeStep.gridy = 9;
 		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredTimeStep, gbc_txtContinuouslyStirredTimeStep);
 		txtContinuouslyStirredTimeStep.setColumns(10);
+		
+		JLabel lblFlowRate = new JLabel("FlowRate");
+		GridBagConstraints gbc_lblFlowRate = new GridBagConstraints();
+		gbc_lblFlowRate.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblFlowRate.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFlowRate.gridx = 0;
+		gbc_lblFlowRate.gridy = 10;
+		continuouslyStirredReactorPreferences.add(lblFlowRate, gbc_lblFlowRate);
+		
+		txtContinuouslyStirredFlowRate = new JTextField();
+		txtContinuouslyStirredFlowRate.setText("1.0");
+		GridBagConstraints gbc_txtContinuouslyStirredFlowRate = new GridBagConstraints();
+		gbc_txtContinuouslyStirredFlowRate.anchor = GridBagConstraints.WEST;
+		gbc_txtContinuouslyStirredFlowRate.insets = new Insets(0, 0, 5, 0);
+		gbc_txtContinuouslyStirredFlowRate.gridx = 1;
+		gbc_txtContinuouslyStirredFlowRate.gridy = 10;
+		continuouslyStirredReactorPreferences.add(txtContinuouslyStirredFlowRate, gbc_txtContinuouslyStirredFlowRate);
+		txtContinuouslyStirredInitialK.setColumns(10);
+		
+		JButton btnSave_2 = new JButton("Save");
+		btnSave_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				savePreferences();
+			}
+		});
+		GridBagConstraints gbc_btnSave_2 = new GridBagConstraints();
+		gbc_btnSave_2.anchor = GridBagConstraints.WEST;
+		gbc_btnSave_2.gridx = 1;
+		gbc_btnSave_2.gridy = 11;
+		continuouslyStirredReactorPreferences.add(btnSave_2, gbc_btnSave_2);
+		
+		JButton applyButton = new JButton("Apply");
+		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton.setToolTipText("Click here to apply parameter changes");
+		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.addActionListener(new ApplyButtonListener());
+		JButton applyButton2 = new JButton("Apply");
+		applyButton2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton2.setToolTipText("Click here to apply parameter changes");
+		applyButton2.setBounds(206, 192, 89, 33);
+		applyButton2.addActionListener(new ApplyButtonListener());
+		JButton applyButton3 = new JButton("Apply");
+		applyButton3.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton3.setToolTipText("Click here to apply parameter changes");
+		applyButton3.setBounds(206, 192, 89, 33);
+		applyButton3.addActionListener(new ApplyButtonListener());
+		
+		GridBagConstraints gbc_btnApply = new GridBagConstraints();
+		gbc_btnApply.anchor = GridBagConstraints.WEST;
+		gbc_btnApply.gridx = 3;
+		gbc_btnApply.gridy = 10;
+		GridBagConstraints gbc_btnApply2 = new GridBagConstraints();
+		gbc_btnApply2.anchor = GridBagConstraints.WEST;
+		gbc_btnApply2.gridx = 3;
+		gbc_btnApply2.gridy = 10;
+		GridBagConstraints gbc_btnApply3 = new GridBagConstraints();
+		gbc_btnApply3.anchor = GridBagConstraints.WEST;
+		gbc_btnApply3.gridx = 3;
+		gbc_btnApply3.gridy = 10;
+		batchReactorPreferences.add(applyButton, gbc_btnApply);
+		continuouslyStirredReactorPreferences.add(applyButton2, gbc_btnApply2);
+		plugFlowReactorPreferences.add(applyButton3, gbc_btnApply3);
+	}
+	
+	public void loadPreferences(){
+		//TODO load file of preferences
+	}
+	
+	public void savePreferences(){
+		//TODO save preferences to file
+	}
+	
+	public void applyPreferences(){	
+		batch.getReactorPanel().setDotSize(Integer.parseInt(txtBatchParticleSize.getText()));
+		batch.getReactorPanel().setTotalNumberOfDots(Integer.parseInt(txtBatchParticleNumber.getText()));
+
+		//DID THE FIRST 2, all the rest still need to be done
+		/*setBatchParticleNumber(int dblBatchParticleNumber) {
+			txtBatchParticleNumber.setText(Integer.toString(dblBatchParticleNumber));
+		}
+
+		setBatchMotionRate(int dblBatchMotionRate) {
+			txtBatchMotionRate.setText(Integer.toString(dblBatchMotionRate));
+		}
+
+		setBatchInitialC(int dblBatchInitialC) {
+			txtBatchInitialC.setText(Integer.toString(dblBatchInitialC));
+		}
+
+		setBatchInitialK(Double dblBatchInitialK) {
+			txtBatchInitialK.setText(Double.toString(dblBatchInitialK));
+		}
+
+		setBatchTimeStep(int dblBatchTimeStep) {
+			txtBatchTimeStep.setText(Integer.toString(dblBatchTimeStep));
+		}
+
+		setBatchParticleColor(Color clrBatchParticleColor) {
+			txtBatchParticleColor.setText(clrBatchParticleColor.toString() );
+		}
+
+		setBatchBackgroundColor(Color clrBatchBackgroundColor) {
+			txtBatchBackgroundColor.setText(clrBatchBackgroundColor.toString());
+		}
+
+		setBatchBorderColor(Color clrBatchBorderColor) {
+			txtBatchBorderColor.setText(clrBatchBorderColor.toString());
+		}
+
+		setPlugFlowParticleSize(int dblPlugFlowParticleSize) {
+			txtPlugFlowParticleSize.setText(Integer.toString(dblPlugFlowParticleSize));
+		}
+
+		setPlugFlowParticleNumber(int dblPlugFlowParticleNumber) {
+			txtPlugFlowParticleNumber.setText(Integer.toString(dblPlugFlowParticleNumber));
+		}
+
+		setPlugFlowMotionRate(int dblPlugFlowMotionRate) {
+			txtPlugFlowMotionRate.setText(Integer.toString(dblPlugFlowMotionRate));
+		}
+
+
+		setPlugFlowInitialC(int dblPlugFlowInitialC) {
+			txtPlugFlowInitialC.setText(Integer.toString(dblPlugFlowInitialC));
+		}
+
+
+		setPlugFlowInitialK(Double dblPlugFlowInitialK) {
+			txtPlugFlowInitialK.setText(Double.toString(dblPlugFlowInitialK));
+		}
+
+
+		setPlugFlowTimeStep(int dblPlugFlowTimeStep) {
+			txtPlugFlowTimeStep.setText(Integer.toString(dblPlugFlowTimeStep));
+		}
+
+		setPlugFlowParticleColor(Color clrPlugFlowParticleColor) {
+			txtPlugFlowParticleColor.setText(clrPlugFlowParticleColor.toString());
+		}
+
+		setPlugFlowPlug1Background(Color clrPlugFlowPlug1Background) {
+			txtPlugFlowPlug1Background.setText(clrPlugFlowPlug1Background.toString());
+		}
+
+		setPlugFlowBorderColor(Color clrPlugFlowBorderColor) {
+			txtPlugFlowBorderColor.setText(clrPlugFlowBorderColor.toString());
+		}
+
+		setPlugFlowPlug2Background(Color clrPlugFlowPlug2Background) {
+			txtPlugFlowPlug2Background.setText(clrPlugFlowPlug2Background.toString());
+		}
+
+		setContinuouslyStirredParticleSize(
+				int dblContinuouslyStirredParticleSize) {
+			txtContinuouslyStirredParticleSize.setText(Integer.toString(dblContinuouslyStirredParticleSize));
+		}
+
+		setContinuouslyStirredParticleNumber(
+				int dblContinuouslyStirredParticleNumber) {
+			txtContinuouslyStirredParticleNumber.setText(Integer.toString(dblContinuouslyStirredParticleNumber));
+		}
+
+		setContinuouslyStirredMotionRate(
+				int dblContinuouslyStirredMotionRate) {
+			txtContinuouslyStirredMotionRate.setText(Integer.toString(dblContinuouslyStirredMotionRate));
+		}
+
+		setContinuouslyStirredInitialC(
+				int dblContinuouslyStirredInitialC) {
+			txtContinuouslyStirredInitialC.setText(Integer.toString(dblContinuouslyStirredInitialC));
+		}
+
+		setContinuouslyStirredInitialK(
+				Double dblContinuouslyStirredInitialK) {
+			txtContinuouslyStirredInitialK.setText(Double.toString(dblContinuouslyStirredInitialK));
+		}
+
+		setContinuouslyStirredTimeStep(
+				int dblContinuouslyStirredTimeStep) {
+			txtContinuouslyStirredTimeStep.setText(Integer.toString(dblContinuouslyStirredTimeStep));
+		}
+
+		setContinuouslyStirredParticleColor(
+				Color clrContinuouslyStirredParticleColor) {
+			txtContinuouslyStirredParticleColor.setText(clrContinuouslyStirredParticleColor.toString());
+		}
+
+		setContinuouslyStirredBackgroundColor(
+				Color clrContinuouslyStirredBackgroundColor) {
+			txtContinuouslyStirredBackgroundColor.setText(clrContinuouslyStirredBackgroundColor.toString());
+		}
+
+		setContinuouslyStirredBorderColor(
+				Color clrContinuouslyStirredBorderColor) {
+			txtContinuouslyStirredBorderColor.setText(clrContinuouslyStirredBorderColor.toString());
+		}*/
+	}
+	
+	class ApplyButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			applyPreferences();
+		}
 	}
 }

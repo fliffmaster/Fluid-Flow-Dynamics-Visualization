@@ -1,48 +1,35 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.Timer;
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FluidFlowReactorPanel
+//
+// Purpose: This class visually displays the batch reactor.  It 
+// 			also has a xPos variable for use in the PFR class since our plug flow
+//			reactor is composed of moving batch reactors that are reacting as
+//			they move. xPos keeps track of a reactors position in the PFR.
+//
+//////////////////////////////////////////////////////////////////////////////////
 
 public class FluidFlowReactorPanel extends ReactorPanel
 {
-	private Timer animationTimer;
-	private Timer reactionTimer;
-	private FFBatchReactor reactor;
+	private static final long serialVersionUID = 1L;
 	private int xPos;
 	
+	//Constructor uses the 5 parameter constructor in ReactorPanel
 	public FluidFlowReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
 		super(numDots, diameter, upperCornerX, rDelta, aDelta);
-		reactor = new FFBatchReactor();
+		setReactor(new FFBatchReactor());
 		xPos = -upperCornerX;
-		animationTimer = new Timer(aDelta, new AnimationTimerListener());
-		reactionTimer = new Timer(rDelta, new ReactionTimerListener());
-		animationTimer.setRepeats(true);
-		reactionTimer.setRepeats(true);
 	}
 	
+	//Must type cast before trying to set initial concentration,
+	//since all reactor types do not have this method
 	public void setInitialConcentration(double concentration)
 	{
-		reactor.setInitialConcentration(concentration);
+		FFBatchReactor react = (FFBatchReactor) getReactor();
+		react.setInitialConcentration(concentration);
 	}
 	
-	public void setReactionConstant(double rate)
-	{
-		reactor.setReactionConstant(rate);
-	}
-	
-	public void setCurrentTime(double time)
-	{
-		reactor.setCurrentTime(time);
-	}
-	
+	//Getters and setters
 	public int getXPos()
 	{
 		return xPos;
@@ -52,78 +39,7 @@ public class FluidFlowReactorPanel extends ReactorPanel
 	//with batch panel width somehow for less gaps between plugs in PFR).
 	public void setXPos()
 	{
-		xPos += 5;
-	}
-	
-	public void startReaction()
-	{
-		reactionTimer.start();
-	}
-	
-	public void stopReaction()
-	{
-		reactionTimer.stop();
-	}
-
-	public void startAnimation()
-	{
-		animationTimer.start();
-	}
-	
-	public void stopAnimation()
-	{
-		animationTimer.stop();
-	}
-	
-	public void setAnimationTimer(int delay)
-	{
-		animationTimer.setDelay(delay);
-	}
-
-	public void setReactionTimer(int delay)
-	{
-		reactionTimer.setDelay(delay);
-	}
-	
-	public FFBatchReactor getReactor() 
-	{
-		return reactor;
-	}
-
-	public void setReactor(FFBatchReactor newReactor) 
-	{
-		reactor = null;
-		reactor = newReactor;
-	}
-
-	class AnimationTimerListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent evt) 
-		{
-			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
-			makeDots();
-			repaint();
-		}
-	}
-	
-	class ReactionTimerListener implements ActionListener 
-	{
-		DecimalFormat df =  new DecimalFormat("#.##");
-		public void actionPerformed(ActionEvent evt) 
-		{
-			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if (getTextLogArea() != null)
-			{
-				getTextLogArea().setText ("Concentration at time "
-				+ (int) reactor.getCurrentTime() + " is "
-				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  getTextLogArea().getText() );
-			}
-			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
-			makeDots();
-			repaint();
-		}
+		xPos += 1;
 	}
 }
 

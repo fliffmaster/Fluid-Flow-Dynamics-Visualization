@@ -1,3 +1,13 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FFCSTReactor
+//
+// Purpose: This class encapsulates the functionality of a constantly
+//			stirred tank reactor by extending FFReactor and adding variables for
+//			inflow concentration, flow rate, and reactor volume, for calculation
+//			purposes.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 public class FFCSTReactor extends FFReactor 
 {	
 	private double cIn;
@@ -39,9 +49,9 @@ public class FFCSTReactor extends FFReactor
 	
 	//This version only returns percentage w/o executing a reaction step.
 	//Not yet used
-	public double getPercentageOnly()
+	public double getPercentageOfUpperLimit()
 	{
-		return getCurrentConcentration() / defaultConcentration;
+		return getCurrentConcentration() / cIn;
 	}
 
 	// Accessor and mutator methods for CSTR specific variables

@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Class: 	FFBatchReactor
 //
-// Purpose: This class encapsulates encapsulates the functionality of a batch
+// Purpose: This class encapsulates the functionality of a batch
 //			reactor by implementing FFReactor and adding a variable for initial
 //			reactor concentration.
 //
@@ -41,6 +41,13 @@ public class FFBatchReactor extends FFReactor
 	public double getPercentageOfConcentrationLeft()
 	{
 		doReactionStep();
+		return getCurrentConcentration() / cInit;
+	}
+	
+	//Returns the ratio of the current concentration to the initial
+	//concentration as a percentage.
+	public double getPercentageOfUpperLimit()
+	{
 		return getCurrentConcentration() / cInit;
 	}
 	

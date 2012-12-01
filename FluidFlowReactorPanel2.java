@@ -1,115 +1,46 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.Timer;
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FluidFlowReactorPanel2
+//
+// Purpose: This class visually displays the CST reactor.  Unlike its sibling,
+//			it has accessor and mutator methods for inflowConcentration and 
+//			flowRate, instead of initialConcentration.
+//
+//////////////////////////////////////////////////////////////////////////////////
 
 public class FluidFlowReactorPanel2 extends ReactorPanel
 {
-	private Timer animationTimer;
-	private Timer reactionTimer;
-	private FFCSTReactor reactor;
+	private static final long serialVersionUID = 1L;
 	
+	//Constructor uses the 5 parameter constructor in ReactorPanel
 	public FluidFlowReactorPanel2(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
 		super(numDots, diameter, upperCornerX, rDelta, aDelta);
-		reactor = new FFCSTReactor();
-		animationTimer = new Timer(aDelta,new AnimationTimerListener());
-		reactionTimer = new Timer(rDelta, new ReactionTimerListener());
-		animationTimer.setRepeats(true);
-		reactionTimer.setRepeats(true);
+		setReactor(new FFCSTReactor());
 	}
 	
+	//Must type cast in these accessor and mutator methods, since
+	//all reactor types don't have the methods they use
 	public void setInflowConcentration(double concentration)
 	{
-		reactor.setInflowConcentration(concentration);
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		react.setInflowConcentration(concentration);
 	}
 	
-	public void setReactionConstant(double rate)
+	public double getInflowConcentration()
 	{
-		reactor.setReactionConstant(rate);
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		return react.getInflowConcentration();
 	}
 	
-	public void setCurrentTime(double time)
+	public void setFlowRate(double rate)
 	{
-		reactor.setCurrentTime(time);
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		react.setFlowRate(rate);
 	}
 	
-	public void startReaction()
+	public double getFlowRate(double concentration)
 	{
-		reactionTimer.start();
+		FFCSTReactor react = (FFCSTReactor) getReactor();
+		return react.getFlowRate();
 	}
-	
-	public void stopReaction()
-	{
-		reactionTimer.stop();
-	}
-
-	public void startAnimation()
-	{
-		animationTimer.start();
-	}
-	
-	public void stopAnimation()
-	{
-		animationTimer.stop();
-	}
-	
-	public void setAnimationTimer(int delay)
-	{
-		animationTimer.setDelay(delay);
-	}
-
-	public void setReactionTimer(int delay)
-	{
-		reactionTimer.setDelay(delay);
-	}
-	
-	public FFCSTReactor getReactor() 
-	{
-		return reactor;
-	}
-
-	public void setReactor(FFCSTReactor newReactor) 
-	{
-		reactor = null;
-		reactor = newReactor;
-	}
-
-	class AnimationTimerListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent evt) 
-		{
-			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
-			makeDots();
-			repaint();
-		}
-	}
-	
-	class ReactionTimerListener implements ActionListener 
-	{
-		DecimalFormat df =  new DecimalFormat("#.##");
-		public void actionPerformed(ActionEvent evt) 
-		{
-			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if (getTextLogArea() != null)
-			{
-				getTextLogArea().setText ("Concentration at time "
-				+ (int) reactor.getCurrentTime() + " is "
-				+ df.format(reactor.getPercentageOfConcentrationLeft() * 100 ) + "%\n" +  getTextLogArea().getText() );
-			}
-			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
-			makeDots();
-			repaint();
-		}
-	}
-	
 }
