@@ -241,6 +241,8 @@ public class TabPlugFlowReactor extends JPanel
 		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 		pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
 		pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+		
+		//tjos os a ffix
 	}
 
 	//Listener for the Go button
