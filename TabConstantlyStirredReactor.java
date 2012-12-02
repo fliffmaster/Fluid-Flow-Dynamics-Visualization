@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Class: 	TabConstantlyStirredReactor
 //
-// Purpose: This class implements all the visual elements in the Batch Reactor
+// Purpose: This class implements all the visual elements in the CST Reactor
 //			tab of the final application.  It is comprised of a 
 //			FluidFlowReactorPanel, a JTextArea for data, text fields for entering
 //			parameters, and buttons for controlling the reactor
@@ -60,7 +60,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		initialize();
 	}
 	
-	//Constructs all objects in the Batch Reactor Tab of the application
+	//Constructs all objects in the CST Reactor Tab of the application
 	private void initialize() 
 	{
 		setBounds(0, 0, 800, 600);

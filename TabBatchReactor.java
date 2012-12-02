@@ -195,7 +195,6 @@ public class TabBatchReactor extends JPanel {
 		
 		//Reset the reactor
 		resetReactor();
-
 	}
 	
 	public ReactorPanel getReactorPanel()
