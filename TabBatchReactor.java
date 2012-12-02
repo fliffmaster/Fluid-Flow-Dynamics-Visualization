@@ -141,7 +141,7 @@ public class TabBatchReactor extends JPanel {
 		panel.setLogTextArea(textLogArea);
 		JLabel lblBatchData = new JLabel("Batch Data");
 		lblBatchData.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblBatchData.setBounds(113, 253, 107, 27);
+		lblBatchData.setBounds(113, 253, 165, 27);
 		add(lblBatchData);
 		
 		//Create panel for data text area
@@ -165,26 +165,26 @@ public class TabBatchReactor extends JPanel {
 		JLabel dynamicConcentrationLabel = new JLabel("0.0");
 		dynamicConcentrationLabel.setForeground(new Color(0, 0, 255));
 		dynamicConcentrationLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		dynamicConcentrationLabel.setBounds(624, 507, 101, 14);
+		dynamicConcentrationLabel.setBounds(656, 507, 101, 14);
 		panel.setConcentrationLabel(dynamicConcentrationLabel);
 		add(dynamicConcentrationLabel);
 		
 		JLabel dynamicPercentLabel = new JLabel("0.00%");
 		dynamicPercentLabel.setForeground(new Color(0, 0, 255));
 		dynamicPercentLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		dynamicPercentLabel.setBounds(624, 532, 101, 14);
+		dynamicPercentLabel.setBounds(656, 532, 101, 14);
 		panel.setPercentageLabel(dynamicPercentLabel);
 		add(dynamicPercentLabel);
 		
 		//Create labels for dynamic concentration and percentage figures
 		JLabel lblCurrentConcentration = new JLabel("Current Concentration:");
 		lblCurrentConcentration.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblCurrentConcentration.setBounds(339, 507, 183, 18);
+		lblCurrentConcentration.setBounds(339, 507, 247, 18);
 		add(lblCurrentConcentration);
 		
 		JLabel lblPercentageOfInflow = new JLabel("Percentage of Inflow Concentation:");
 		lblPercentageOfInflow.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPercentageOfInflow.setBounds(339, 536, 250, 14);
+		lblPercentageOfInflow.setBounds(339, 536, 307, 14);
 		add(lblPercentageOfInflow);
 		
 		//Just a cosmetic panel
