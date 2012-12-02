@@ -13,7 +13,7 @@
     </resources>
     <applet-desc
          name="Fluid Flow Reactor"
-         main-class="FluidFlowApplet">
+         main-class="FluidFlowApplet"
          width="820"
          height="650">
      </applet-desc>
