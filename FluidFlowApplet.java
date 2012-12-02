@@ -115,5 +115,13 @@ public class FluidFlowApplet extends JApplet
 //		if (isApplet == false)
 //			tabbedPane.addTab("Preferences", null, preferences, null);
 	}
-
+    public void start() {
+        System.out.println("starting...");
+    }
+    public void stop() {
+        System.out.println("stopping...");
+    }
+    public void destroy() {
+        System.out.println("preparing to unload...");
+    }
 }
