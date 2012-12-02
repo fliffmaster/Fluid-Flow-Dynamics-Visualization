@@ -44,14 +44,17 @@ public class FFBatchReactor extends FFReactor
 		if(cInit != 0.0)
 			return getCurrentConcentration() / cInit;
 		else
-			return (Double) null;
+			return 0.0; //if divide by zero, just return zero as a default
 	}
 	
 	//Returns the ratio of the current concentration to the initial
 	//concentration as a percentage.
 	public double getPercentageOfUpperLimit()
 	{
-		return getCurrentConcentration() / cInit;
+		if(cInit != 0.0)
+			return getCurrentConcentration() / cInit;
+		else
+			return 0.0;
 	}
 	
 	//Accessor and mutator methods for Batch Reactor specific vars
