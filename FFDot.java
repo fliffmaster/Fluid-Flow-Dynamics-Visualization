@@ -28,7 +28,7 @@ public class FFDot
 		x = rando.nextInt((int)(width - diameter + 1)) ;	
 	}
 	
-	//returns the ellipse
+	//returns the ellipse for the dot with specified coordinates and diameter
 	public Ellipse2D.Double getEllipse()
 	{
 		return new Ellipse2D.Double(x, y, diameter, diameter);

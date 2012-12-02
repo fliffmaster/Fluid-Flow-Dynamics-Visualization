@@ -1,3 +1,13 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FFCSTReactor
+//
+// Purpose: This class encapsulates the functionality of a constantly
+//			stirred tank reactor by extending FFReactor and adding variables for
+//			inflow concentration, flow rate, and reactor volume, for calculation
+//			purposes.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 public class FFCSTReactor extends FFReactor 
 {	
 	private double cIn;

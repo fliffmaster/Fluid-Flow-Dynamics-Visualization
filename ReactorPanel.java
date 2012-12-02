@@ -1,3 +1,14 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	ReactorPanel
+//
+// Purpose: This class is the parent class of the two classes that implement
+//			the visual representation of the batch reactor and the cstr reactor.
+//			It contains most of the logic for visually representing a reactor,
+//			including methods for performing individual reaction steps and
+//			individual animation steps.
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,6 +40,8 @@ public class ReactorPanel extends JPanel
 	private JLabel concentrationLabel;
 	private JLabel percentageLabel;
 	
+	//Constructor sets the position, numbers of dots, dot/background color, and timestep
+	//of both timers
 	public ReactorPanel(int numDots, int diameter, int upperCornerX, int rDelta, int aDelta)
 	{
 		this.setUpperCornerX(upperCornerX);
@@ -45,6 +58,73 @@ public class ReactorPanel extends JPanel
 		getReactionTimer().setRepeats(true);
 	}
 	
+	//Adds dots up to the necessary amount into the array
+	public void makeDots()
+	{
+		for(int i = 0; i < currentNumberOfDots; i++)
+			dots.add(new FFDot(this.getBounds(), dotDiameter));
+	}
+	
+	//Removes all dots from the array
+	public void clearDots()
+	{
+		dots = new ArrayList<FFDot>();
+	}
+	
+	//Repaints all dots in their updated positions
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setColor(dotColor);
+		makeDots();
+		for(int i = 0; i < currentNumberOfDots; i++)
+		{
+			Ellipse2D.Double dot = dots.get(i).getEllipse();
+			g2.fill(dot);
+		}
+	}
+
+	//Performs one animation step.  By clearing dots and
+	//then remaking them, any changes in concentration that
+	//occurred during the last reaction step are taken into
+	//account visually
+	class AnimationTimerListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			clearDots();
+			makeDots();
+			repaint();
+		}
+	}
+	
+	//Performs one reaction step
+	class ReactionTimerListener implements ActionListener 
+	{
+		DecimalFormat df1 =  new DecimalFormat("#.####");
+		DecimalFormat df2 =  new DecimalFormat("#.##");
+		public void actionPerformed(ActionEvent evt) 
+		{
+			//Updates the dynamic labels to reflect new concentration and %
+			concentrationLabel.setText(df1.format(reactor.getCurrentConcentration()));
+			percentageLabel.setText(df2.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
+			reactor.setCurrentTime(reactor.getCurrentTime() + 1); //increment time by 1
+			if (getTextLogArea() != null)
+			{
+				getTextLogArea().append("Concentration at time "
+				+ (int) reactor.getCurrentTime() + " is "					//append current
+				+ df1.format(reactor.getCurrentConcentration()) + "\n"); 	//concentration info
+			}
+			clearDots();
+			//manually reset the current number of dots to reflect any changes
+			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
+			makeDots();
+			repaint();
+		}
+	}
+	
+	//Accessor and mutator methods for instance variables
 	public void setLogTextArea(JTextArea log)
 	{
 		txtConcentrationLog = log;
@@ -53,17 +133,6 @@ public class ReactorPanel extends JPanel
 	public JTextArea getTextLogArea()
 	{
 		return txtConcentrationLog;
-	}
-	
-	public void makeDots()
-	{
-		for(int i = 0; i < currentNumberOfDots; i++)
-			dots.add(new FFDot(this.getBounds(), dotDiameter));
-	}
-	
-	public void clearDots()
-	{
-		dots = new ArrayList<FFDot>();
 	}
 	
 	public void setTotalNumberOfDots(int index)
@@ -145,6 +214,11 @@ public class ReactorPanel extends JPanel
 		animationTimer.stop();
 	}
 	
+	public int getUpperCornerX() 
+	{
+		return upperCornerX;
+	}
+	
 	public void setAnimationTimer(int delay)
 	{
 		animationTimer.setDelay(delay);
@@ -155,24 +229,6 @@ public class ReactorPanel extends JPanel
 		reactionTimer.setDelay(delay);
 	}
 	
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setColor(dotColor);
-		makeDots();
-		for(int i = 0; i < currentNumberOfDots; i++)
-		{
-			Ellipse2D.Double dot = dots.get(i).getEllipse();
-			g2.fill(dot);
-		}
-	}
-
-	public int getUpperCornerX() 
-	{
-		return upperCornerX;
-	}
-
 	public void setUpperCornerX(int upperCornerX) 
 	{
 		this.upperCornerX = upperCornerX;
@@ -213,37 +269,5 @@ public class ReactorPanel extends JPanel
 
 	public void setPercentageLabel(JLabel percentageLabel) {
 		this.percentageLabel = percentageLabel;
-	}
-
-	class AnimationTimerListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent evt) 
-		{
-			clearDots();
-			makeDots();
-			repaint();
-		}
-	}
-	
-	class ReactionTimerListener implements ActionListener 
-	{
-		DecimalFormat df1 =  new DecimalFormat("#.####");
-		DecimalFormat df2 =  new DecimalFormat("#.##");
-		public void actionPerformed(ActionEvent evt) 
-		{
-			concentrationLabel.setText(df1.format(reactor.getCurrentConcentration()));
-			percentageLabel.setText(df2.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
-			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
-			if (getTextLogArea() != null)
-			{
-				getTextLogArea().append("Concentration at time "
-				+ (int) reactor.getCurrentTime() + " is "
-				+ df1.format(reactor.getCurrentConcentration()) + "\n");
-			}
-			clearDots();
-			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));
-			makeDots();
-			repaint();
-		}
 	}
 }

@@ -1,5 +1,16 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	FFReactor
+//
+// Purpose: This class encapsulates the functionality of a basic reactor. It 
+//			contains all functionality the two low level reactor classes,
+//			FFBatchReactor and FFCSTReactor, share in common, and is their
+//			parent.  It contains 3 methods which must be implemented at the child
+//			level, so they are declared abstract and FFReactor is abstract.
+//
+//////////////////////////////////////////////////////////////////////////////////
 
-public abstract class FFReactor {
+public abstract class FFReactor 
+{
 	private double tFinal;
 	private double kInit;
 	private double cCurr;
@@ -7,6 +18,8 @@ public abstract class FFReactor {
 	
 	public FFReactor()
 	{
+		//default values are 1000 time steps, k=0.1, and initial
+		//concentration = 1.0
 		this(1000.0, 0.1, 1.0);
 	}
 	
@@ -17,11 +30,13 @@ public abstract class FFReactor {
 		this.kInit = kInit;
 		this.cCurr = cCurr;
 	}
-
+	
+	//3 abstract methods implemented at children level
 	public abstract double getPercentageOfConcentrationLeft();
 	public abstract double getPercentageOfUpperLimit();
 	public abstract void doReactionStep();
 	
+	//accessor and mutator methods for instance variables
 	public double getCurrentTime() {
 		return tCurr;
 	}

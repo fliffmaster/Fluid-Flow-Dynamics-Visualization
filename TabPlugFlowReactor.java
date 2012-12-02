@@ -1,3 +1,13 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Class: 	TabPlugFlowReactor
+//
+// Purpose: This class implements all the visual elements in the Batch Reactor
+//			tab of the final application.  It is comprised of a 
+//			FluidFlowReactorPanel, a JTextArea for data, text fields for entering
+//			parameters, and buttons for controlling the reactor
+//
+//////////////////////////////////////////////////////////////////////////////////
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
