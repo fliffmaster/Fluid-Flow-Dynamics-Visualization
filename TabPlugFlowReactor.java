@@ -225,7 +225,6 @@ public class TabPlugFlowReactor extends JPanel
 	}
 
 	private void setFlowRate(){
-		System.out.println(flowRateSlider.getValue());
 		pfrPanel.setMoveTime(flowRateSlider.getValue() );
 	}
 	
