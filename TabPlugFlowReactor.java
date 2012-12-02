@@ -238,7 +238,9 @@ public class TabPlugFlowReactor extends JPanel
 	//then remaking the dots and repainting
 	private void resetReactor() 
 	{
-		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));				
+		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+		pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
+		pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 	}
 
 	//Listener for the Go button
