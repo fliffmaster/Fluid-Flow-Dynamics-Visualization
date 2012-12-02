@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="Fluid Flow Visualization" default="dist">
+  <!-- set global properties for this build -->
+  <property name="src" location="."/>
+  <property name="build" location="../build"/>
+  <property name="dist"  location="../dist"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac includeantruntime="false" srcdir="${src}" destdir="${build}"/>
+  </target>
+
+  <target name="dist" depends="compile"
+          description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}"/>
+    
+    <!-- Put everything in ${build} into the FluidFlowApplet.jar file -->
+    <jar jarfile="${dist}/FluidFlowApplet.jar" basedir="${build}">
+      <manifest>
+	<!-- <attribute name="Main-Class" value="FluidFlowDynamicsVisualization"/> -->
+	<attribute name="Main-Class" value="FluidFlowApplet"/>
+      </manifest>
+    </jar>
+    <copy file="index.html" todir="${dist}"/>
+    <copy file="ffdv.jnlp" todir="${dist}"/>
+  </target>
+  
+  <target name="clean"
+          description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
