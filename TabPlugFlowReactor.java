@@ -25,6 +25,7 @@ import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 public class TabPlugFlowReactor extends JPanel 
 {
@@ -37,6 +38,8 @@ public class TabPlugFlowReactor extends JPanel
 	private PFR  pfrPanel;
 	private Preferences preferences;
 	private JSlider flowRateSlider;
+	private JLabel concentrationLabel;
+	private JLabel percentageLabel;
 	
 	//Constructors all use the initialize() method
 	public TabPlugFlowReactor() {
@@ -60,6 +63,8 @@ public class TabPlugFlowReactor extends JPanel
 		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
+		
+		
 		
 		//Create Labels for text fields
 		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
@@ -197,13 +202,28 @@ public class TabPlugFlowReactor extends JPanel
 		panel_1.setBounds(0, 0, 800, 91);
 		add(panel_1);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(133, 539, 46, 14);
-		add(lblNewLabel);
+		concentrationLabel = new JLabel("-");
+		concentrationLabel.setBounds(645, 528, 46, 14);
+		add(concentrationLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(460, 539, 46, 14);
-		add(lblNewLabel_1);
+		percentageLabel = new JLabel("-");
+		percentageLabel.setBounds(645, 554, 46, 14);
+		add(percentageLabel);
+		
+		pfrPanel.setPercentageLabel(percentageLabel);
+		pfrPanel.setConcentrationLabel(concentrationLabel);
+		
+		JLabel label = new JLabel("Current Concentration:");
+		label.setHorizontalAlignment(SwingConstants.RIGHT);
+		label.setFont(new Font("Dialog", Font.BOLD, 14));
+		label.setBounds(399, 528, 234, 18);
+		add(label);
+		
+		JLabel lblPercentageOfOutflow = new JLabel("Percentage of outflow Concentation:");
+		lblPercentageOfOutflow.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPercentageOfOutflow.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblPercentageOfOutflow.setBounds(328, 554, 305, 14);
+		add(lblPercentageOfOutflow);
 		
 		resetReactor();		
 	}
