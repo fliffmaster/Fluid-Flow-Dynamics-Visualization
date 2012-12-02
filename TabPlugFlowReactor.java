@@ -41,6 +41,8 @@ public class TabPlugFlowReactor extends JPanel
 	private JLabel concentrationLabel;
 	private JLabel percentageLabel;
 	private boolean isStopped;
+	private JLabel lblInitialConcentration;
+	private JLabel lblRateConstant;
 	
 	//Constructors all use the initialize() method
 	public TabPlugFlowReactor() {
@@ -69,12 +71,12 @@ public class TabPlugFlowReactor extends JPanel
 		
 		
 		//Create Labels for text fields
-		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
+		lblInitialConcentration = new JLabel("Initial Concentration");
 		lblInitialConcentration.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblInitialConcentration.setBounds(30, 137, 192, 15);
 		add(lblInitialConcentration);
 		
-		JLabel lblRateConstant = new JLabel("Rate Constant per Minute");
+		lblRateConstant = new JLabel("Rate Constant per Minute");
 		lblRateConstant.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRateConstant.setBounds(30, 163, 190, 14);
 		add(lblRateConstant);
@@ -242,6 +244,8 @@ public class TabPlugFlowReactor extends JPanel
 			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
 			pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
 			pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+			concentrationLabel.setText("-");
+			percentageLabel.setText("-");
 	}
 
 	//Listener for the Go button
@@ -281,6 +285,17 @@ public class TabPlugFlowReactor extends JPanel
 			{
 				resetReactor();
 				pfrPanel.resetBatchReactorLocation();
+			}
+			else
+			{
+				pfrPanel.stopReactor();
+				pfrPanel.stopAnimation();
+				resetReactor();
+				pfrPanel.resetBatchReactorLocation();
+				pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+				pfrPanel.startAnimation();
+				pfrPanel.beginAnimation();
+				
 			}
 		}
 
