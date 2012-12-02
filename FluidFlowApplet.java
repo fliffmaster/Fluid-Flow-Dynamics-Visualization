@@ -81,6 +81,10 @@ public class FluidFlowApplet extends JApplet {
 
 		TabPlugFlowReactor plugFlowReactor = new TabPlugFlowReactor(preferences);
 		tabbedPane.addTab("Plug Flow Reactor", null, plugFlowReactor, null);
+		
+		preferences.setBatch(batchReactor);
+		preferences.setConstantlyStirred(constantlyStirredReactor);
+		preferences.setPlugFlow(plugFlowReactor);
 
 		// TabBatchReactor batchReactor = new TabBatchReactor();
 		// tabbedPane.addTab("Batch Reactor", null, batchReactor, null);

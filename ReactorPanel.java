@@ -227,17 +227,18 @@ public class ReactorPanel extends JPanel
 	
 	class ReactionTimerListener implements ActionListener 
 	{
-		DecimalFormat df =  new DecimalFormat("#.##");
+		DecimalFormat df1 =  new DecimalFormat("#.####");
+		DecimalFormat df2 =  new DecimalFormat("#.##");
 		public void actionPerformed(ActionEvent evt) 
 		{
-			concentrationLabel.setText(df.format(reactor.getCurrentConcentration()));
-			percentageLabel.setText(df.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
+			concentrationLabel.setText(df1.format(reactor.getCurrentConcentration()));
+			percentageLabel.setText(df2.format(reactor.getPercentageOfUpperLimit() * 100) + "%");
 			reactor.setCurrentTime(reactor.getCurrentTime() + 1);
 			if (getTextLogArea() != null)
 			{
 				getTextLogArea().append("Concentration at time "
 				+ (int) reactor.getCurrentTime() + " is "
-				+ df.format(reactor.getCurrentConcentration()) + "\n");
+				+ df1.format(reactor.getCurrentConcentration()) + "\n");
 			}
 			clearDots();
 			setCurrentNumberOfDots((int) (reactor.getPercentageOfConcentrationLeft() * getTotalNumberOfDots()));

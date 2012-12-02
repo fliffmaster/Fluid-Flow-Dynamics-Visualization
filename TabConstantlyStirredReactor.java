@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
@@ -55,10 +53,18 @@ public class TabConstantlyStirredReactor extends JPanel {
 	{
 		setBounds(0, 0, 800, 600);
 		setLayout(null);
+		
+		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
+		panel2.setBorder(new LineBorder(preferences.getContinuouslyStirredBorderColor(), 4));
+		panel2.setBounds(339, 138, 433, 358);
+		panel2.setDotSize(preferences.getContinuouslyStirredParticleSize());
+		panel2.setDotColor(preferences.getContinuouslyStirredParticleColor());
+		panel2.setBackground(preferences.getBatchBackgroundColor());
+		add(panel2);
 
 		JLabel lblInitialConcentration = new JLabel("Inflow Concentration");
 		lblInitialConcentration.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblInitialConcentration.setBounds(30, 114, 192, 15);
+		lblInitialConcentration.setBounds(30, 110, 192, 15);
 		add(lblInitialConcentration);
 
 		txtInflowConcentration = new JTextField();
@@ -69,7 +75,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("Rate Constant per Minute");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(30, 141, 192, 15);
+		lblNewLabel.setBounds(30, 137, 192, 15);
 		add(lblNewLabel);
 
 		txtRateConstant = new JTextField();
@@ -101,13 +107,6 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnReset.addActionListener(new ButtonResetListener());
 		btnReset.setBounds(551, 11, 174, 71);
 		add(btnReset);
-		panel2 = new FluidFlowReactorPanel2(2000, 3, 0, 100, 500);
-		panel2.setBorder(new LineBorder(preferences.getContinuouslyStirredBorderColor(), 4));
-		panel2.setBounds(339, 138, 433, 358);
-		panel2.setDotSize(preferences.getContinuouslyStirredParticleSize());
-		panel2.setDotColor(preferences.getContinuouslyStirredParticleColor());
-		panel2.setBackground(new Color(240, 255, 255));
-		add(panel2);
 
 		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
 		lblCstrVisualization.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -116,6 +115,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 
 		textLogArea = new JTextArea();
 		JScrollPane logPane = new JScrollPane(textLogArea);
+		textLogArea.setFocusable(false);
 		logPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		textLogArea.setBackground(new Color(245, 245, 220));
 		logPane.setBounds(23, 265, 375, 264);
@@ -125,9 +125,16 @@ public class TabConstantlyStirredReactor extends JPanel {
 		lblCstrData.setBounds(113, 253, 107, 27);
 		add(lblCstrData);
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		panel.setBounds(30, 281, 265, 264);
+		panel.add(logPane);
+		add(panel);
+		
 		JLabel lblInflowRate = new JLabel("Inflow Rate");
 		lblInflowRate.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblInflowRate.setBounds(30, 167, 114, 14);
+		lblInflowRate.setBounds(30, 163, 114, 14);
 		add(lblInflowRate);
 		
 		txtFlowRate = new JTextField();
@@ -135,13 +142,6 @@ public class TabConstantlyStirredReactor extends JPanel {
 		txtFlowRate.setBounds(181, 161, 114, 20);
 		add(txtFlowRate);
 		txtFlowRate.setColumns(10);
-		
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		panel.setBounds(30, 281, 265, 264);
-		panel.add(logPane);
-		add(panel);
 		
 		JButton applyButton = new JButton("Apply");
 		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -153,14 +153,14 @@ public class TabConstantlyStirredReactor extends JPanel {
 		JLabel lblNewLabel_1 = new JLabel("0.0");
 		lblNewLabel_1.setForeground(new Color(0, 0, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(624, 507, 46, 14);
+		lblNewLabel_1.setBounds(624, 507, 101, 14);
 		panel2.setConcentrationLabel(lblNewLabel_1);
 		add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("0.00%");
 		lblNewLabel_2.setForeground(new Color(0, 0, 255));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_2.setBounds(624, 532, 64, 14);
+		lblNewLabel_2.setBounds(624, 532, 101, 14);
 		panel2.setPercentageLabel(lblNewLabel_2);
 		add(lblNewLabel_2);
 		
@@ -185,11 +185,14 @@ public class TabConstantlyStirredReactor extends JPanel {
 
 	private void resetReactor() {
 
-		panel2.setInflowConcentration(1.0);
+		panel2.setInflowConcentration(Double
+				.parseDouble(txtInflowConcentration.getText()));
 		panel2.getReactor().setCurrentConcentration(0.0);
 		panel2.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
 		panel2.setCurrentTime(0);
 		textLogArea.setText("");
+		panel2.getConcentrationLabel().setText("0.0");
+		panel2.getPercentageLabel().setText("0.00%");
 		panel2.clearDots();
 		panel2.setCurrentNumberOfDots(0);
 		panel2.repaint();
@@ -226,7 +229,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 	{
 		public void actionPerformed(ActionEvent evt) 
 		{
-			panel2.setInflowConcentration(Integer.parseInt(txtInflowConcentration.getText()));
+			panel2.setInflowConcentration(Double.parseDouble(txtInflowConcentration.getText()));
 			panel2.getReactor().setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
 			panel2.setFlowRate(Double.parseDouble(txtFlowRate.getText()));
 		}

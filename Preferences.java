@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -8,10 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-
 
 public class Preferences extends JTabbedPane {
 
@@ -50,6 +50,10 @@ public class Preferences extends JTabbedPane {
 	private JTextField txtContinuouslyStirredBackgroundColor;
 	private JTextField txtContinuouslyStirredBorderColor;
 	private JTextField txtContinuouslyStirredFlowRate;
+	
+	private TabBatchReactor batch;
+	private TabConstantlyStirredReactor cstr;
+	private TabPlugFlowReactor plug;
 
 //	private int dblBatchParticleSize;
 //	private int dblBatchParticleNumber;
@@ -82,7 +86,20 @@ public class Preferences extends JTabbedPane {
 //	private Color clrContinuouslyStirredBackgroundColor;
 //	private Color clrContinuouslyStirredBorderColor;
 	
-		
+	public void setBatch(TabBatchReactor batch)
+	{
+		this.batch = batch;
+	}
+	
+	public void setConstantlyStirred(TabConstantlyStirredReactor cstr)
+	{
+		this.cstr = cstr;
+	}
+	
+	public void setPlugFlow(TabPlugFlowReactor plug)
+	{
+		this.plug = plug;
+	}
 	
 	public Integer getBatchParticleSize() {
 		return Integer.parseInt( txtBatchParticleSize.getText()) ;
@@ -970,6 +987,38 @@ public class Preferences extends JTabbedPane {
 		gbc_btnSave_2.gridx = 1;
 		gbc_btnSave_2.gridy = 11;
 		continuouslyStirredReactorPreferences.add(btnSave_2, gbc_btnSave_2);
+		
+		JButton applyButton = new JButton("Apply");
+		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton.setToolTipText("Click here to apply parameter changes");
+		applyButton.setBounds(206, 192, 89, 33);
+		applyButton.addActionListener(new ApplyButtonListener());
+		JButton applyButton2 = new JButton("Apply");
+		applyButton2.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton2.setToolTipText("Click here to apply parameter changes");
+		applyButton2.setBounds(206, 192, 89, 33);
+		applyButton2.addActionListener(new ApplyButtonListener());
+		JButton applyButton3 = new JButton("Apply");
+		applyButton3.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton3.setToolTipText("Click here to apply parameter changes");
+		applyButton3.setBounds(206, 192, 89, 33);
+		applyButton3.addActionListener(new ApplyButtonListener());
+		
+		GridBagConstraints gbc_btnApply = new GridBagConstraints();
+		gbc_btnApply.anchor = GridBagConstraints.WEST;
+		gbc_btnApply.gridx = 3;
+		gbc_btnApply.gridy = 10;
+		GridBagConstraints gbc_btnApply2 = new GridBagConstraints();
+		gbc_btnApply2.anchor = GridBagConstraints.WEST;
+		gbc_btnApply2.gridx = 3;
+		gbc_btnApply2.gridy = 10;
+		GridBagConstraints gbc_btnApply3 = new GridBagConstraints();
+		gbc_btnApply3.anchor = GridBagConstraints.WEST;
+		gbc_btnApply3.gridx = 3;
+		gbc_btnApply3.gridy = 10;
+		batchReactorPreferences.add(applyButton, gbc_btnApply);
+		continuouslyStirredReactorPreferences.add(applyButton2, gbc_btnApply2);
+		plugFlowReactorPreferences.add(applyButton3, gbc_btnApply3);
 	}
 	
 	public void loadPreferences(){
@@ -978,5 +1027,139 @@ public class Preferences extends JTabbedPane {
 	
 	public void savePreferences(){
 		//TODO save preferences to file
+	}
+	
+	public void applyPreferences(){	
+		batch.getReactorPanel().setDotSize(Integer.parseInt(txtBatchParticleSize.getText()));
+		batch.getReactorPanel().setTotalNumberOfDots(Integer.parseInt(txtBatchParticleNumber.getText()));
+
+		//DID THE FIRST 2, all the rest still need to be done
+		/*setBatchParticleNumber(int dblBatchParticleNumber) {
+			txtBatchParticleNumber.setText(Integer.toString(dblBatchParticleNumber));
+		}
+
+		setBatchMotionRate(int dblBatchMotionRate) {
+			txtBatchMotionRate.setText(Integer.toString(dblBatchMotionRate));
+		}
+
+		setBatchInitialC(int dblBatchInitialC) {
+			txtBatchInitialC.setText(Integer.toString(dblBatchInitialC));
+		}
+
+		setBatchInitialK(Double dblBatchInitialK) {
+			txtBatchInitialK.setText(Double.toString(dblBatchInitialK));
+		}
+
+		setBatchTimeStep(int dblBatchTimeStep) {
+			txtBatchTimeStep.setText(Integer.toString(dblBatchTimeStep));
+		}
+
+		setBatchParticleColor(Color clrBatchParticleColor) {
+			txtBatchParticleColor.setText(clrBatchParticleColor.toString() );
+		}
+
+		setBatchBackgroundColor(Color clrBatchBackgroundColor) {
+			txtBatchBackgroundColor.setText(clrBatchBackgroundColor.toString());
+		}
+
+		setBatchBorderColor(Color clrBatchBorderColor) {
+			txtBatchBorderColor.setText(clrBatchBorderColor.toString());
+		}
+
+		setPlugFlowParticleSize(int dblPlugFlowParticleSize) {
+			txtPlugFlowParticleSize.setText(Integer.toString(dblPlugFlowParticleSize));
+		}
+
+		setPlugFlowParticleNumber(int dblPlugFlowParticleNumber) {
+			txtPlugFlowParticleNumber.setText(Integer.toString(dblPlugFlowParticleNumber));
+		}
+
+		setPlugFlowMotionRate(int dblPlugFlowMotionRate) {
+			txtPlugFlowMotionRate.setText(Integer.toString(dblPlugFlowMotionRate));
+		}
+
+
+		setPlugFlowInitialC(int dblPlugFlowInitialC) {
+			txtPlugFlowInitialC.setText(Integer.toString(dblPlugFlowInitialC));
+		}
+
+
+		setPlugFlowInitialK(Double dblPlugFlowInitialK) {
+			txtPlugFlowInitialK.setText(Double.toString(dblPlugFlowInitialK));
+		}
+
+
+		setPlugFlowTimeStep(int dblPlugFlowTimeStep) {
+			txtPlugFlowTimeStep.setText(Integer.toString(dblPlugFlowTimeStep));
+		}
+
+		setPlugFlowParticleColor(Color clrPlugFlowParticleColor) {
+			txtPlugFlowParticleColor.setText(clrPlugFlowParticleColor.toString());
+		}
+
+		setPlugFlowPlug1Background(Color clrPlugFlowPlug1Background) {
+			txtPlugFlowPlug1Background.setText(clrPlugFlowPlug1Background.toString());
+		}
+
+		setPlugFlowBorderColor(Color clrPlugFlowBorderColor) {
+			txtPlugFlowBorderColor.setText(clrPlugFlowBorderColor.toString());
+		}
+
+		setPlugFlowPlug2Background(Color clrPlugFlowPlug2Background) {
+			txtPlugFlowPlug2Background.setText(clrPlugFlowPlug2Background.toString());
+		}
+
+		setContinuouslyStirredParticleSize(
+				int dblContinuouslyStirredParticleSize) {
+			txtContinuouslyStirredParticleSize.setText(Integer.toString(dblContinuouslyStirredParticleSize));
+		}
+
+		setContinuouslyStirredParticleNumber(
+				int dblContinuouslyStirredParticleNumber) {
+			txtContinuouslyStirredParticleNumber.setText(Integer.toString(dblContinuouslyStirredParticleNumber));
+		}
+
+		setContinuouslyStirredMotionRate(
+				int dblContinuouslyStirredMotionRate) {
+			txtContinuouslyStirredMotionRate.setText(Integer.toString(dblContinuouslyStirredMotionRate));
+		}
+
+		setContinuouslyStirredInitialC(
+				int dblContinuouslyStirredInitialC) {
+			txtContinuouslyStirredInitialC.setText(Integer.toString(dblContinuouslyStirredInitialC));
+		}
+
+		setContinuouslyStirredInitialK(
+				Double dblContinuouslyStirredInitialK) {
+			txtContinuouslyStirredInitialK.setText(Double.toString(dblContinuouslyStirredInitialK));
+		}
+
+		setContinuouslyStirredTimeStep(
+				int dblContinuouslyStirredTimeStep) {
+			txtContinuouslyStirredTimeStep.setText(Integer.toString(dblContinuouslyStirredTimeStep));
+		}
+
+		setContinuouslyStirredParticleColor(
+				Color clrContinuouslyStirredParticleColor) {
+			txtContinuouslyStirredParticleColor.setText(clrContinuouslyStirredParticleColor.toString());
+		}
+
+		setContinuouslyStirredBackgroundColor(
+				Color clrContinuouslyStirredBackgroundColor) {
+			txtContinuouslyStirredBackgroundColor.setText(clrContinuouslyStirredBackgroundColor.toString());
+		}
+
+		setContinuouslyStirredBorderColor(
+				Color clrContinuouslyStirredBorderColor) {
+			txtContinuouslyStirredBorderColor.setText(clrContinuouslyStirredBorderColor.toString());
+		}*/
+	}
+	
+	class ApplyButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			applyPreferences();
+		}
 	}
 }
