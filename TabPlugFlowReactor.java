@@ -126,6 +126,13 @@ public class TabPlugFlowReactor extends JPanel
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 		
+		//Just a cosmetic panel
+		Panel panel_1 = new Panel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(176, 196, 222));
+		panel_1.setBounds(0, 0, 800, 91);
+		add(panel_1);
+		
 		//Create reactor control buttons
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ButtonGoListener());
@@ -133,7 +140,7 @@ public class TabPlugFlowReactor extends JPanel
 		btnGo.setForeground(new Color(240, 255, 255));
 		btnGo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnGo.setBounds(65, 11, 174, 71);
-		add(btnGo);
+		panel_1.add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ButtonStopListener());
@@ -141,7 +148,7 @@ public class TabPlugFlowReactor extends JPanel
 		btnStop.setForeground(new Color(240, 255, 255));
 		btnStop.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnStop.setBounds(309, 11, 174, 71);
-		add(btnStop);
+		panel_1.add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
 		btnReset.setForeground(new Color(240, 255, 255));
@@ -149,7 +156,7 @@ public class TabPlugFlowReactor extends JPanel
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnReset.addActionListener(new ButtonResetListener());
 		btnReset.setBounds(551, 11, 174, 71);
-		add(btnReset);
+		panel_1.add(btnReset);
 		
 		//Create Toggle Flow button
 		JButton btnToggleFlow = new JButton("Toggle Flow");
@@ -192,11 +199,7 @@ public class TabPlugFlowReactor extends JPanel
 		applyButton.addActionListener(new ApplyButtonListener());
 		add(applyButton);
 		
-		//Just a cosmetic panel
-		Panel panel_1 = new Panel();
-		panel_1.setBackground(new Color(176, 196, 222));
-		panel_1.setBounds(0, 0, 800, 91);
-		add(panel_1);
+
 		
 		concentrationLabel = new JLabel("-");
 		concentrationLabel.setBounds(645, 528, 46, 14);

@@ -109,6 +109,13 @@ public class TabConstantlyStirredReactor extends JPanel {
 		txtFlowRate.setBounds(200, 164, 114, 20);
 		add(txtFlowRate);
 		txtFlowRate.setColumns(10);
+		
+		//Just a cosmetic panel
+		Panel panel_1 = new Panel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(new Color(176, 196, 222));
+		panel_1.setBounds(0, 0, 800, 91);
+		add(panel_1);
 
 		//Create reactor control buttons
 		JButton btnGo = new JButton("Go");
@@ -117,7 +124,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnGo.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnGo.addActionListener(new ButtonGoListener());
 		btnGo.setBounds(65, 11, 174, 71);
-		add(btnGo);
+		panel_1.add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.setBackground(new Color(255, 0, 0));
@@ -125,7 +132,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnStop.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnStop.addActionListener(new ButtonStopListener());
 		btnStop.setBounds(309, 11, 174, 71);
-		add(btnStop);
+		panel_1.add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
 		btnReset.setForeground(new Color(240, 255, 255));
@@ -133,7 +140,7 @@ public class TabConstantlyStirredReactor extends JPanel {
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnReset.addActionListener(new ButtonResetListener());
 		btnReset.setBounds(551, 11, 174, 71);
-		add(btnReset);
+		panel_1.add(btnReset);
 		
 		//Create label for reactor
 		JLabel lblCstrVisualization = new JLabel("CSTR Visualization");
@@ -196,12 +203,6 @@ public class TabConstantlyStirredReactor extends JPanel {
 		lblPercentageOfInflow.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPercentageOfInflow.setBounds(339, 536, 290, 14);
 		add(lblPercentageOfInflow);
-		
-		//Just a cosmetic panel
-		Panel panel_1 = new Panel();
-		panel_1.setBackground(new Color(176, 196, 222));
-		panel_1.setBounds(0, 0, 800, 91);
-		add(panel_1);
 
 		//Reset the reactor
 		resetReactor();
