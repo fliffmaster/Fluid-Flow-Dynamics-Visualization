@@ -87,7 +87,6 @@ public class TabPlugFlowReactor extends JPanel
 		
 		txtTimeRate = new JTextField();
 		txtTimeRate.addFocusListener(new FocusAdapter() {
-			@Override
 			public void focusLost(FocusEvent e) {
 				pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
 			}
@@ -99,7 +98,6 @@ public class TabPlugFlowReactor extends JPanel
 		
 		txtParticleMoveRate = new JTextField();
 		txtParticleMoveRate.addFocusListener(new FocusAdapter() {
-			@Override
 			public void focusLost(FocusEvent e) {
 				pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
 			}
@@ -111,7 +109,6 @@ public class TabPlugFlowReactor extends JPanel
 		
 		txtInitialConcentration.addFocusListener(new FocusAdapter() 
 		{
-			@Override
 			public void focusLost(FocusEvent e) 
 			{
 				resetReactor();
@@ -120,7 +117,6 @@ public class TabPlugFlowReactor extends JPanel
 
 		txtRateConstant = new JTextField();
 		txtRateConstant.addFocusListener(new FocusAdapter() {
-			@Override
 			public void focusLost(FocusEvent e) {
 				resetReactor();
 			}
@@ -238,7 +234,9 @@ public class TabPlugFlowReactor extends JPanel
 	//then remaking the dots and repainting
 	private void resetReactor() 
 	{
-		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));				
+		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+		pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
+		pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 	}
 
 	//Listener for the Go button
