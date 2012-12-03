@@ -58,7 +58,8 @@ public abstract class FFReactor
 	}
 
 	public void setReactionConstant(double kInit) {
-		this.kInit = kInit;
+		if(kInit <= 1.0)
+			this.kInit = kInit;
 	}
 
 	public double getFinalTime() {

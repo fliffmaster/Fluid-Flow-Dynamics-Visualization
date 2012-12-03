@@ -51,7 +51,10 @@ public class FFCSTReactor extends FFReactor
 	//Not yet used
 	public double getPercentageOfUpperLimit()
 	{
-		return getCurrentConcentration() / cIn;
+		if(cIn != 0.0)
+			return getCurrentConcentration() / cIn;
+		else
+			return 0.0;
 	}
 
 	// Accessor and mutator methods for CSTR specific variables

@@ -67,6 +67,11 @@ public class PFR extends JPanel {
 	public double getRateConstant() {
 		return rateConstant;
 	}
+	
+	public boolean getStarted()
+	{
+		return started;
+	}
 
 	private JPanel panel = new JPanel();
 
