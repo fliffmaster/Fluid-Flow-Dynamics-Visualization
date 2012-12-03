@@ -56,7 +56,7 @@ public class TabPlugFlowReactor extends JPanel
 		
 		//Create the reactor panel/set appearance based on preferences
 		pfrPanel = new PFR(preferences);
-		pfrPanel.setBounds(59, 338, 626, 209);
+		pfrPanel.setBounds(65, 307, 626, 209);
 		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
@@ -104,7 +104,6 @@ public class TabPlugFlowReactor extends JPanel
 		//add(txtParticleMoveRate);
 		txtParticleMoveRate.setColumns(10);
 		
-		//NEED TO FIX THIS, SHOULD NOT DO THIS (when you click around fields w/o changing anything, the whole thing resets)
 		txtInitialConcentration.addFocusListener(new FocusAdapter() 
 		{
 			@Override
@@ -160,7 +159,7 @@ public class TabPlugFlowReactor extends JPanel
 				pfrPanel.toggleFlowing();
 			}
 		});
-		btnToggleFlow.setBounds(407, 284, 126, 23);
+		btnToggleFlow.setBounds(453, 273, 126, 23);
 		add(btnToggleFlow);
 		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
 		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
@@ -176,11 +175,11 @@ public class TabPlugFlowReactor extends JPanel
 		});
 
 
-		flowRateSlider.setBounds(68, 291, 200, 16);
+		flowRateSlider.setBounds(114, 280, 200, 16);
 		add(flowRateSlider);
 		
 		JLabel lblFlowRate = new JLabel("Flow Rate");
-		lblFlowRate.setBounds(76, 271, 192, 15);
+		lblFlowRate.setBounds(122, 260, 192, 15);
 		add(lblFlowRate);
 
 		//Create Apply button to apply new parameters entered by user in
@@ -197,6 +196,14 @@ public class TabPlugFlowReactor extends JPanel
 		panel_1.setBackground(new Color(176, 196, 222));
 		panel_1.setBounds(0, 0, 800, 91);
 		add(panel_1);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(133, 539, 46, 14);
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(460, 539, 46, 14);
+		add(lblNewLabel_1);
 		
 		resetReactor();		
 	}
@@ -257,7 +264,7 @@ public class TabPlugFlowReactor extends JPanel
 		public void actionPerformed(ActionEvent evt) 
 		{
 			pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
-			pfrPanel.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
+			pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 		}
 	}
 }

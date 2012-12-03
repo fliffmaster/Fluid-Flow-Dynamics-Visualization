@@ -23,6 +23,7 @@ public class PFR extends JPanel
 	private int particleMoveRate = 50;
 	private int flowParticleSize = 2;
 	private int initialConcentration = 1000;
+	private double rateConstant;
 	
 
 	public int getReactionTimeRate() {
@@ -39,6 +40,16 @@ public class PFR extends JPanel
 
 	public void setParticleMoveRate(int particleMoveRate) {
 		this.particleMoveRate = particleMoveRate;
+	}
+	
+	public void setRateConstant(double constant)
+	{
+		rateConstant = constant;
+	}
+	
+	public double getRateConstant()
+	{
+		return rateConstant;
 	}
 
 
@@ -167,12 +178,6 @@ public class PFR extends JPanel
 		repaint();
 	}
 	
-	public void setReactionConstant(double constant)
-	{
-		for(FluidFlowReactorPanel f : batchPanels)
-			f.getReactor().setReactionConstant(constant);
-	}	
-
 	class TimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent arg) 
@@ -185,6 +190,7 @@ public class PFR extends JPanel
 				if(batchPanels.get(size - 1).getXPos() >= 0)
 				{
 					FluidFlowReactorPanel ffTemp = new FluidFlowReactorPanel(initialConcentration, flowParticleSize, batchPanelWidth, reactionTimeRate, particleMoveRate);
+					ffTemp.getReactor().setReactionConstant(rateConstant);
 					ffTemp.startAnimation();
 					if(preferences != null){
 						ffTemp.setDotSize(preferences.getPlugFlowParticleSize());
