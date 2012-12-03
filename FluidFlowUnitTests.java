@@ -102,7 +102,7 @@ public class FluidFlowUnitTests
 		else
 			System.out.println("Test Failed");
 		
-		//PFR class unit tests
+		/////////////////////PFR class unit tests///////////////////////////
 		if(pfr.getFlowing() == true)
 			System.out.println("Test Passed");
 		else
@@ -115,19 +115,19 @@ public class FluidFlowUnitTests
 		else
 			System.out.println("Test Failed");	
 		
-		if(pfr.getStarted() == true)
+		if(pfr.getStarted() == false)
 			System.out.println("Test Passed");
 		else
 			System.out.println("Test Failed");
 		
 		pfr.toggleStarted();
 	
-		if(pfr.getStarted() == false)
+		if(pfr.getStarted() == true)
 			System.out.println("Test Passed");
 		else
 			System.out.println("Test Failed");
 		
-		//FFDot class unit tests
+		///////////////////////FFDot class unit tests//////////////////////////
 		Rectangle rect = new Rectangle(0, 0, 100, 100);
 		FFDot dot = new FFDot(rect, 2);
 		Ellipse2D ellipse = dot.getEllipse();
@@ -138,6 +138,52 @@ public class FluidFlowUnitTests
 			System.out.println("Test Failed");	
 		
 		if(ellipse.getX() - 2 >= 0 && ellipse.getY() >= 0)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		dot.setDiameter(-2); //check to see that negative diameters are not accepted
+		
+		if(ellipse.getHeight() == 2 && ellipse.getWidth() == 2)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		dot.setDiameter(1); //check to see that boundary condition of 
+							//diameter of 1 is accepted
+		ellipse = dot.getEllipse();
+		
+		if(ellipse.getHeight() == 1 && ellipse.getWidth() == 1)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		dot.setDiameter(1); //check to see that boundary condition of 
+							//diameter of 0 is not accepted
+		ellipse = dot.getEllipse();
+		
+		if(ellipse.getHeight() == 1 && ellipse.getWidth() == 1)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		//////////////////////ReactorPanel class unit tests////////////////////
+		
+		if(panel.getDots().size() == 0)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		panel.makeDots();
+		
+		if(panel.getDots().size() == 2000)
+			System.out.println("Test Passed");
+		else
+			System.out.println("Test Failed");
+		
+		panel.clearDots();
+		
+		if(panel.getDots().size() == 0)
 			System.out.println("Test Passed");
 		else
 			System.out.println("Test Failed");

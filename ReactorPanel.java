@@ -155,6 +155,11 @@ public class ReactorPanel extends JPanel
 		return totalNumberOfDots;
 	}
 	
+	public ArrayList<FFDot> getDots()
+	{
+		return dots;
+	}
+	
 	
 	public int getLastDot()
 	{

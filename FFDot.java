@@ -21,11 +21,14 @@ public class FFDot
 	//Constructs a new dot w/given diameter at random coordinates within a rectangle
 	public FFDot(Rectangle boundary, int diameter)
 	{	
-		this.diameter = diameter;
+		if(diameter >= 1)
+			this.diameter = diameter;
+		else
+			this.diameter = 1;
 		int height = (int) boundary.getHeight();
 		int width = (int) boundary.getWidth();
-		y =  rando.nextInt(Math.abs((int)(height - diameter + 1)) );
-		x = rando.nextInt(Math.abs((int)(width - diameter + 1))) ;	
+		y =  rando.nextInt(Math.abs((int)(height - diameter + 1)));
+		x = rando.nextInt(Math.abs((int)(width - diameter + 1)));	
 	}
 	
 	//returns the ellipse for the dot with specified coordinates and diameter
@@ -36,6 +39,14 @@ public class FFDot
 	
 	public void setDiameter(int diameter)
 	{
-		this.diameter = diameter;
+		if(diameter >= 1)
+			this.diameter = diameter;
+		else
+			this.diameter = 1;
 	}	
+	
+	public int getDiameter()
+	{
+		return diameter;
+	}
 }
