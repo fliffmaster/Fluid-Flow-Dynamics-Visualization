@@ -108,8 +108,8 @@ public class FluidFlowUnitTests
 		else
 			System.out.println("Test Failed");
 		
-		pfr.toggleFlowing();
-	
+		pfr.toggleFlowing(); 	//test that if/else statement toggles
+								//value correctly
 		if(pfr.getFlowing() == false)
 			System.out.println("Test Passed");
 		else
@@ -120,8 +120,8 @@ public class FluidFlowUnitTests
 		else
 			System.out.println("Test Failed");
 		
-		pfr.toggleStarted();
-	
+		pfr.toggleStarted();	//test that if/else statement toggles
+								//value correctly
 		if(pfr.getStarted() == true)
 			System.out.println("Test Passed");
 		else
@@ -169,19 +169,19 @@ public class FluidFlowUnitTests
 		
 		//////////////////////ReactorPanel class unit tests////////////////////
 		
-		if(panel.getDots().size() == 0)
+		if(panel.getDots().size() == 0) //check that ArrayList starts out empty
 			System.out.println("Test Passed");
 		else
 			System.out.println("Test Failed");
 		
-		panel.makeDots();
+		panel.makeDots(); //test that method makes correct # of dots
 		
 		if(panel.getDots().size() == 2000)
 			System.out.println("Test Passed");
 		else
 			System.out.println("Test Failed");
 		
-		panel.clearDots();
+		panel.clearDots(); //test that method clears all dots
 		
 		if(panel.getDots().size() == 0)
 			System.out.println("Test Passed");
