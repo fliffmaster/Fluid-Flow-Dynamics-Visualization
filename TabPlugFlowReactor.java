@@ -9,6 +9,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -30,7 +32,6 @@ public class TabPlugFlowReactor extends JPanel
 	private JTextField txtInitialConcentration;
 	private JTextField txtRateConstant;	
 	private JTextArea txtConcentrationLog;
-	private JTextField txtParticleNumber;
 	private JTextField txtTimeRate;
 	private JTextField txtParticleMoveRate;
 	private PFR  pfrPanel;
@@ -55,54 +56,29 @@ public class TabPlugFlowReactor extends JPanel
 		
 		//Create the reactor panel/set appearance based on preferences
 		pfrPanel = new PFR(preferences);
-		pfrPanel.setBounds(71, 339, 626, 209);
+		pfrPanel.setBounds(59, 338, 626, 209);
 		pfrPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		add(pfrPanel);
 		pfrPanel.setLayout(null);
 		
-		//Create labels for text fields
+		//Create Labels for text fields
 		JLabel lblInitialConcentration = new JLabel("Initial Concentration");
-		lblInitialConcentration.setBounds(12, 67, 192, 15);
+		lblInitialConcentration.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblInitialConcentration.setBounds(30, 137, 192, 15);
 		add(lblInitialConcentration);
 		
 		JLabel lblRateConstant = new JLabel("Rate Constant per Minute");
-		lblRateConstant.setBounds(12, 94, 192, 15);
+		lblRateConstant.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRateConstant.setBounds(30, 163, 190, 14);
 		add(lblRateConstant);
 		
-		JLabel lblNumberOfParticles = new JLabel("Number of particles");
-		lblNumberOfParticles.setBounds(12, 121, 192, 15);
-		add(lblNumberOfParticles);
-		
-		JLabel lblRateOfReaction = new JLabel("Rate of reaction steps");
-		lblRateOfReaction.setBounds(12, 154, 220, 15);
-		add(lblRateOfReaction);
-		
-		JLabel lblRateOfRepaint = new JLabel("Rate of repaint of particles");
-		lblRateOfRepaint.setBounds(12, 185, 192, 15);
-		add(lblRateOfRepaint);
-		
-		JLabel lblBatchReactorData = new JLabel("Batch Reactor Data");
-		lblBatchReactorData.setBounds(629, 37, 135, 14);
-		add(lblBatchReactorData);
 		
 		//Create text fields
 		txtInitialConcentration = new JTextField();
 		lblInitialConcentration.setLabelFor(txtInitialConcentration);
 		txtInitialConcentration.setText(preferences.getPlugFlowInitialC().toString());
-		txtInitialConcentration.setBounds(239, 63, 114, 19);
+		txtInitialConcentration.setBounds(232, 130, 114, 19);
 		add(txtInitialConcentration);
-		
-		txtParticleNumber = new JTextField();
-		txtParticleNumber.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
-			}
-		});
-		txtParticleNumber.setText(preferences.getPlugFlowParticleNumber().toString());
-		txtParticleNumber.setBounds(239, 121, 114, 19);
-		add(txtParticleNumber);
-		txtParticleNumber.setColumns(10);
 		
 		txtTimeRate = new JTextField();
 		txtTimeRate.addFocusListener(new FocusAdapter() {
@@ -113,7 +89,7 @@ public class TabPlugFlowReactor extends JPanel
 		});
 		txtTimeRate.setText(preferences.getPlugFlowTimeStep().toString());
 		txtTimeRate.setBounds(239, 152, 114, 19);
-		add(txtTimeRate);
+		//add(txtTimeRate);
 		txtTimeRate.setColumns(10);
 		
 		txtParticleMoveRate = new JTextField();
@@ -125,7 +101,7 @@ public class TabPlugFlowReactor extends JPanel
 		});
 		txtParticleMoveRate.setText(preferences.getPlugFlowMotionRate().toString());
 		txtParticleMoveRate.setBounds(239, 183, 114, 19);
-		add(txtParticleMoveRate);
+		//add(txtParticleMoveRate);
 		txtParticleMoveRate.setColumns(10);
 		
 		//NEED TO FIX THIS, SHOULD NOT DO THIS (when you click around fields w/o changing anything, the whole thing resets)
@@ -146,32 +122,34 @@ public class TabPlugFlowReactor extends JPanel
 			}
 		});
 		txtRateConstant.setText(preferences.getPlugFlowInitialK().toString());
-		txtRateConstant.setBounds(239, 90, 114, 19);
+		txtRateConstant.setBounds(232, 157, 114, 20);
 		add(txtRateConstant);
 		txtRateConstant.setColumns(10);
 		
 		//Create reactor control buttons
 		JButton btnGo = new JButton("Go");
 		btnGo.addActionListener(new ButtonGoListener());
-		btnGo.setBounds(247, 218, 81, 25);
+		btnGo.setBackground(new Color(0, 128, 0));
+		btnGo.setForeground(new Color(240, 255, 255));
+		btnGo.setFont(new Font("Tahoma", Font.BOLD, 28));
+		btnGo.setBounds(65, 11, 174, 71);
 		add(btnGo);
 
 		JButton btnStop = new JButton("Stop");
 		btnStop.addActionListener(new ButtonStopListener());
-		btnStop.setBounds(338, 218, 71, 25);
+		btnStop.setBackground(new Color(255, 0, 0));
+		btnStop.setForeground(new Color(240, 255, 255));
+		btnStop.setFont(new Font("Tahoma", Font.BOLD, 28));
+		btnStop.setBounds(309, 11, 174, 71);
 		add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
+		btnReset.setForeground(new Color(240, 255, 255));
+		btnReset.setBackground(new Color(184, 134, 11));
+		btnReset.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnReset.addActionListener(new ButtonResetListener());
-		btnReset.setBounds(419, 218, 81, 25);
+		btnReset.setBounds(551, 11, 174, 71);
 		add(btnReset);
-		
-		//Create data log
-		txtConcentrationLog = new JTextArea();
-		txtConcentrationLog.setBackground(new Color(127, 255, 212));
-		txtConcentrationLog.setLineWrap(true);
-		txtConcentrationLog.setBounds(569, 62, 246, 266);
-		add(txtConcentrationLog);
 		
 		//Create Toggle Flow button
 		JButton btnToggleFlow = new JButton("Toggle Flow");
@@ -182,11 +160,11 @@ public class TabPlugFlowReactor extends JPanel
 				pfrPanel.toggleFlowing();
 			}
 		});
-		btnToggleFlow.setBounds(111, 219, 126, 23);
+		btnToggleFlow.setBounds(407, 284, 126, 23);
 		add(btnToggleFlow);
 		pfrPanel.setParticleMoveRate(Integer.parseInt(txtParticleMoveRate.getText()));
 		pfrPanel.setReactionTimeRate(Integer.parseInt(txtTimeRate.getText()));
-		pfrPanel.setInitialConcentration(Integer.parseInt(txtParticleNumber.getText()));
+		pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
 		
 		flowRateSlider = new JSlider();
 		flowRateSlider.setMaximum(300);
@@ -204,12 +182,22 @@ public class TabPlugFlowReactor extends JPanel
 		JLabel lblFlowRate = new JLabel("Flow Rate");
 		lblFlowRate.setBounds(76, 271, 192, 15);
 		add(lblFlowRate);
-//		flowRateSlider.addPropertyChangeListener(new PropertyChangeListener() {
-//			public void propertyChange(PropertyChangeEvent arg0) {
-//				setFlowRate();
-//			}
-//		});
-		//Reset the Reactor
+
+		//Create Apply button to apply new parameters entered by user in
+		//text fields		
+		JButton applyButton = new JButton("Apply");
+		applyButton.setFont(new Font("Tahoma", Font.BOLD, 15));
+		applyButton.setToolTipText("Click here to apply parameter changes");
+		applyButton.setBounds(225, 192, 89, 33);
+		applyButton.addActionListener(new ApplyButtonListener());
+		add(applyButton);
+		
+		//Just a cosmetic panel
+		Panel panel_1 = new Panel();
+		panel_1.setBackground(new Color(176, 196, 222));
+		panel_1.setBounds(0, 0, 800, 91);
+		add(panel_1);
+		
 		resetReactor();		
 	}
 
@@ -217,12 +205,12 @@ public class TabPlugFlowReactor extends JPanel
 		System.out.println(flowRateSlider.getValue());
 		pfrPanel.setMoveTime(flowRateSlider.getValue() );
 	}
+	
 	//Resets the reactor by reseting the initial concentration
 	//and reaction constant figures and dynamic label figures, 
 	//then remaking the dots and repainting
 	private void resetReactor() 
 	{
-		txtConcentrationLog.setText("");
 		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));				
 	}
 
@@ -255,12 +243,21 @@ public class TabPlugFlowReactor extends JPanel
 	//Listener for the Reset button
 	class ButtonResetListener implements ActionListener 
 	{
-
 		public void actionPerformed(ActionEvent evt) 
 		{
 			resetReactor();
 			pfrPanel.resetBatchReactorLocation();
 		}
 
+	}
+	
+	//Listener for the apply changes button
+	class ApplyButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent evt) 
+		{
+			pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
+			pfrPanel.setReactionConstant(Double.parseDouble(txtRateConstant.getText()));
+		}
 	}
 }

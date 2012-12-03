@@ -8,21 +8,12 @@ import javax.swing.border.LineBorder;
 
 public class PFR extends JPanel
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<FluidFlowReactorPanel> batchPanels;
-	//private int x = 0;
 	private Timer timer = new Timer(50, new TimerListener());
 	private Timer plugMoveTimer = new Timer(50, new plugMoveTimerListener());
 	private int batchPanelWidth;
-	//private int upperCornerX;
 	private boolean flowing = true;
-
-
-
-
 	private boolean started = false;
 	private Preferences preferences;
 	private boolean colorToggle;
@@ -55,12 +46,10 @@ public class PFR extends JPanel
 	private JPanel panel = new JPanel();
 
 
-	public void setBorder(LineBorder lb){
-		super.setBorder(lb);
-		
-		
+	public void setBorder(LineBorder lb)
+	{
+		super.setBorder(lb);	
 		borderWidth = lb.getThickness();
-		//panel.setBounds(borderWidth, borderWidth, getWidth(), 100);
 		panel.setBounds(borderWidth, borderWidth, getWidth() - (2*borderWidth), getHeight() - (2*borderWidth));
 		
 	}
@@ -68,7 +57,7 @@ public class PFR extends JPanel
 	public PFR(Preferences pref)
 	{
 		setLayout(null);
-		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
+		batchPanelWidth = 30;  //This is where we would put in a variable for user input on batch size
 		batchPanelHeight = this.getHeight() - (2 * borderWidth);
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		preferences = pref;
@@ -76,7 +65,6 @@ public class PFR extends JPanel
 		colorToggle = true;
 		timer.setRepeats(true);
 		panel.setBounds(1, 1, 100, 100);
-		//panel.setBounds(borderWidth, borderWidth, getWidth() - (2*borderWidth), getHeight() - (2*borderWidth));
 		panel.setLayout(null);
 		flowParticleSize = preferences.getPlugFlowParticleSize();
 		add(panel);
@@ -88,10 +76,8 @@ public class PFR extends JPanel
 		setLayout(null);
 		panel.setBounds(1, 1, 100, 100);
 		panel.setLayout(null);
-		
 		add(panel);
-		batchPanelWidth = /*this.getWidth()*/ 30;  //This is where we would put in a variable for user input on batch size
-		
+		batchPanelWidth = 30;  //This is where we would put in a variable for user input on batch size
 		batchPanels = new ArrayList<FluidFlowReactorPanel>();
 		timer.setRepeats(true);		
 	}
@@ -137,9 +123,6 @@ public class PFR extends JPanel
 	{
 		timer.start();
 		plugMoveTimer.start();
-//		int size = batchPanels.size();
-//		for(int i = 0; i < size; i++)
-//			batchPanels.get(i).startAnimation();
 		for(FluidFlowReactorPanel f : batchPanels)
 			f.startAnimation();
 	}
@@ -166,7 +149,6 @@ public class PFR extends JPanel
 		int size = batchPanels.size();
 		for(int i = 0; i < size; i++)
 			batchPanels.get(i).stopReaction();
-		//panel_1.stopReaction();
 	}
 	
 	public void stopAnimation()
@@ -179,29 +161,24 @@ public class PFR extends JPanel
 	{
 		panel.removeAll();
 		batchPanels.clear();
-		
-		//System.out.println(batchPanels.isEmpty());
 		flowing = true;
 		started = false;
 		colorToggle = true;
 		repaint();
 	}
 	
+	public void setReactionConstant(double constant)
+	{
+		for(FluidFlowReactorPanel f : batchPanels)
+			f.getReactor().setReactionConstant(constant);
+	}	
 
-	
 	class TimerListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent arg) 
 		{
 			int size = batchPanels.size();
 			batchPanelHeight = panel.getHeight();
-//			for(FluidFlowReactorPanel f : batchPanels)
-//			{
-//				f.setXPos();
-//				f.setBounds(f.getXPos(), 0, batchPanelWidth, batchPanelHeight);
-//				if(f.getXPos() >= 0)
-//					f.startReaction();	
-//			}
 
 			if(flowing == true)
 			{

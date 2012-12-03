@@ -30,9 +30,13 @@ public class FluidFlowUnitTests
 		pfr.toggleFlowing();
 	
 		if(batch.getCurrentConcentration() == 0.9)
+		{
+			System.out.println(batch.getCurrentConcentration());
 			System.out.println("Test 3 Passed");
+		}
 		else
 			System.out.println("Test 3 Failed");
+		System.out.println(batch.getCurrentConcentration());
 		if(batch.getPercentageOfUpperLimit() == 0.9)
 			System.out.println("Test 4 Passed");
 		else
