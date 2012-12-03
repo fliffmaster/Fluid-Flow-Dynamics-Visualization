@@ -251,6 +251,8 @@ public class FluidFlowDynamicsVisualization {
 		
 		//reset the pfr
 		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));	
+		pfrPanel.setInitialConcentration(300);
+		pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 	}
 
 	//sets each reactors reaction timer to the txtTimeRate fields value and
@@ -267,9 +269,13 @@ public class FluidFlowDynamicsVisualization {
 			panel2.setAnimationTimer(Integer.parseInt(txtParticleMoveRate.getText()));
 			panel2.startAnimation();
 			panel2.startReaction();
-			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-			pfrPanel.startAnimation();
-			pfrPanel.beginAnimation();
+			
+			if(pfrPanel.isFlowing() == true && pfrPanel.isStarted() == false)
+			{
+				pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+				pfrPanel.startAnimation();
+				pfrPanel.beginAnimation();
+			}
 		}
 	}
 

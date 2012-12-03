@@ -40,6 +40,7 @@ public class TabPlugFlowReactor extends JPanel
 	private JSlider flowRateSlider;
 	private JLabel concentrationLabel;
 	private JLabel percentageLabel;
+	private boolean isStopped;
 	
 	//Constructors all use the initialize() method
 	public TabPlugFlowReactor() {
@@ -57,6 +58,7 @@ public class TabPlugFlowReactor extends JPanel
 		setBounds(0, 0, 800, 600);
 		setLayout(null);
 		
+		isStopped = true;
 		//Create the reactor panel/set appearance based on preferences
 		pfrPanel = new PFR(preferences);
 		pfrPanel.setBounds(65, 307, 626, 209);
@@ -151,6 +153,7 @@ public class TabPlugFlowReactor extends JPanel
 		panel_1.add(btnStop);
 
 		JButton btnReset = new JButton("Reset");
+		btnReset.setToolTipText("Reactor must be stopped to reset");
 		btnReset.setForeground(new Color(240, 255, 255));
 		btnReset.setBackground(new Color(184, 134, 11));
 		btnReset.setFont(new Font("Tahoma", Font.BOLD, 28));
@@ -236,9 +239,9 @@ public class TabPlugFlowReactor extends JPanel
 	//then remaking the dots and repainting
 	private void resetReactor() 
 	{
-		pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-		pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
-		pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
+			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+			pfrPanel.setInitialConcentration(Integer.parseInt(txtInitialConcentration.getText()));
+			pfrPanel.setRateConstant(Double.parseDouble(txtRateConstant.getText()));
 	}
 
 	//Listener for the Go button
@@ -248,9 +251,10 @@ public class TabPlugFlowReactor extends JPanel
 		{
 			if(pfrPanel.isFlowing() == true && pfrPanel.isStarted() == false)
 			{
-			pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
-			pfrPanel.startAnimation();
-			pfrPanel.beginAnimation();
+				pfrPanel.setAnimationTimers(Integer.parseInt(txtParticleMoveRate.getText()));
+				pfrPanel.startAnimation();
+				pfrPanel.beginAnimation();
+				isStopped = false;
 			}
 		}
 	}
@@ -263,6 +267,7 @@ public class TabPlugFlowReactor extends JPanel
 		{
 			pfrPanel.stopReactor();
 			pfrPanel.stopAnimation();
+			isStopped = true;
 		}
 
 	}
@@ -272,8 +277,11 @@ public class TabPlugFlowReactor extends JPanel
 	{
 		public void actionPerformed(ActionEvent evt) 
 		{
-			resetReactor();
-			pfrPanel.resetBatchReactorLocation();
+			if(isStopped)
+			{
+				resetReactor();
+				pfrPanel.resetBatchReactorLocation();
+			}
 		}
 
 	}
