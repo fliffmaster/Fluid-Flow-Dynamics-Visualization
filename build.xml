@@ -29,8 +29,9 @@
 	<attribute name="Main-Class" value="FluidFlowApplet"/>
       </manifest>
     </jar>
-    <copy file="index.html" todir="${dist}"/>
+    <copy file="FluidFlowApplet.html" todir="${dist}"/>
     <copy file="ffdv.jnlp" todir="${dist}"/>
+    <copy file="deployJava.js" todir="${dist}"/>
   </target>
   
   <target name="clean"
