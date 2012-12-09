@@ -1,0 +1,136 @@
+#+TITLE:Fluid Flow Dynamics Visualization: User Manual
+#+AUTHOR:Homan
+* Preface
+  Fluid Fluid Dynamics Visualization is a particle filtration reactor
+  simulator. This document describes the operations which can be
+  performed in Fluid Flow Dynamics Visualization.
+* Introduction
+  Fluid Flow Dynamics Visualization allows you to simulate three
+  different kinds of reactors; [[batch_reactor][batch reactor]], [[constantly_stirred_reactor][constantly stirred
+  reactor]], and [[plug_flow_reactor][plug flow reactor]]. 
+* Installation  
+ You can run Fluid Flow Dynamics Visualization by running
+ FluidFlowApplet.jar as an executable, in the command line, or in a
+ Java capable browser. To run as an executable, you should be running
+ [[http://www.java.com][Java™]] version 6 or higher. To run in the command line, type
+ #+begin_example
+   java -jar FluidFlowApplet.jar
+ #+end_example
+ To run in a web browser, the browser must have Java and JavaScript
+ capable browser such as Internet Explorer, Firefox, Chrome, or
+ Safari. If the browser is JavaScript enabled but does not have Java,
+ the applet will give you a link to the Oracle download page.
+* Controls
+  Each reactor can be accessed by clicking on their respective
+  tabs. Each reactor page allows you to start, stop, and reset the
+  reactor simulation. The reset button, will set the reactor state to
+  the starting state with the user set parameters given in the entry
+  fields. Clicking reset while the reactor is running will cause the
+  simulation to restart. The simulations will continue running until
+  you click the stop button or close the program.
+* Batch Reactor
+#<<batch_reactor>>
+   [[file:Batch.png]] 
+
+   A batch reactor operates by putting a solution into the reactor,
+   sealing it, and then allowing the reactor to filter the solution
+   before removing the contents. Fluid Flow Dynamics Visualization
+   allows you to simulate the change in particle that occurs in a
+   batch reactor. The user can specify the initial concentration and
+   reaction constant.  See the [[batch_reactor_dynamics][Appendix]] for a description of the
+   algorithms used in simulation.
+
+   The concentration per cycle is shown in the Batch Data dialog. The
+   Batch Visualization dialog gives a pictographic representation of
+   the change in particulate concentration. The change in particle
+   concentration is shown visually by the density of dots in the
+   simulation. The Current Concentration and the Percentage of Inflow
+   Concentration, which is the current concentration divided by the
+   initial concentration, are shown in the lower right of the window.
+
+   The initial concentration and reaction constant can be set by
+   entering numerical values in their respective fields; "Initial
+   Concentration" and "Rate Constant per Minute", and then clicking
+   the Apply button.
+   
+* Constantly Stirred Reactor
+#<<constantly_stirred_reactor>>
+   [[file:cstr.png]]
+   
+   A constantly stirred reactor has a holding tank that constantly
+   filters its contents with a constant in-flow and out-flow. Fluid
+   Flow Dynamics Visualization allows the user to specify the initial
+   concentration, reaction constant, and flow rate. See the [[constantly_stirred_reactor_dynamics][Appendix]]
+   for a description of the algorithms used in simulation.
+
+   The concentration per cycle is shown in the CSTR Data dialog. The
+   CSTR Visualization dialog gives a pictographic representation of
+   the change in particulate concentration in the out-flow. The change
+   in particle concentration is shown visually by the density of dots
+   in the simulation. The Current Concentration and the Percentage of
+   Inflow Concentration, which is the current concentration divided by
+   the initial concentration, are shown in the lower right of the
+   window.
+
+   The initial concentration, reaction constant, and flow rate can be
+   set by entering numerical values in their respective fields;
+   "Initial Concentration", "Rate Constant per Minute", and "Inflow
+   Rate", and then clicking the Apply button.
+* Plug Flow Reactor
+#<<plug_flow_reactor>>
+   [[file:pfr.png]]
+
+   A plug flow reactor operates by having a constant in-flow and
+   out-flow through a filtration tube. Fluid Flow Dynamics
+   Visualization allows the user to specify the initial concentration,
+   reaction constant, and flow rate.  See the [[plug_flow_reactor_dynamics][Appendix]] for a
+   description of the algorithms used in simulation.
+
+   The change in particulate concentration is shown with the in-flow
+   on the left and out-flow on the right. The flow is shown by wight
+   and gray bands. The change in particle concentration is shown
+   visually by the density of dots in the simulation. The Current
+   Concentration and the Percentage of Outflow Concentration are shown
+   in the lower right of the window.  The Current Concentration is the
+   concentration in the out-flow. Percentage of Outflow Concentration
+   is the current concentration divided by the initial concentration.
+
+   The initial concentration and reaction constant can be set by
+   entering numerical values in their respective fields; "Initial
+   Concentration" and "Rate Constant per Minute", and then clicking
+   the Apply button. The flow rate can be changed dynamically by using
+   the "Flow Rate" slider. Move the slider left to increase the flow
+   rate and right to decrease. The "Toggle Flow" button will stop and
+   start the in-flow, but the contents within the rector will continue
+   to flow.
+* Appendix 
+** Batch Reactor Dynamics
+#<<batch_reactor_dynamics>>
+   The dynamics of the batch reactor is described by the
+   equation \[C=C_0e^{-kt},\] where $C_0$ is the initial
+   concentration, $k$ is the reaction constant, $t$ is time, and $C$
+   is the current concentration. Time is automatically set initially
+   to 0 and is incremented by 1 for each cycle in the simulation.
+** Constantly Stirred Reactor Dynamics
+#<<constantly_stirred_reactor_dynamics>>
+   The constantly stirred reactor is simulated in discrete increments
+   by taking a weighted average between the reactor contents and the
+   in-flow contents \[C'=C_{\hbox{tank}}(1-P)+C_{\hbox{in}}P\] and
+   then subtracting the amount concentration removed by the
+   reactor \[C=C'-kC',\] where $C_{\hbox{tank}}$ is the concentration
+   in the tank, $P$ is the percent volume of the reactor solution
+   being replaced, $C_{\hbox{in}}$ is the in-flow concentration, $k$
+   is the reaction constant, and $C$ is the resulting concentration in
+   the tank. Time is automatically set initially to 0 and is
+   incremented by 1 for each cycle in the simulation.
+** Plug Flow Reactor Dynamics
+#<<plug_flow_reactor_dynamics>>
+   The plug flow reactor is simulated by partitioning the filtration
+   tube into a series of batch reactors. Each batch reactor controls
+   its own state and visual output. The plug flow reactor changes the
+   location of the batch reactors to simulate the change in
+   concentration with distance traveled by the solution. When a batch
+   reactor exits the plug flow reactor, the concentration of the batch
+   reactor is recorded as the current concentration, and the batch
+   reactor is destroyed. New batch reactors are created at the start
+   of the plug flow reactor.
