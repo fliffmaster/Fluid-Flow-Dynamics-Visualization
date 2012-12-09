@@ -1,5 +1,5 @@
 #+TITLE:Fluid Flow Dynamics Visualization: User Manual
-#+AUTHOR:Homan
+#+AUTHOR:Homan, Mahar, Porter, & Tweet
 * Preface
   Fluid Fluid Dynamics Visualization is a particle filtration reactor
   simulator. This document describes the operations which can be
